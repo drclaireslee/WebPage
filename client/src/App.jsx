@@ -28,17 +28,23 @@ function App() {
   
   */
 
+  /**
+   * First container: Main landing page
+   * Second Container: Information about the lab's activities
+   */
 
   return (
     <Container fluid>
 
       <AILabHeader/>
       
+      
       <Container className='p-5'>
            <Row>
             <Col>
                 <h1 className='align-center'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
                 <br/>
+                
                 <Image src="src/assets/ai-cyren-home-image.jpg" thumbnail/>
             </Col>
            </Row>
