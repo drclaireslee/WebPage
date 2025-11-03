@@ -28,17 +28,14 @@ function App() {
   
   */
 
-  /**
-   * First container: Main landing page
-   * Second Container: Information about the lab's activities
-   */
+
 
   return (
     <Container fluid>
 
       <AILabHeader/>
       
-      
+      {/** Name of the Lab*/}
       <Container className='p-5'>
            <Row>
             <Col>
@@ -51,6 +48,9 @@ function App() {
 
       </Container>
   
+      {/**
+       * Information about the AI-CYREN Lab
+       */}
         <Container className='p-4'>
           <Row>
             <Col className='col-md-8'>
@@ -63,12 +63,11 @@ function App() {
         </Container>
         
       
-        <footer>
-          <Container>
-            <p>Claire Lee 2025</p>
-          </Container>
-          
-        </footer>
+            <footer>
+                <Container>
+                    <p>&copy; 2024 Dr. Claire S. Lee. All rights reserved.</p>
+                </Container>
+            </footer>
         
         
         {
