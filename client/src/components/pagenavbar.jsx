@@ -3,13 +3,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Image } from 'react-bootstrap';
 import { Link } from 'react-router';
+import umlLogo from '../assets/umllogo.svg';
 
 /** Navbar for all of the pages */
 function AILabHeader() {
   return (
     <Navbar expand="lg" fixed="top" className="bg-body-tertiary" data-bs-theme="dark">
       <Container>
-        <Image alt="umass lowell logo" src="src/assets/umllogo.svg" width='50' height='50' className='d-inline-block align-start'/>
+        <Image alt="umass lowell logo" src={umlLogo} width='50' height='50' className='d-inline-block align-start'/>
         <Navbar.Brand href="#home">
           AI-CYREN Lab
           </Navbar.Brand>

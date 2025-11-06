@@ -6,6 +6,9 @@ import axios from "axios";
 import AILabHeader from './components/pagenavbar'
 import {Container, Row, Col, Image} from 'react-bootstrap';
 
+import homeImage from './assets/ai-cyren-home-image.jpg';
+import umlLogo from './assets/umllogo.svg';
+
 function App() {
   /*
   const [count, setCount] = useState(0);
@@ -42,7 +45,7 @@ function App() {
                 <h1 className='align-center'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
                 <br/>
                 
-                <Image src="src/assets/ai-cyren-home-image.jpg" thumbnail/>
+                <Image src={homeImage} thumbnail/>
             </Col>
            </Row>
 
@@ -57,7 +60,7 @@ function App() {
               <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society. <br/> <br/> Through this integrative framework, the lab fosters a creative, holistic, and nuanced understanding of cyberattacks, cybercrime, cybersecurity, and AI phenomena.</p>
             </Col>
             <Col className='col-md-4 align-items-start'>
-              <Image src="src/assets/umllogo.svg" width={"250"} height={"250"} rounded/>
+              <Image src={umlLogo} width={"250"} height={"250"} rounded/>
             </Col>
           </Row>
         </Container>
