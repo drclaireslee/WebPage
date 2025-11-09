@@ -2,6 +2,7 @@
 import AILabHeader from "./components/pagenavbar";
 import { Container } from "react-bootstrap";
 import ResearchCard from "./components/researchcard";
+import research_data from './research_studies.json';
 
 function Research() {
     return (
@@ -17,8 +18,11 @@ function Research() {
                 <h1 className="m-5">Funded Research Projects</h1>
 
                 {/*<ResearchCard/>*/}
+                {research_data.map((card, idx) => {
+                    return(<ResearchCard key={idx} research_image={card.research_image} research_name={card.research_name} research_country={card.research_country} research_year={card.research_years} research_desc={card.research_desc}/>)
+                })}
 
-                <h3><strong>National Science Foundation</strong>, USA <br/> (2025 – 2028)</h3>
+                {/*<h3><strong>National Science Foundation</strong>, USA <br/> (2025 – 2028)</h3>
                 <p className="fs-5">“Enhancing Undergraduate STEM Education with Large Language Models: Personalization, Collaboration, and Active Learning” (Co-PI, US$399,724)</p>
 
                 <h3><strong>Korea Foundation</strong>, Republic of Korea (2023 – 2024)</h3>
@@ -28,7 +32,7 @@ function Research() {
                 <p className="fs-5">Monitor and Combat Trafficking in Person Office (JTIP) “Child Protection Compact Study – Formative Research on Child Trafficking in Cote d’Ivoire” (Co-PI, US$1,000,000)</p>
 
                 <h3><strong>National Security Agency and National Science Foundation</strong>, USA (2021 – 2023)</h3>
-                <p className="fs-5">“GenCyber Summer Camp at the University of Massachusetts Lowell” (Co-PI, US$150,000)</p>
+                <p className="fs-5">“GenCyber Summer Camp at the University of Massachusetts Lowell” (Co-PI, US$150,000)</p>*/}
 
             </Container>
 

@@ -8,6 +8,7 @@ import {Container, Row, Col, Image} from 'react-bootstrap';
 
 import homeImage from './assets/ai-cyren-home-image.jpg';
 import umlLogo from './assets/umllogo.svg';
+import claireLeePhoto from './assets/claire_lee_photo.jpg';
 
 function App() {
   /*
@@ -35,7 +36,6 @@ function App() {
 
   return (
     <div>
-
       <AILabHeader/>
       
       {/** Name of the Lab*/}
@@ -47,6 +47,7 @@ function App() {
                 
                 <Image src={homeImage} thumbnail/>
             </Col>
+            <hr/>
            </Row>
       </Container>
      
@@ -56,14 +57,35 @@ function App() {
         <Container className='p-4'>
           <Row>
             <Col className='col-md-8'>
-              <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society. <br/> <br/> Through this integrative framework, the lab fosters a creative, holistic, and nuanced understanding of cyberattacks, cybercrime, cybersecurity, and AI phenomena.</p>
+              <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society.</p>
+              <p className='text-start fs-5'>Through this integrative framework, the lab fosters a creative, holistic, and nuanced understanding of cyberattacks, cybercrime, cybersecurity, and AI phenomena.</p>
             </Col>
             <Col className='col-md-4 align-items-start'>
               <Image src={umlLogo} width={"250"} height={"250"} rounded/>
             </Col>
           </Row>
         </Container>
+
+        <hr/>
+      {/**
+       * Information about Dr. Claire Lee
+       */}
+        <Container className='p-4'>
+          <Row>
+            <Col className='col-md-4'>
+              <Image src={claireLeePhoto} width={"250"} height={"250"} className='d-flex justify-content-start' rounded/>
+            </Col>
+            <Col className='col-md-8'>
+              <p className='text-start fs-5'><b>Dr. Claire S. Lee</b> is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell.</p>
+              <p className='text-start fs-5'>As a dedicated teacher-scholar, she is interested in and practices connective learning in her classroom, which is also being translated into her research. In this connection, she received innovative teaching grants (for big data and statistics courses) at her previous institution. She is a recipient of an Outstanding Teaching Award in 2022.
+
+</p>
+            </Col>
+
+          </Row>
+        </Container>
         
+        {/**Dr. Claire S. Lee is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell. She is also a founding member and a researcher of Cybercrime Investigation & Cybersecurity Lab (CIC) at Boston University and an editor of the International Journal of Cybersecurity Intelligence and Cybercrime (IJCIC). She was an Assistant Professor (of Sociology) and was affiliated with the Immigration & Multiculturalism Program (Graduate Studies) at Inha University and was a research affiliate with the University of Massachusetts Boston. She has worked in the educational, media and legal sectors in Hong Kong, Shanghai, Taipei and Seoul, and for the Korea Institute for International Economic Policy (KIEP), one of the leading think tanks in South Korea. She worked for the Division of International Cooperation at the Korean Institute for Curriculum and Evaluation and Tembusu College and Asia Research Institute at the National University of Singapore. She has taught undergraduate and professional courses at Tembusu College, National University of Singapore, Hankuk University of Foreign Studies, and Cyber Hankuk University of Foreign Studies where she taught online courses. She was a volunteer instructor for the Prison Teaching Initiative in Incheon, South Korea. She serves as a Treasurer/Secretary for the Division of Cybercrime at American Society of Criminology. */}
       
             <footer>
                 <Container>
