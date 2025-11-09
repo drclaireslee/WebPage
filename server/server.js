@@ -1,24 +1,19 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
-// used to set requests for front end
-const cors = require("cors");
-const corsOptions = {
-    origin: ["http://localhost:5173"]
-}
 
-app.use(cors(corsOptions));
+const port = 3000;
 
-// retrieve local host
-app.get("/api", (req, res, next) => {
-    // necessary statement for CORS requests, along with next();
-    res.set({
-        "Access-Control-Allow-Origin": "*"
-    });
-    res.json({names: ["anton", "rohan", "russ"]});
-    next();
-});
+//Routes
+const labMemberRoute = require("./route/labMemberRoute.js");
 
-app.listen(8080, () => {
-    console.log("Server started on port 8080.");
-})
+//Enable all CORS requests
+app.use(cors());
+
+//Parses URL-encoded data in a request body and adds the parsed values to the req.body
+app.use(express.urlencoded({extended: false}));
+
+app.use("/api/labMember", labMemberRoute);
+
+app.listen(port);
