@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import axios from "axios";
-import AILabHeader from './components/pagenavbar'
+import AILabHeader from './components/pagenavbar';
 import {Container, Row, Col, Image} from 'react-bootstrap';
+
+import homeImage from './assets/ai-cyren-home-image.jpg';
+import umlLogo from './assets/umllogo.svg';
 
 function App() {
   /*
@@ -31,23 +34,22 @@ function App() {
 
 
   return (
-    <Container fluid>
+    <div>
 
       <AILabHeader/>
       
       {/** Name of the Lab*/}
-      <Container className='p-5'>
-           <Row>
+      <Container fluid className='p-5 bg-dark'>
+           <Row className='m-5'>
             <Col>
-                <h1 className='align-center'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
+                <h1 className='align-center text-light'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
                 <br/>
                 
-                <Image src="src/assets/ai-cyren-home-image.jpg" thumbnail/>
+                <Image src={homeImage} thumbnail/>
             </Col>
            </Row>
-
       </Container>
-  
+     
       {/**
        * Information about the AI-CYREN Lab
        */}
@@ -57,7 +59,7 @@ function App() {
               <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society. <br/> <br/> Through this integrative framework, the lab fosters a creative, holistic, and nuanced understanding of cyberattacks, cybercrime, cybersecurity, and AI phenomena.</p>
             </Col>
             <Col className='col-md-4 align-items-start'>
-              <Image src="src/assets/umllogo.svg" width={"250"} height={"250"} rounded/>
+              <Image src={umlLogo} width={"250"} height={"250"} rounded/>
             </Col>
           </Row>
         </Container>
@@ -65,7 +67,7 @@ function App() {
       
             <footer>
                 <Container>
-                    <p>&copy; 2024 Dr. Claire S. Lee. All rights reserved.</p>
+                    <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
                 </Container>
             </footer>
         
@@ -85,7 +87,7 @@ function App() {
           */
         }
       
-    </Container>
+    </div>
     
   )
 }

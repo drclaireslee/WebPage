@@ -1,6 +1,7 @@
 
 import AILabHeader from "./components/pagenavbar";
 import { Container } from "react-bootstrap";
+import ResearchCard from "./components/researchcard";
 
 function Research() {
     return (
@@ -9,11 +10,15 @@ function Research() {
             {/** Navigation Bar */}
             <AILabHeader/>
 
- 
             {/** Main section for research projects */}
             <Container className="p-5">
-                <h1>Funded Research Projects</h1>
-                <h3><strong>National Science Foundation</strong>, USA (2025 – 2028)</h3>
+                
+                
+                <h1 className="m-5">Funded Research Projects</h1>
+
+                {/*<ResearchCard/>*/}
+
+                <h3><strong>National Science Foundation</strong>, USA <br/> (2025 – 2028)</h3>
                 <p className="fs-5">“Enhancing Undergraduate STEM Education with Large Language Models: Personalization, Collaboration, and Active Learning” (Co-PI, US$399,724)</p>
 
                 <h3><strong>Korea Foundation</strong>, Republic of Korea (2023 – 2024)</h3>
@@ -31,7 +36,7 @@ function Research() {
 
             <footer>
                 <Container>
-                    <p>&copy; 2024 Dr. Claire S. Lee. All rights reserved.</p>
+                    <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
                 </Container>
             </footer>
         </Container>

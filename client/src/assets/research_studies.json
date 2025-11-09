@@ -1,0 +1,32 @@
+[
+    {
+        "research_image": "here",
+        "research_name": "National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2025-2028" 
+    },
+    {
+        "research_image": "here",
+        "research_name": "Korea Foundation",
+        "research_country": "Republic of Korea",
+        "research_years": "2023-2024" 
+    },
+    {
+        "research_image": "here",
+        "research_name": "Department of State",
+        "research_country": "USA",
+        "research_years": "2023-2025" 
+    },
+    {
+        "research_image": "here",
+        "research_name": "National Security Agency and National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2022-2023" 
+    },
+    {
+        "research_image": "here",
+        "research_name": "National Security Agency and National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2021-2022" 
+    }
+]
