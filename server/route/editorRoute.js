@@ -3,8 +3,8 @@ const router  = express.Router();
 const editorController = require("../controller/editorController.js");
 
 router.post("/auth", editorController.auth);
-
-router.delete("/delete/:id", editorController.deleteLabMember);
+router.delete("/:id", editorController.deleteLabMember);
+router.put("/:id", editorController.modifyLabMember);
 
 
 module.exports = router;

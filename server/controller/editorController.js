@@ -41,4 +41,4 @@ async function modifyLabMember(req, res) {
 }
 
 
-module.exports = {auth, deleteLabMember};
+module.exports = {auth, deleteLabMember, createLabMember, modifyLabMember};
