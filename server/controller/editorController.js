@@ -2,23 +2,43 @@ const editorModel = require("../model/editorModel.js");
 const jwt = require("jwt-simple");
 const secret = process.env.SECRET;
 
-function auth(res, req) {
+async function auth(req, res) {
 	try {
-		if (editorModel.verify(req.body.username, req.body.password)) {
+		if (await editorModel.verify(req.body.username, req.body.password)) {
 			const tk = jwt.encode({username: req.body.username}, secret);
 			res.json({token: tk});
 		} else {
 			//Unauthorized access
-			res.status(401).json({error: "Bas username/password"});
+			res.json({error: "Bad username/password"});
 		}
 	} catch(ex) {
-		//respond with an error code
-		console.log("Error has occured within editorController");
+		res.send(ex.message)
 	}
 }
 
-async function deleteLabMember(res, req) {
-	res.status(401);
+async function deleteLabMember(req, res) {
+	try {
+
+	} catch(ex) {
+		console.log();
+	}
 }
+
+async function createLabMember(req, res) {
+	try {
+
+	} catch(ex) {
+		console.log();
+	}
+}
+
+async function modifyLabMember(req, res) {
+	try {
+
+	} catch(ex) {
+		console.log();
+	}
+}
+
 
 module.exports = {auth, deleteLabMember};

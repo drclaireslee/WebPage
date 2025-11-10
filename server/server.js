@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 //Routes
 const labMemberRoute = require("./route/labMemberRoute.js");
@@ -19,4 +19,6 @@ app.use(express.urlencoded({extended: false}));
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
 
-app.listen(port);
+app.listen(port, () => {
+	console.log(`Listen on port: ${port}`);
+});

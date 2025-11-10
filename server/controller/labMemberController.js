@@ -1,8 +1,8 @@
 const labMemberModel = require("../model/labMemberModel.js")
 
-function getAll(req, res) {
+async function getAll(req, res) {
 	try {
-		res.json(labMemberModel.getAll());
+		res.json(await labMemberModel.getAll());
 	} catch(ex) {
 		console.log(ex.message);
 	}

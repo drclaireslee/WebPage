@@ -1,4 +1,4 @@
-function getAll() {
+async function getAll() {
     return [
         {
             _id: 0,
