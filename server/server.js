@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
 
 
-const port = 3000;
+const port = process.env.PORT;
 
 //Routes
 const labMemberRoute = require("./route/labMemberRoute.js");
+const editorRoute = require("./route/editorRoute.js");
 
 //Enable all CORS requests
 app.use(cors());
@@ -15,5 +17,6 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.use("/api/labMember", labMemberRoute);
+app.use("/api/editor", editorRoute);
 
 app.listen(port);
