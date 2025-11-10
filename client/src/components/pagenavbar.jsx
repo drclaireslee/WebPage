@@ -8,11 +8,11 @@ import umlLogo from '../assets/umllogo.svg';
 /** Navbar for all of the pages */
 function AILabHeader() {
   return (
-    <Navbar expand="lg" fixed="top" className="bg-body-tertiary" data-bs-theme="dark">
+    <Navbar expand="lg" fixed="top" className="bg-body-tertiary" data-bs-theme="light">
       <Container>
         <Image alt="umass lowell logo" src={umlLogo} width='50' height='50' className='d-inline-block align-start'/>
         <Navbar.Brand href="#home">
-          AI-CYREN Lab
+          Dr. Claire Lee
           </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

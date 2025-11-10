@@ -1,0 +1,37 @@
+[
+    {
+        "research_image": "./src/assets/nsf_logo.png",
+        "research_name": "National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2025-2028", 
+        "research_desc": "“Enhancing Undergraduate STEM Education with Large Language Models: Personalization, Collaboration, and Active Learning” (Co-PI, US$399,724)"
+    },
+    {
+        "research_image": "./src/assets/kf_logo.jpg",
+        "research_name": "Korea Foundation",
+        "research_country": "Republic of Korea",
+        "research_years": "2023-2024",
+        "research_desc": "“The Trends, Patterns, and Tactics of Cyberattacks on the Korean Peninsula: An Open Source and Computational Approach” (PI, US$40,000)"
+    },
+    {
+        "research_image": "./src/assets/usds_logo.png",
+        "research_name": "Department of State",
+        "research_country": "USA",
+        "research_years": "2023-2025",
+        "research_desc": "Monitor and Combat Trafficking in Person Office (JTIP) “Child Protection Compact Study – Formative Research on Child Trafficking in Cote d’Ivoire” (Co-PI, US$1,000,000)"
+    },
+    {
+        "research_image": "./src/assets/nsa_logo.png",
+        "research_name": "National Security Agency and National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2022-2023",
+        "research_desc": "“GenCyber Summer Camp at the University of Massachusetts Lowell” (Co-PI, US$150,000)"
+    },
+    {
+        "research_image": "./src/assets/nsa_logo.png",
+        "research_name": "National Security Agency and National Science Foundation",
+        "research_country": "USA",
+        "research_years": "2021-2022",
+        "research_desc": "“GenCyber Summer Camp at the University of Massachusetts Lowell” (Co-PI, US$150,000)"
+    }
+]
