@@ -3,13 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const mongoose = require("mongoose");
+
 
 const port = process.env.PORT || 3000;
 
 //Routes
 const labMemberRoute = require("./route/labMemberRoute.js");
 const editorRoute = require("./route/editorRoute.js");
-
 
 
 //Enable all CORS requests
@@ -24,6 +25,17 @@ app.use(express.json());
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
 
-app.listen(port, () => {
-	console.log(`Listen on port: ${port}`);
-});
+app.use(express.static("public"));
+
+async function startServer() {
+	try {
+		await mongoose.connect(process.env.DB);
+		app.listen(port, () => {
+			console.log(`Listen on port: ${port}`);
+		});
+	} catch(ex) {
+		console.log(ex.message);
+		process.exit(1);
+	}
+}
+startServer();

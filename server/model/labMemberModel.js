@@ -1,37 +1,37 @@
-async function getAll() {
-    return [
-        {
-            _id: 0,
-            memberName: "Claire Seungeun Lee",
-            type: "Faculty",
-            picture: null,
-            email: "claire_lee@uml.edu",
-            background: ["Associate Professor", "Ph.D.", "School of Criminology and Justice Studies", "Co-Director, Center for Asian American Studies", "University of Massachusetts Lowell"]
-        },
-        {
-            _id: 1,
-            memberName: "Lia Mengyan Liu",
-            type: "Ph.D.",
-            picture: null,
-            email: null,
-            background: ["Co-Advisee, School of Criminology and Justice Studies"]
-        },
-        {
-            _id: 2,
-            memberName: "William Breen",
-            type: "Undergraduate",
-            picture: null,
-            email: null,
-            background: ["Miner School of Computer and Information Sciences", "Immersive Scholar (2025 –2026)"]
-        },
-        {
-            _id: 3,
-            memberName: "Daniela Pena",
-            type: "Former",
-            picture: null,
-            email: null,
-            background: ["School of Criminology and Justice Studies(2022 - 2023)", "Immersive Scholar (2025 – 2026)"]
-        },
-    ];
-}
-module.exports = {getAll};
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB);
+
+const labMemberSchema = mongoose.Schema({
+        fullName: {type: String, required: true},
+        type: {type: String, required: true},
+        email: {type: String, unique: true},
+        picture: {type: String},
+        background: {type: [String]}
+});
+
+//Add methods to the model
+labMemberSchema.statics.getType = async function(typeInput) {
+    return this.find({type: typeInput}).exec();
+};
+
+labMemberSchema.statics.getAll = async function() {
+    return this.find({}).exec();
+};
+
+labMemberSchema.statics.create = async function(labMemberInput) {
+    this.create(labMemberInput);
+};
+
+labMemberSchema.statics.deleteById = async function(idInput) {
+    this.findById(idInput).deleteOne().exec();
+};
+
+labMemberSchema.statics.updateById = async function(idInput, labMemberInput) {
+    this.findById(idInput).updateOne({$set: labMemberInput}).exec();
+};
+
+
+const labMemberModel = mongoose.model("LabMember", labMemberSchema);
+
+
+module.exports = labMemberModel;

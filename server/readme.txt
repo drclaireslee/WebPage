@@ -1,6 +1,11 @@
 
 First make a .env file with the following keys and assign it any value you like 
-PORT and SECRET 
+SECRET = any string but don't include quotes
+DB = URL to database
+
+
+Then run the command to get a node_module folder
+-> "npm install"
 
 To run the server.js you write and enter into the terminal 
 -> "node server.js"
@@ -15,6 +20,10 @@ Return an array of all lab members in the labMember collection
 Return a token given when the correct values are provided for the keys username and password
 
 -> http://localhost:3000/api/editor/auth
+
+
+To access the login page (the login page requires a working DB)
+-> http://localhost:3000/login.html
 
 
 a student object has the following keys

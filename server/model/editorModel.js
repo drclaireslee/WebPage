@@ -1,9 +1,27 @@
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
-//TODO
-async function verify(usernameInput, passwordInput) {
-	console.log(bcrypt.hashSync(passwordInput));
-	return (usernameInput === "admin" &&  bcrypt.compareSync(passwordInput, "$2b$10$9To4Rv/aH1dAtqyU/0Ml9.0i.sbRO.CqHBWl/x58wDslhSU7FG33."));
-}
 
-module.exports = {verify};
+const editorSchema = mongoose.Schema({
+    username: {type: String, required: true, unique: true},
+    passhash: {type: String, minLength: 60, maxLength: 60, required: true}    
+});
+
+//add methods to the model
+editorSchema.statics.verify = async function(editorInput) {
+    const doc = await this.findOne({username: editorInput.username}).exec();
+    return (doc.passhash != undefined && bcrypt.compareSync(editorInput.password, doc.passhash));
+};
+
+editorSchema.statics.deleteByUsername = async function(usernameInput) {
+    this.findOne({username: usernameInput}).deleteOne().exec();
+};
+
+editorSchema.statics.insert = async function(editorInput) {
+    this.create(editorInput);
+};
+
+
+const editorModel = mongoose.model("Editor", editorSchema);
+
+module.exports = editorModel;
