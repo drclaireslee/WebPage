@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+
 import './App.css';
 import axios from "axios";
 import AILabHeader from './components/pagenavbar';
 import {Container, Row, Col, Image} from 'react-bootstrap';
 
-import homeImage from './assets/ai-cyren-home-image.jpg';
-import umlLogo from './assets/umllogo.svg';
-import claireLeePhoto from './assets/claire_lee_photo.jpg';
+import homeImage from '/assets/ai-cyren-home-image.jpg';
+import umlLogo from '/assets/umllogo.svg';
+import claireLeePhoto from '/assets/claire_lee_photo.jpg';
 
 function App() {
   /*

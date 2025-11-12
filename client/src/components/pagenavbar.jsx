@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Image } from 'react-bootstrap';
 import { Link } from 'react-router';
-import umlLogo from '../assets/umllogo.svg';
+import umlLogo from '/assets/umllogo.svg';
 
 /** Navbar for all of the pages */
 function AILabHeader() {
