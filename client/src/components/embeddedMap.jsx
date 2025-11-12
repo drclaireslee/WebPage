@@ -16,8 +16,8 @@ export default function MapComponent() {
 
     // Add marker
     const marker = L.marker([42.6422, -71.3337]).addTo(map);
+    marker.bindPopup("<b>UMass Lowell South Campus</b><br>Manning Health and Social Sciences Building <br> Room 469");
 
-    marker.bindPopup("<b>UMass Lowell South Campus</b><br>113 Wilder St, Lowell, MA 01854");
 
     // Cleanup map instance on component unmount
     return () => {
