@@ -17,7 +17,7 @@ export default function MapComponent() {
     // Add marker
     const marker = L.marker([42.6422, -71.3337]).addTo(map);
 
-    marker.bindPopup("<b>UMass Lowell South Campus</b><br>This is my location!");
+    marker.bindPopup("<b>UMass Lowell South Campus</b><br>113 Wilder St, Lowell, MA 01854");
 
     // Cleanup map instance on component unmount
     return () => {
@@ -27,7 +27,7 @@ export default function MapComponent() {
 
   return (
     <div className="map-wrapper">
-      <h2>Interactive Map Example</h2>
+      <h2>Our Location</h2>
       <div id="map"></div>
     </div>
   );
