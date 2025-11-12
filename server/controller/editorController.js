@@ -2,8 +2,11 @@ const editorModel = require("../model/editorModel.js");
 const labMemberModel = require("../model/labMemberModel.js");
 const publicationModel = require("../model/publicationModel.js");
 const researchModel = require("../model/researchModel.js");
+
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET;
+
+const zod = require("zod");
 
 async function auth(req, res) {
 	try {
@@ -21,33 +24,39 @@ async function auth(req, res) {
 
 
 //Create
-async function createLabMember(req, res) {
+async function createLabMember(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await labMemberModel.create(req.body);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
-async function createPublication(req, res) {
+async function createPublication(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await publicationModel.create(req.body);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
-async function createResearch(req, res) {
+async function createResearch(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await researchModel.create(req.body);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
@@ -55,33 +64,39 @@ async function createResearch(req, res) {
 
 
 //Delete
-async function deleteLabMember(req, res) {
+async function deleteLabMember(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await labMemberModel.deleteById(req.params.id);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
-async function deletePublication(req, res) {
+async function deletePublication(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await publicationModel.deleteById(req.params.id);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
-async function deleteResearch(req, res) {
+async function deleteResearch(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		await researchModel.deleteById(req.params.id);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
@@ -89,23 +104,27 @@ async function deleteResearch(req, res) {
 
 
 //Modify
-async function updateLabMember(req, res) {
+async function updateLabMember(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		labMemberModel.updateById(req.params.id, req.body);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
-async function updatePublication(req, res) {
+async function updatePublication(req, res, next) {
 	try {
 		payload = jwt.verify(req.headers["x-auth"], secret);
 		publicationModel.updateById(req.params.id, req.body);
 		res.send("OK");
 	} catch(ex) {
 		res.send("NOT OK");
+	} finally {
+		next();
 	}
 }
 
