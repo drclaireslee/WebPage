@@ -1,144 +1,35 @@
-const editorModel = require("../model/editorModel.js");
-const labMemberModel = require("../model/labMemberModel.js");
-const publicationModel = require("../model/publicationModel.js");
-const researchModel = require("../model/researchModel.js");
+import {editorModel, editorZod} from "../model/editorModel.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import {baseController} from "./baseController.js";
 
-const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET;
+export default class editorController extends baseController {
+    
+    constructor() {
+    	super(process.env.SECRET, editorModel, editorZod);
+    }
 
-const zod = require("zod");
+    async verifyLogin(editorInput) {
+    	const doc = await this.model.findOne({username: editorInput.username}).exec();
+    	return (doc.passhash != undefined && bcrypt.compareSync(editorInput.password, doc.passhash));
+    }
 
-async function auth(req, res) {
-	try {
-		if (await editorModel.verify(req.body)) {
-			const tk = jwt.sign({username: req.body.username}, secret);
-			res.json({token: tk});
-		} else {
-			//Unauthorized access
-			res.status(401).json({error: "Bad username/password"});
+    async auth(req, res, next) {
+		try {
+			const doc = this.validateDocument(req.body);
+			if (await this.verifyLogin(doc)) {
+				const tk = jwt.sign({username: doc.username}, this.secret);
+				res.json({token: tk});
+			} else {
+				//Unauthorized access
+				res.status(401).json({error: "Bad username/password"});
+			}
+		} catch(ex) {
+			res.status(401).json({error: ex.message});
+		} finally {
+			next();
 		}
-	} catch(ex) {
-		res.status(401).json({error: ex.message});
 	}
+
 }
 
-
-//Create
-async function createLabMember(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await labMemberModel.create(req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function createPublication(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await publicationModel.create(req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function createResearch(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await researchModel.create(req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-
-
-
-//Delete
-async function deleteLabMember(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await labMemberModel.deleteById(req.params.id);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function deletePublication(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await publicationModel.deleteById(req.params.id);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function deleteResearch(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		await researchModel.deleteById(req.params.id);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-
-
-
-//Modify
-async function updateLabMember(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		labMemberModel.updateById(req.params.id, req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function updatePublication(req, res, next) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		publicationModel.updateById(req.params.id, req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	} finally {
-		next();
-	}
-}
-
-async function updateResearch(req, res) {
-	try {
-		payload = jwt.verify(req.headers["x-auth"], secret);
-		researchModel.updateById(req.params.id, req.body);
-		res.send("OK");
-	} catch(ex) {
-		res.send("NOT OK");
-	}
-}
-
-
-module.exports = {auth, createLabMember, createPublication, createResearch, 
-	deleteLabMember, deletePublication, deleteResearch, 
-	updateLabMember, updateResearch, updatePublication};

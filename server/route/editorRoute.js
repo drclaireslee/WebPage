@@ -1,6 +1,6 @@
 const express = require("express");
-const router  = express.Router();
 const editorController = require("../controller/editorController.js");
+const router  = express.Router();
 
 router.post("/auth", editorController.auth);
 
