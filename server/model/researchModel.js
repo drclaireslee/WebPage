@@ -18,16 +18,16 @@ const researchSchema = mongoose.Schema({
 });
 
 const researchZod = {
-    title: zod.string();
-    startDate: zod.iso.date();
-    endDate: zod.iso.date();
-    role: zod.string();
-    description: zod.string();
-    sponsor: zod.array(zod.string());
-    fundAmountUsd: zod.number();
+    title: zod.string(),
+    startDate: zod.iso.date(),
+    endDate: zod.iso.date(),
+    role: zod.string(),
+    description: zod.string(),
+    sponsor: zod.array(zod.string()),
+    fundAmountUsd: zod.number()
 };
 
 
 const researchModel = mongoose.model("Research", researchSchema);
 
-export {reserachModel, researchZod};
+export {researchModel, researchZod};

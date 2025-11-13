@@ -17,6 +17,7 @@ export default class editorController extends baseController {
 	async auth(req, res, next) {
 		try {
 			const doc = this.validateDocument(req.body);
+            console.log(doc);
 			if (await this.verifyLogin(doc)) {
 				const tk = jwt.sign({username: doc.username}, this.secret);
 				res.json({token: tk});

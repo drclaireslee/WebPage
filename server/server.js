@@ -1,20 +1,19 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const app = express();
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
 
+//Routes
+import labMemberRoute from "./route/labMemberRoute.js";
+import editorRoute from "./route/editorRoute.js";
+import publicationRoute from "./route/publicationRoute.js";
+import researchRoute from "./route/researchRoute.js";
 
 
 const port = process.env.PORT || 3000;
-
-//Routes
-const labMemberRoute = require("./route/labMemberRoute.js");
-const editorRoute = require("./route/editorRoute.js");
-const publicationRoute = require("./route/publicationRoute.js");
-const researchRoute = require("./route/researchRoute.js");
+const app = express();
 
 
 //Enable all CORS requests
