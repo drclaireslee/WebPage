@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import zod from "zod";
 

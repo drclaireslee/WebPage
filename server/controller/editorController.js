@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-import zod from "zod";
-import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import baseController from "./baseController.js";
 import {editorModel, editorZod} from "../model/editorModel.js"
@@ -17,7 +15,7 @@ export default class editorController extends baseController {
 	    return (doc.passhash != undefined && bcrypt.compareSync(editorInput.passhash, doc.passhash));
 	}
 
-	async auth(req, res, next) {
+	async auth(req, res) {
 		try {
 			const doc = this.validateDocument(req.body);
 			if (await this.verifyLogin(doc)) {
