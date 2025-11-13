@@ -18,7 +18,7 @@ function AILabHeader() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to={"/"}>Home</Nav.Link>
-            <Nav.Link as={Link} to={"/publications"}>Publications</Nav.Link>
+            <Nav.Link as={Link} to={"/research"}>Research</Nav.Link>
             <Nav.Link as={Link} to={"/grants"}>Grants</Nav.Link>
             <Nav.Link as={Link} to={"/team"}>Team</Nav.Link>
             <Nav.Link as={Link} to={"/contact"}>Contact</Nav.Link>

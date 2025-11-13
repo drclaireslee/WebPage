@@ -2,14 +2,14 @@
 import AILabHeader from "./components/pagenavbar";
 import { Container } from "react-bootstrap";
 
-function Publications() {
+function Research() {
     return (
         <Container fluid>
             <AILabHeader/>
-            <h1>Publications Page</h1>
+            <h1>Research Page</h1>
         </Container>
 
     );
 }
 
-export default Publications;
+export default Research;

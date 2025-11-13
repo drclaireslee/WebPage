@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from 'react-router';
 
 import Grants from './Grants.jsx';
-import Publications from './Publications.jsx';
+import Research from './Research.jsx';
 import Team from './Team.jsx';
 import Contact from './Contact.jsx';
 
@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>}/>
-        <Route path='/publications' element={<Publications/>}/>
+        <Route path='/research' element={<Research/>}/>
         <Route path='/grants' element={<Grants/>}/>
         <Route path='/team' element={<Team/>}/>
         <Route path='/contact' element={<Contact/>}/>
