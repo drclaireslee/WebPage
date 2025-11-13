@@ -26,8 +26,7 @@ export default class editorController extends baseController {
 				res.status(401).json({error: "Bad username/password"});
 			}
 		} catch(ex) {
-			console.log(ex.message);
-			res.status(401).json({error: ex.message});
+			this.errorHandler(res, ex);
 		}
 	}
 }

@@ -30,21 +30,28 @@ export default class baseController {
 		return newDoc;
 	}
 
+	errorHandler(res, ex) {
+		if (ex instanceof zod.zodError || ex.message == "Not an object id") {
+			return res.status(400).json({error: `Bad request: ${ex.message}`});
+		}
+
+		return res.status(500).json({error: `Internal Server Error: ${ex.message}`});
+	}
+
 	async readAll(req, res) {
 		try {
-	    	res.json(await this.model.find({}).exec());
+	    	res.status(200).json(await this.model.find({}).exec());
 	    } catch(ex) {
-            console.log(ex.message);
-	    	res.json({error: ex.message});
+	    	this.errorHandler(res, ex);
 	    }
 	}
 
 	async readFiltered(req, res) {
 	    try {
 	    	const doc = this.validateDocument(req.query);
-	    	res.json(await this.model.find(doc).exec());
+	    	res.status(200).json(await this.model.find(doc).exec());
 	    } catch(ex) {
-	    	res.json({error: ex.message});
+	    	this.errorHandler(res, ex);
 	    }
 	}
 
@@ -52,10 +59,10 @@ export default class baseController {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
 	    	const doc = this.validateDocument(req.body);
-	    	await this.model.create(doc);
-	    	res.send("OK");
+	    	const createdDoc = await this.model.create(doc);
+	    	res.status(201).json(createdDoc);
 	    } catch(ex) {
-	    	res.send(ex.message);
+	    	this.errorHandler(res, ex);
 	    }
 	}
 
@@ -65,10 +72,17 @@ export default class baseController {
 	    	if (!mongoose.isValidObjectId(req.params.id)) {
 	    		throw new Error("Not an object id");
 	    	}
-	    	await this.model.findById(req.params.id).deleteOne().exec();
-	    	res.send("OK");
+
+
+	    	const result = await this.model.findById(req.params.id).deleteOne().exec();
+	    	
+	    	if (result.deletedCount == 0) {
+	    		res.status(404).json()
+	    	} else {
+	    		res.status(200).send("OK");
+	    	}
 	    } catch(ex) {
-	    	res.send(ex.message);
+	    	this.errorHandler(res, ex);
 	    } 
 	}
 
@@ -79,10 +93,14 @@ export default class baseController {
 	    		throw new Error("Not an object id");
 	    	}
 	    	const doc = this.validateDocument(req.body);
-	    	await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
-	    	res.send("OK");
+	    	const result = await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
+	    	if (result.matchedCount == 0) {
+	    		res.status(404).send("NOT FOUND");
+	    	} else {
+	    		res.status(200).send("OK");
+	    	}
 	    } catch(ex) {
-	    	res.send(ex.message);
+	    	this.errorHandler(res, ex);
 	    } 
 	}
 }
