@@ -1,6 +1,6 @@
-const bcrypt = require("bcryptjs");
-const mongoose = require("mongoose");
-const zod = require("zod");
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
+import zod from "zod";
 
 const editorSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
@@ -8,15 +8,15 @@ const editorSchema = mongoose.Schema({
     role: {type: String}    
 });
 
-const zodObject = {
+const editorZod = {
     username: zod.string(),
     passhash: zod.string(),
     role: zod.string()
 };
 
-const model = mongoose.model("Editor", editorSchema);
+const editorModel = mongoose.model("Editor", editorSchema);
 
 
-module.exports = {model, zodObject};
+export {editorModel, editorZod};
 
 

@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const zod = require("zod");
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
+import zod from "zod";
 
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
@@ -9,15 +10,15 @@ const labMemberSchema = mongoose.Schema({
         background: {type: [String]}
 });
 
-const zodObject = zod.object({
+const labMemberZod = {
     fullName: zod.string(),
     type: zod.string(),
     email: zod.email(),
     picture: zod.url(),
     background: zod.array(zod.string())
-})
+};
 
-const model = mongoose.model("LabMember", labMemberSchema);
+const labMemberModel = mongoose.model("LabMember", labMemberSchema);
 
 
-module.exports = {model, zodObject};
+export {labMemberModel, labMemberZod};

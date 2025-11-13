@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
-const zod = require("zod");
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
+import zod from "zod";
+
 
 const researchSchema = mongoose.Schema({
 	title: {type: String, required: true, unique: true},
@@ -15,7 +17,7 @@ const researchSchema = mongoose.Schema({
     fundAmountUsd: {type: Number, min: 0}
 });
 
-const zodObject = zod.object({
+const researchZod = {
     title: zod.string();
     startDate: zod.iso.date();
     endDate: zod.iso.date();
@@ -23,9 +25,9 @@ const zodObject = zod.object({
     description: zod.string();
     sponsor: zod.array(zod.string());
     fundAmountUsd: zod.number();
-});
+};
 
 
-const model = mongoose.model("Research", researchSchema);
+const researchModel = mongoose.model("Research", researchSchema);
 
-module.exports = {model, zodObject};
+export {reserachModel, researchZod};

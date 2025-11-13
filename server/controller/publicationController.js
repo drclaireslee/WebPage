@@ -1,15 +1,11 @@
-const jwt =  require("jsonwebtoken");
-const zod = require("zod");
-const mongoose = require("mongoose");
+import jwt from "jsonwebtoken";
+import zod from "zod";
+import mongoose from "mongoose";
+import baseController from "./baseController.js";
+import {publicationModel, publicationZod} from "../model/publicationModel.js"
 
-const baseController = require("./baseController.js");
-const publicationModel = require("../model/publicationModel.js");
-
-function publicationController() {
-	baseController.call(this, process.env.SECRET, publicationModel.model, publicationModel.zodObject);
-};
-
-publicationController.prototype = Object.create(baseController);
-publicationController.prototype.constructor = publicationController;
-
-module.exports = publicationController;
+export default class publicationController extends baseController {
+	constructor() {
+		super(process.env.SECRET, publicationModel, publicationZod);
+	}
+}

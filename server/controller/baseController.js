@@ -1,100 +1,87 @@
-const jwt =  require("jsonwebtoken");
-const zod = require("zod");
-const mongoose = require("mongoose");
+import jwt from "jsonwebtoken";
+import zod from "zod";
+import mongoose from "mongoose";
 
 //class
-function baseController(secret, model, zodSchema) {
-	this.secret = secret;
-	this.model = model;
-	this.zodSchema = zodSchema;
-};
+export default class baseController {
 
-//methods
-
-//returns payload of the token
-//throws an error if it's unable to parse the token as a valid jwt token signed by the secret
-baseController.prototype.verifyToken = function (token) {
-	parsedToken = zod.jwt().parse(token);
- 	return jwt.verify(parsedToken, secret);
-};
-
-
-//returns a parsed doc that is a subset of zodSchema
-//Throws an error if doc cannot be parsed
-baseController.prototype.validateDocument = function (doc) {
-	let newDoc = {};
-	for (let attr in this.zodSchema) {
-		if (attr in doc) {
-			newDoc[attr] = zodSchema.attr.parse(doc.attr);
-		}
+	constructor(secret, model, zodSchema) {
+		this.secret = secret;
+		this.model = model;
+		this.zodSchema = zodSchema;
 	}
-	return newDoc;
-};
 
+	//returns payload of the token
+	//throws an error if it's unable to parse the token as a valid jwt token signed by the secret
+	verifyToken(token) {
+		parsedToken = zod.jwt().parse(token);
+	 	return jwt.verify(parsedToken, this.secret);
+	}
 
-baseController.prototype.readAll = async function(req, res, next) {
-	try {
-    	res.json(await this.model.find({}).exec());
-    } catch(ex) {
-    	res.json({error: ex.message});
-    } finally {
-    	next();
-    }	
-};
+	//returns a parsed doc that is a subset of zodSchema
+	//Throws an error if doc cannot be parsed
+	validateDocument(doc) {
+		let newDoc = {};
+		for (let attr in this.zodSchema) {
+			if (attr in doc) {
+				newDoc[attr] = zodSchema.attr.parse(doc.attr);
+			}
+		}
+		return newDoc;
+	}
 
-baseController.prototype.readFiltered = async function(req, res, next) {
-    try {
-    	const doc = this.validateDocument(req.query);
-    	res.json(await this.model.find(doc).exec());
-    } catch(ex) {
-    	res.json({error: ex.message});
-    } finally {
-    	next();
-    }
-};
+	async readAll(req, res, next) {
+		try {
+	    	res.json(await this.model.find({}).exec());
+	    } catch(ex) {
+	    	res.json({error: ex.message});
+	    }
+	}
 
-baseController.prototype.create = async function(req, res, next) {
-	try {
-    	this.verifyToken(req.headers["x-auth"]);
-    	const doc = this.validateDocument(req.body);
-    	await this.model.create(doc);
-    	res.send("OK");
-    } catch(ex) {
-    	res.send("NOT OK");
-    } finally {
-    	next();
-    }
-};
+	async readFiltered(req, res, next) {
+	    try {
+	    	const doc = this.validateDocument(req.query);
+	    	res.json(await this.model.find(doc).exec());
+	    } catch(ex) {
+	    	res.json({error: ex.message});
+	    }
+	}
 
-baseController.prototype.delete = async function(req, res, next) {
-	try {
-    	this.verifyToken(req.headers["x-auth"]);
-    	if (!mongoose.isValidObjectId(req.params.id)) {
-    		throw new Error("Not an object id");
-    	}
-    	await this.findById(req.params.id).deleteOne().exec();
-    	res.send("OK");
-    } catch(ex) {
-    	res.send("NOT OK");
-    } finally {
-    	next();
-    }
-};
+	async create(req, res, next) {
+		try {
+	    	this.verifyToken(req.headers["x-auth"]);
+	    	const doc = this.validateDocument(req.body);
+	    	await this.model.create(doc);
+	    	res.send("OK");
+	    } catch(ex) {
+	    	res.send("NOT OK");
+	    }
+	}
 
-baseController.prototype.update = async function(req, res, next) {
-	try {
-    	this.verifyToken(req.headers["x-auth"]);
-    	if (!mongoose.isValidObjectId(req.params.id)) {
-    		throw new Error("Not an object id");
-    	}
-    	const doc = this.validateDocument(req.body);
-    	await this.findById(req.params.id).updateOne({$set: doc}).exec();
-    	res.send("OK");
-    } catch(ex) {
-    	res.send("NOT OK");
-    } finally {
-    	next();
-    }
-};
+	async delete(req, res, next) {
+		try {
+	    	this.verifyToken(req.headers["x-auth"]);
+	    	if (!mongoose.isValidObjectId(req.params.id)) {
+	    		throw new Error("Not an object id");
+	    	}
+	    	await this.model.findById(req.params.id).deleteOne().exec();
+	    	res.send("OK");
+	    } catch(ex) {
+	    	res.send("NOT OK");
+	    } 
+	}
 
-module.exports = baseController;
+	async update(req, res, next) {
+		try {
+	    	this.verifyToken(req.headers["x-auth"]);
+	    	if (!mongoose.isValidObjectId(req.params.id)) {
+	    		throw new Error("Not an object id");
+	    	}
+	    	const doc = this.validateDocument(req.body);
+	    	await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
+	    	res.send("OK");
+	    } catch(ex) {
+	    	res.send("NOT OK");
+	    } 
+	}
+}

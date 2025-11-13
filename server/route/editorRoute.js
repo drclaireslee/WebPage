@@ -1,8 +1,9 @@
-const express = require("express");
-const editorController = require("../controller/editorController.js");
-const router  = express.Router();
+import express from "express"
+import editorController from "../controller/editorController.js"
+
+const router = express.Router();
 const controller = new editorController();
 
 router.post("/auth", controller.auth);
 
-module.exports = router;
+export default router;

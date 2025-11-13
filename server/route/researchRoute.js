@@ -1,5 +1,6 @@
-const express = require("express");
-const researchController = require("../controller/labMemberController.js");
+import express from "express"
+import reserarchController from "../controller/researchController.js"
+
 const router = express.Router();
 const controller = new researchController();
 
@@ -9,4 +10,4 @@ router.post("/", controller.create);
 router.patch("/:id", controller.update);
 router.delete("/:id", controller.delete);
 
-module.exports = router;
+export default router;

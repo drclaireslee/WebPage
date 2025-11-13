@@ -1,15 +1,11 @@
-const jwt =  require("jsonwebtoken");
-const zod = require("zod");
-const mongoose = require("mongoose");
+import jwt from "jsonwebtoken";
+import zod from "zod";
+import mongoose from "mongoose";
+import baseController from "./baseController.js";
+import {labMemberModel, labMemberZod} from "../model/labMemberModel.js"
 
-const baseController = require("./baseController.js");
-const labMemberModel = require("../model/labMemberModel.js");
-
-function labMemberController() {
-	baseController.call(this, process.env.SECRET, labMemberModel.model, labMemberModel.zodObject);
-};
-
-labMemberController.prototype = Object.create(baseController.prototype);
-labMemberController.prototype.constructor = labMemberController;
-
-module.exports = labMemberController;
+export default class labMemberController extends baseController {
+	constructor() {
+		super(process.env.SECRET, labMemberModel, labMemberZod);
+	}
+}
