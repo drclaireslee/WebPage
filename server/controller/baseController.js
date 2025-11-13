@@ -24,7 +24,7 @@ export default class baseController {
 		let newDoc = {};
 		for (let attr in this.zodSchema) {
 			if (attr in doc) {
-				newDoc[attr] = zodSchema.attr.parse(doc.attr);
+				newDoc[attr] = this.zodSchema[attr].parse(doc[attr]);
 			}
 		}
 		return newDoc;

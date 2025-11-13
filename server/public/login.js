@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 async function auth() {
 	const logInfo = {
 		username: document.getElementById("username").value,
-		password: document.getElementById("password").value
+		passhash: document.getElementById("password").value
 	}
 
 	const response = await fetch("http://localhost:3000/api/editor/auth", {
