@@ -13,6 +13,8 @@ const port = process.env.PORT || 3000;
 //Routes
 const labMemberRoute = require("./route/labMemberRoute.js");
 const editorRoute = require("./route/editorRoute.js");
+const publicationRoute = require("./route/publicationRoute.js");
+const researchRoute = require("./route/researchRoute.js");
 
 
 //Enable all CORS requests
@@ -26,6 +28,8 @@ app.use(express.json());
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
+app.use("/api/publication", publicationRoute);
+app.use("/api/research", researchRoute);
 
 app.use(express.static("public"));
 

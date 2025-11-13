@@ -1,7 +1,7 @@
 const express = require("express");
-const labMemberController = require("../controller/labMemberController.js");
+const publicationController = require("../controller/labMemberController.js");
 const router = express.Router();
-const controller = new labMemberController();
+const controller = new publicationController();
 
 router.get("/all", controller.getAll);
 

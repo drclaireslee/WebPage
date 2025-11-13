@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const zod = require("zod");
 
 const publicationSchema = mongoose.Schema({
     title: {type: String, unique: true, required: true},
@@ -7,24 +8,15 @@ const publicationSchema = mongoose.Schema({
     abstract: {type: String}
 });
 
+const zodObject = zod.object({
+    title: zod.string(),
+    author: zod.string(),
+    url: zod.url(),
+    abstract: zod.string()
+})
 
-//Add methods to the model
-publicationSchema.statics.getAll = async function() {
-    return this.findOne({});
-};
 
-publicationSchema.statics.create = async function(publicationInput) {
-    this.create(publicationInput);
-};
+const model = mongoose.model("Publication", publicationSchema);
 
-publicationSchema.statics.deleteById = async function(idInput) {
-    this.findById(idInput).deleteOne().exec();
-};
 
-publicationSchema.statics.updateById = async function(idInput, publicationInput) {
-    this.findById(idInput).updateOne({$set: publicationInput}).exec();
-};
-
-const publicationModel = mongoose.model("Publication", publicationSchema);
-
-module.exports = publicationModel;
+module.exports = {model, zodObject};

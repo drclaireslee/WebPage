@@ -1,34 +1,31 @@
 const mongoose = require("mongoose");
+const zod = require("zod");
 
 const researchSchema = mongoose.Schema({
-	startDate: {type: Date},
+	title: {type: String, required: true, unique: true},
+    startDate: {type: Date},
 	endDate: {type: Date, validate:{
         validator: function(v) {
             return v > startDate;
         }
     }},
     role: {type: String},
-    title: {type: String, required: true, unique: true},
     description: {type: String},
-    sponsor: {type: [String]}
+    sponsor: {type: [String]},
+    fundAmountUsd: {type: Number, min: 0}
 });
 
-researchSchema.statics.getAll = async function() {
-    return this.find({});
-};
+const zodObject = zod.object({
+    title: zod.string();
+    startDate: zod.iso.date();
+    endDate: zod.iso.date();
+    role: zod.string();
+    description: zod.string();
+    sponsor: zod.array(zod.string());
+    fundAmountUsd: zod.number();
+});
 
-researchSchema.statics.create = async function(researchInput) {
-    this.create(researchInput);
-};
 
-researchSchema.statics.deleteById = async function(idInput) {
-    this.findById(idInput).deleteOne().exec();
-};
+const model = mongoose.model("Research", researchSchema);
 
-researchSchema.statics.updateById = async function(idInput, researchNew) {
-    this.findById(idInput).updateOne({$set: researchNew}).exec();
-};
-
-const researchModel = mongoose.model("Research", researchSchema);
-
-module.exports = researchModel;
+module.exports = {model, zodObject};

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.DB);
+const zod = require("zod");
 
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
@@ -9,29 +9,15 @@ const labMemberSchema = mongoose.Schema({
         background: {type: [String]}
 });
 
-//Add methods to the model
-labMemberSchema.statics.getType = async function(typeInput) {
-    return this.find({type: typeInput}).exec();
-};
+const zodObject = zod.object({
+    fullName: zod.string(),
+    type: zod.string(),
+    email: zod.email(),
+    picture: zod.url(),
+    background: zod.array(zod.string())
+})
 
-labMemberSchema.statics.getAll = async function() {
-    return this.find({}).exec();
-};
-
-labMemberSchema.statics.create = async function(labMemberInput) {
-    this.create(labMemberInput);
-};
-
-labMemberSchema.statics.deleteById = async function(idInput) {
-    this.findById(idInput).deleteOne().exec();
-};
-
-labMemberSchema.statics.updateById = async function(idInput, labMemberInput) {
-    this.findById(idInput).updateOne({$set: labMemberInput}).exec();
-};
+const model = mongoose.model("LabMember", labMemberSchema);
 
 
-const labMemberModel = mongoose.model("LabMember", labMemberSchema);
-
-
-module.exports = labMemberModel;
+module.exports = {model, zodObject};

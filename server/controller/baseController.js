@@ -7,16 +7,20 @@ function baseController(secret, model, zodSchema) {
 	this.secret = secret;
 	this.model = model;
 	this.zodSchema = zodSchema;
-
-	let x = "Bob"
-}
+};
 
 //methods
+
+//returns payload of the token
+//throws an error if it's unable to parse the token as a valid jwt token signed by the secret
 baseController.prototype.verifyToken = function (token) {
 	parsedToken = zod.jwt().parse(token);
  	return jwt.verify(parsedToken, secret);
 };
 
+
+//returns a parsed doc that is a subset of zodSchema
+//Throws an error if doc cannot be parsed
 baseController.prototype.validateDocument = function (doc) {
 	let newDoc = {};
 	for (let attr in this.zodSchema) {
@@ -26,6 +30,7 @@ baseController.prototype.validateDocument = function (doc) {
 	}
 	return newDoc;
 };
+
 
 baseController.prototype.readAll = async function(req, res, next) {
 	try {
@@ -74,7 +79,7 @@ baseController.prototype.delete = async function(req, res, next) {
     } finally {
     	next();
     }
-}
+};
 
 baseController.prototype.update = async function(req, res, next) {
 	try {
@@ -90,11 +95,6 @@ baseController.prototype.update = async function(req, res, next) {
     } finally {
     	next();
     }
-}
+};
 
-
-baseController.prototype.print = function() {
-	console.log("x");
-}
-
-let x  = base
+module.exports = baseController;

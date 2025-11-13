@@ -1,11 +1,15 @@
-const labMemberModel = require("../model/labMemberModel.js")
+const jwt =  require("jsonwebtoken");
+const zod = require("zod");
+const mongoose = require("mongoose");
 
-async function getAll(req, res) {
-	try {
-		res.json(await labMemberModel.getAll());
-	} catch(ex) {
-		console.log(ex.message);
-	}
-}
+const baseController = require("./baseController.js");
+const labMemberModel = require("../model/labMemberModel.js");
 
-module.exports = {getAll};
+function labMemberController() {
+	baseController.call(this, process.env.SECRET, labMemberModel.model, labMemberModel.zodObject);
+};
+
+labMemberController.prototype = Object.create(baseController.prototype);
+labMemberController.prototype.constructor = labMemberController;
+
+module.exports = labMemberController;
