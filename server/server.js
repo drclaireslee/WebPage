@@ -4,6 +4,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import helmet from "helmet";
+
+
 
 //Routes
 import labMemberRoute from "./route/labMemberRoute.js";
@@ -12,12 +15,20 @@ import publicationRoute from "./route/publicationRoute.js";
 import researchRoute from "./route/researchRoute.js";
 
 
+
 const port = process.env.PORT || 3000;
 const app = express();
 
 
 //Enable all CORS requests
 app.use(cors());
+
+//Activate general security policies
+app.use(helmet());
+
+//Disable finger printing
+app.disable('x-powered-by');
+
 
 //Parses URL-encoded data in a request body and adds the parsed values to the req.body
 app.use(express.urlencoded({extended: false}));

@@ -14,7 +14,7 @@ export default class baseController {
 	//returns payload of the token
 	//throws an error if it's unable to parse the token as a valid jwt token signed by the secret
 	verifyToken(token) {
-		parsedToken = zod.jwt().parse(token);
+		let parsedToken = zod.jwt().parse(token);
 	 	return jwt.verify(parsedToken, this.secret);
 	}
 
@@ -30,7 +30,7 @@ export default class baseController {
 		return newDoc;
 	}
 
-	async readAll(req, res, next) {
+	async readAll(req, res) {
 		try {
 	    	res.json(await this.model.find({}).exec());
 	    } catch(ex) {
@@ -39,7 +39,7 @@ export default class baseController {
 	    }
 	}
 
-	async readFiltered(req, res, next) {
+	async readFiltered(req, res) {
 	    try {
 	    	const doc = this.validateDocument(req.query);
 	    	res.json(await this.model.find(doc).exec());
@@ -48,18 +48,18 @@ export default class baseController {
 	    }
 	}
 
-	async create(req, res, next) {
+	async create(req, res) {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
 	    	const doc = this.validateDocument(req.body);
 	    	await this.model.create(doc);
 	    	res.send("OK");
 	    } catch(ex) {
-	    	res.send("NOT OK");
+	    	res.send(ex.message);
 	    }
 	}
 
-	async delete(req, res, next) {
+	async delete(req, res) {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
 	    	if (!mongoose.isValidObjectId(req.params.id)) {
@@ -68,11 +68,11 @@ export default class baseController {
 	    	await this.model.findById(req.params.id).deleteOne().exec();
 	    	res.send("OK");
 	    } catch(ex) {
-	    	res.send("NOT OK");
+	    	res.send(ex.message);
 	    } 
 	}
 
-	async update(req, res, next) {
+	async update(req, res) {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
 	    	if (!mongoose.isValidObjectId(req.params.id)) {
@@ -82,7 +82,7 @@ export default class baseController {
 	    	await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
 	    	res.send("OK");
 	    } catch(ex) {
-	    	res.send("NOT OK");
+	    	res.send(ex.message);
 	    } 
 	}
 }

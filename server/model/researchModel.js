@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import zod from "zod";
 
@@ -8,7 +7,10 @@ const researchSchema = mongoose.Schema({
     startDate: {type: Date},
 	endDate: {type: Date, validate:{
         validator: function(v) {
-            return v > startDate;
+            if (!this.startDate) {
+                return true;
+            }
+            return v > this.startDate;
         }
     }},
     role: {type: String},
