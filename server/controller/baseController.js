@@ -34,6 +34,7 @@ export default class baseController {
 		try {
 	    	res.json(await this.model.find({}).exec());
 	    } catch(ex) {
+            console.log(ex.message);
 	    	res.json({error: ex.message});
 	    }
 	}

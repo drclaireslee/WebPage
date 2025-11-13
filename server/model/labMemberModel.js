@@ -5,7 +5,7 @@ import zod from "zod";
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
         type: {type: String, required: true},
-        email: {type: String, unique: true},
+        email: {type: String},
         picture: {type: String},
         background: {type: [String]}
 });
