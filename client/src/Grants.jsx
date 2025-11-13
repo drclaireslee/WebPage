@@ -3,19 +3,19 @@ import { Container } from "react-bootstrap";
 import ResearchCard from "./components/researchcard";
 import research_data from './research_studies.json';
 
-function Research() {
+function ResearchGrants() {
     return (
         <div>
-            <Container role="page" aria-label='research page'>
+            <Container className="bg-white p-5" role="page" aria-label='grant page'>
             
                 {/** Navigation Bar */}
                 <AILabHeader/>
 
                 {/** Main section for research projects */}
-                <Container className="p-5 bg-dark" role="section" aria-label="research grants">
+                <Container role="section" aria-label="research grants">
                     
                     
-                    <h1 className="text-light m-5">Research Grants</h1>
+                    <h1 className="m-5">Research Grants</h1>
 
                 
                     {research_data.map((card, idx) => {
@@ -39,4 +39,4 @@ function Research() {
     );
 }
 
-export default Research;
+export default ResearchGrants;
