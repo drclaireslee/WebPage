@@ -6,7 +6,6 @@ function Contact() {
     return (
         <Container fluid>
             <AILabHeader/>
-            <h1>Contact Page</h1>
             <MapEmbed/>
         </Container>
 
