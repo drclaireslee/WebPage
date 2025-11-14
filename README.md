@@ -28,4 +28,5 @@ This is where all of the front-end work will be stored (i.e. React, CSS, etc.) u
 # Server Folder
 This is where all of the back-end work will be stored (Express server, Node Server, Database, etc.) using Node.js.
 
-10/25/2025: Intialization of the Backend Node server.
+- 11/09/2025 - 11/13/2025: Creation of the authentication server, login page, initial database setup, and status codes for API calls
+- 10/25/2025: Intialization of the Backend Node server.
