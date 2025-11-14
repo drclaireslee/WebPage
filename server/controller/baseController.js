@@ -31,7 +31,7 @@ export default class baseController {
 	}
 
 	errorHandler(res, ex) {
-		if (ex instanceof zod.zodError || ex.message == "Not an object id") {
+		if (ex.message == "Not an object id") {
 			return res.status(400).json({error: `Bad request: ${ex.message}`});
 		}
 

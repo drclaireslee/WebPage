@@ -8,7 +8,7 @@ async function getListItems() {
 	const resJSON = await res.json();
 	let html = "";
 	for (let entry of resJSON) {
-		html = html + `<li>${entry.fullName}</li>`;
+		html = html + `<li>${entry.fullName} <img src="${"http://localhost:3000/"+ entry.imagePath}"></li>`;
 	}
 	return html;
 }
