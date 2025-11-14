@@ -20,9 +20,10 @@ Thank you!
 # Client Folder
 This is where all of the front-end work will be stored (i.e. React, CSS, etc.) using Vite.
 
-11/01/2025: Creation of the Research, Publications, Contact, and Team pages.
-10/27/2025 - 10/31/2025: Basic homepage and navigation bar
-10/25/2025: Intialization of the frontend using React and Vite.
+- 11/12/2025: Added embedded map using OpenStreetMap and Leaflet.js for API integration.
+- 11/01/2025: Creation of the Research, Publications, Contact, and Team pages.
+- 10/27/2025 - 10/31/2025: Basic homepage and navigation bar
+- 10/25/2025: Intialization of the frontend using React and Vite.
 
 # Server Folder
 This is where all of the back-end work will be stored (Express server, Node Server, Database, etc.) using Node.js.
