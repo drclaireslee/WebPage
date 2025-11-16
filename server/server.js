@@ -20,28 +20,30 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 
-//Enable all CORS requests
-app.use(cors());
-
 //Activate general security policies
 app.use(helmet());
+
+//Enable all CORS requests
+app.use(cors());
 
 //Disable finger printing
 app.disable('x-powered-by');
 
+// Middleware that parses HTTP requests with JSON body
+app.use(express.json());
 
 //Parses URL-encoded data in a request body and adds the parsed values to the req.body
 app.use(express.urlencoded({extended: false}));
 
-// Middleware that parses HTTP requests with JSON body
-app.use(express.json());
+
+app.use(express.static("public"));
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
 app.use("/api/publication", publicationRoute);
 app.use("/api/research", researchRoute);
 
-app.use(express.static("public"));
+
 
 async function startServer() {
 	try {

@@ -7,11 +7,11 @@ const editorSchema = mongoose.Schema({
     role: {type: String}    
 });
 
-const editorZod = {
+const editorZod = zod.object({
     username: zod.string(),
     passhash: zod.string(),
     role: zod.string()
-};
+});
 
 const editorModel = mongoose.model("Editor", editorSchema);
 

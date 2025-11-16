@@ -5,27 +5,41 @@ import multer from "multer"
 const store = multer.diskStorage({
 	destination: "./public/img",
 	filename: function(req, file, cb) {
-		cb(null, req.body._id + ".jpeg");
+		cb(null, "temp");
 	}
 });
 
 const imageFilter = function(req, file, cb) {
-	
-	cb(null, true);
+	switch (file.mimetype) {
+	case "image/jpeg":
+	case "image/png":
+	case "image/webp":
+		cb(null, true);
+		break;
+	default:
+		cb(null, false);
+	}
+};
+
+const limiters = {
+	files: 1,
+	fileSize: 1e7
 };
 
 const upload = multer({
 	storage: store,
 	fileFilter: imageFilter,
+	limits: limiters
 });
 
 const router = express.Router();
 const controller = new labMemberController();
 
 router.get("/all", controller.readAll.bind(controller));
+router.get("/", controller.readFiltered.bind(controller));
 
-router.post("/", upload.single("memberImage"), controller.create.bind(controller));
-router.patch("/:id", controller.update.bind(controller));
+router.post("/", upload.single("labMemberImage"), controller.create.bind(controller));
+router.patch("/:id", upload.single("labMemberImage"), controller.update.bind(controller));
 router.delete("/:id", controller.delete.bind(controller));
 
 

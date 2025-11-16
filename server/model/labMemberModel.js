@@ -9,13 +9,13 @@ const labMemberSchema = mongoose.Schema({
         background: {type: [String]}
 });
 
-const labMemberZod = {
+const labMemberZod = zod.object({
     fullName: zod.string(),
     type: zod.string(),
     email: zod.email(),
     picture: zod.url(),
     background: zod.array(zod.string())
-};
+});
 
 const labMemberModel = mongoose.model("LabMember", labMemberSchema);
 

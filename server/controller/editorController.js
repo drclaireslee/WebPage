@@ -20,10 +20,10 @@ export default class editorController extends baseController {
 			const doc = this.validateDocument(req.body);
 			if (await this.verifyLogin(doc)) {
 				const tk = jwt.sign({username: doc.username}, this.secret);
-				res.json({token: tk});
+				return res.json({token: tk});
 			} else {
 				//Unauthorized access
-				res.status(401).json({error: "Bad username/password"});
+				return res.status(401).json({error: "Bad username/password"});
 			}
 		} catch(ex) {
 			this.errorHandler(res, ex);
