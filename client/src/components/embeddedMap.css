@@ -1,6 +1,7 @@
 .map-wrapper {
-  width: 50vh;
+  width: 80vh;
   padding: 50px;
+  
 }
 
 #map {
@@ -8,4 +9,5 @@
   width: 100%;
   border-radius: 8px;
   border: 2px solid #ccc;
+
 }
