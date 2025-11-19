@@ -66,6 +66,8 @@ function App() {
 
      
         
+     
+        
       {/**
        * Information about Dr. Claire Lee
        */}
@@ -75,7 +77,7 @@ function App() {
           <br/>
           <Row>
             <Col className='col-md-3 align-items-start'>
-              <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture'/>
+              <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture' className='p-2'/>
             </Col>
             <Col className='col-md-9'>
               <p className='text-start fs-5'><b>Dr. Claire S. Lee</b> is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell.</p>
@@ -84,6 +86,7 @@ function App() {
 
 
           </Row>
+          <br/>
           <br/>
         </Container>
         

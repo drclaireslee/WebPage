@@ -1,25 +1,32 @@
 import { useEffect } from "react";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "./embeddedMap.css"; // your CSS file
+import "./embeddedMap.css"; 
+
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
 
 export default function MapComponent() {
   useEffect(() => {
-    // Initial map setup
     const map = L.map("map").setView([42.6422, -71.3337], 16);
 
-    // Add OpenStreetMap tiles
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: "© OpenStreetMap",
     }).addTo(map);
 
-    // Add marker
     const marker = L.marker([42.6422, -71.3337]).addTo(map);
     marker.bindPopup("<b>UMass Lowell South Campus</b><br>Manning Health and Social Sciences Building <br> Room 469");
 
-
-    // Cleanup map instance on component unmount
     return () => {
       map.remove();
     };

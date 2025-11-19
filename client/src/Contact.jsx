@@ -31,7 +31,7 @@ function Contact() {
             </Container>
             
             {/**Commented out due to formatting issues */}
-            {/*<MapEmbed/>*/}
+            <MapEmbed/>
         </div>
 
     );
