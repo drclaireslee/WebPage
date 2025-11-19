@@ -30,6 +30,7 @@ This is where all of the front-end work will be stored (i.e. React, CSS, etc.) u
     - Renamed Home to About, Team to Members on Navbar
     - Initialized new basic research page
     -  Added the professor's research interests, methods, and geographical focus
+    - Removed container fluid, for Grants and Home pages
 - 11/12/2025: Added embedded map using OpenStreetMap and Leaflet.js for API integration.
 - 11/01/2025: Creation of the Research, Publications, Contact, and Team pages.
 - 10/27/2025 - 10/31/2025: Basic homepage and navigation bar

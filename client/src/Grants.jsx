@@ -6,16 +6,16 @@ import research_data from './research_grants.json';
 function ResearchGrants() {
     return (
       
-        <>
+        <div>
             {/** Navigation Bar */}
             <AILabHeader/>
-            <Container fluid className='my-1 p-5 bg-white' role="page" aria-label='grant page'>
+            <Container className='my-1 p-5 bg-white' role="page" aria-label='grant page'>
             
                
 
                 
                 {/** Main section for research projects */}
-                <Container fluid   role="section" aria-label="research grants">
+                <Container role="section" aria-label="research grants">
                     
                     <h1>Research Grants</h1>
                     
@@ -38,7 +38,7 @@ function ResearchGrants() {
                     </Container>
                 </footer>
             </Container>
-     </>
+     </div>
 
 
     );

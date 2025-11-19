@@ -38,7 +38,7 @@ function App() {
       <AILabHeader/>
       
       {/** Name of the Lab*/}
-      <Container fluid className='p-5 bg-dark' role='section' aria-label='ai-cyren lab landing section'>
+      <Container className='p-5 bg-dark' role='section' aria-label='ai-cyren lab landing section'>
            <Row className='m-5'>
             <Col>
                 <h1 className='align-center text-light' role="title" aria-label='ai-cyren lab full title'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
@@ -52,7 +52,7 @@ function App() {
       {/**
        * Information about the AI-CYREN Lab
        */}
-        <Container fluid className='bg-white' role='section' aria-label='ai-cyren lab information'>
+        <Container className='bg-white' role='section' aria-label='ai-cyren lab information'>
           <Row>
             <Col className='col-md-8 p-4'>
               <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society.</p>
@@ -71,11 +71,11 @@ function App() {
        */}
       
 
-        <Container fluid className='bg-white' role='section' aria-label='dr claire lee about section' >
+        <Container  className='bg-white' role='section' aria-label='dr claire lee about section' >
           <br/>
           <Row>
             <Col className='col-md-3 align-items-start'>
-              <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture' className='p-2'/>
+              <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture'/>
             </Col>
             <Col className='col-md-9'>
               <p className='text-start fs-5'><b>Dr. Claire S. Lee</b> is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell.</p>
