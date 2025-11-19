@@ -10,7 +10,7 @@ function ResearchCard({research_image, research_name, research_country, research
                     </Col>
                     <Col md={8}>
                         <Card.Body>
-                            <Card.Title><h3><strong>{research_name}</strong>, {research_country} <br/> ({research_year})</h3></Card.Title>
+                            <Card.Title><h3><strong>{research_name}</strong>, {research_country}<br/>({research_year})</h3></Card.Title>
                             
                             <Card.Text><p className="fs-4">{research_desc}</p></Card.Text>
 

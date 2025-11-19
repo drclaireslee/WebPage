@@ -27,7 +27,7 @@ export default function MapComponent() {
 
   return (
     <div className="map-wrapper">
-      <h2>Our Location</h2>
+      <h2>My Office</h2>
       <div id="map"></div>
     </div>
   );
