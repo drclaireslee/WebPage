@@ -8,5 +8,26 @@
 		<div id="greeting"></div>
 		<input type="button" value="Logout" id="logoutBtn">
 		<div id="studentList"></div>
+		
+		<h2>Create</h2>
+		<form>
+			<p><label>Name:</label><input id="nameInput" name="fullName" type="text"></p>
+			<p><label>Type:</label><input id="typeInput" name="type" type="text"></p>
+			<p><label>Image:</label><input id="fileInput" name="labMemberImage" type="file"></p>
+			<input type="submit" id="createMemberBtn" value="Submit">
+		</form>
+		
+		<h2>Delete</h2>
+		<p><label>ID:</label><input id="deleteIdInput" name="_id" type="text"></p>
+		<input type="button" id="deleteBtn" value="Delete Something">
+
+		<h2>Update</h2>
+		<form id="updateForm">
+			<p><label>ID:</label><input id="updateIdInput" name="_id" type="text"></p>
+			<p><label>Name:</label><input id="updateNameInput" name="fullName" type="text"></p>
+			<p><label>Image:</label><input id="updateFileInput" name="labMemberImage" type="file"></p>
+			<input type="submit" id="updateMemberBtn" value="Submit">
+		</form>
+
 	</body>
 </html>

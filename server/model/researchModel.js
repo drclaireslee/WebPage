@@ -19,7 +19,7 @@ const researchSchema = mongoose.Schema({
     fundAmountUsd: {type: Number, min: 0}
 });
 
-const researchZod = {
+const researchZod = zod.object({
     title: zod.string(),
     startDate: zod.iso.date(),
     endDate: zod.iso.date(),
@@ -27,7 +27,7 @@ const researchZod = {
     description: zod.string(),
     sponsor: zod.array(zod.string()),
     fundAmountUsd: zod.number()
-};
+});
 
 
 const researchModel = mongoose.model("Research", researchSchema);

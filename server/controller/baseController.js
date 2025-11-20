@@ -21,17 +21,11 @@ export default class baseController {
 	//returns a parsed doc that is a subset of zodSchema
 	//Throws an error if doc cannot be parsed
 	validateDocument(doc) {
-		let newDoc = {};
-		for (let attr in this.zodSchema) {
-			if (attr in doc) {
-				newDoc[attr] = this.zodSchema[attr].parse(doc[attr]);
-			}
-		}
-		return newDoc;
+		return this.zodSchema.partial().parse(doc);
 	}
 
 	errorHandler(res, ex) {
-		if (ex instanceof zod.zodError || ex.message == "Not an object id") {
+		if (ex.message == "Not an object id") {
 			return res.status(400).json({error: `Bad request: ${ex.message}`});
 		}
 
@@ -40,7 +34,7 @@ export default class baseController {
 
 	async readAll(req, res) {
 		try {
-	    	res.status(200).json(await this.model.find({}).exec());
+	    	return res.status(200).json(await this.model.find({}).exec());
 	    } catch(ex) {
 	    	this.errorHandler(res, ex);
 	    }
@@ -49,7 +43,7 @@ export default class baseController {
 	async readFiltered(req, res) {
 	    try {
 	    	const doc = this.validateDocument(req.query);
-	    	res.status(200).json(await this.model.find(doc).exec());
+	    	return res.status(200).json(await this.model.find(doc).exec());
 	    } catch(ex) {
 	    	this.errorHandler(res, ex);
 	    }
@@ -60,7 +54,7 @@ export default class baseController {
 	    	this.verifyToken(req.headers["x-auth"]);
 	    	const doc = this.validateDocument(req.body);
 	    	const createdDoc = await this.model.create(doc);
-	    	res.status(201).json(createdDoc);
+	    	return res.status(201).json(createdDoc);
 	    } catch(ex) {
 	    	this.errorHandler(res, ex);
 	    }
@@ -73,13 +67,12 @@ export default class baseController {
 	    		throw new Error("Not an object id");
 	    	}
 
-
 	    	const result = await this.model.findById(req.params.id).deleteOne().exec();
 	    	
 	    	if (result.deletedCount == 0) {
-	    		res.status(404).json()
+	    		return res.status(404).json();
 	    	} else {
-	    		res.status(200).send("OK");
+	    		return res.status(200).send("OK");
 	    	}
 	    } catch(ex) {
 	    	this.errorHandler(res, ex);
@@ -95,11 +88,12 @@ export default class baseController {
 	    	const doc = this.validateDocument(req.body);
 	    	const result = await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
 	    	if (result.matchedCount == 0) {
-	    		res.status(404).send("NOT FOUND");
+	    		return res.status(404).send("NOT FOUND");
 	    	} else {
-	    		res.status(200).send("OK");
+	    		return res.status(200).send("OK");
 	    	}
 	    } catch(ex) {
+	    	console.log(ex.message);
 	    	this.errorHandler(res, ex);
 	    } 
 	}

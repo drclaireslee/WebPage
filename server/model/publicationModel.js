@@ -8,12 +8,12 @@ const publicationSchema = mongoose.Schema({
     abstract: {type: String}
 });
 
-const publicationZod = {
+const publicationZod = zod.object({
     title: zod.string(),
     author: zod.string(),
     url: zod.url(),
     abstract: zod.string()
-};
+});
 
 
 const publicationModel = mongoose.model("Publication", publicationSchema);
