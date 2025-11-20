@@ -28,7 +28,6 @@ export default class baseController {
 		if (ex.message == "Not an object id") {
 			return res.status(400).json({error: `Bad request: ${ex.message}`});
 		}
-
 		return res.status(500).json({error: `Internal Server Error: ${ex.message}`});
 	}
 
@@ -63,11 +62,11 @@ export default class baseController {
 	async delete(req, res) {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
-	    	if (!mongoose.isValidObjectId(req.params.id)) {
+	    	if (!mongoose.isValidObjectId(req.params._id)) {
 	    		throw new Error("Not an object id");
 	    	}
 
-	    	const result = await this.model.findById(req.params.id).deleteOne().exec();
+	    	const result = await this.model.findById(req.params._id).deleteOne().exec();
 	    	
 	    	if (result.deletedCount == 0) {
 	    		return res.status(404).json();
@@ -82,11 +81,11 @@ export default class baseController {
 	async update(req, res) {
 		try {
 	    	this.verifyToken(req.headers["x-auth"]);
-	    	if (!mongoose.isValidObjectId(req.params.id)) {
+	    	if (!mongoose.isValidObjectId(req.params._id)) {
 	    		throw new Error("Not an object id");
 	    	}
 	    	const doc = this.validateDocument(req.body);
-	    	const result = await this.model.findById(req.params.id).updateOne({$set: doc}).exec();
+	    	const result = await this.model.findById(req.params._id).updateOne({$set: doc}).exec();
 	    	if (result.matchedCount == 0) {
 	    		return res.status(404).send("NOT FOUND");
 	    	} else {
