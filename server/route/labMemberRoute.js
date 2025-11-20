@@ -39,8 +39,8 @@ router.get("/all", controller.readAll.bind(controller));
 router.get("/", controller.readFiltered.bind(controller));
 
 router.post("/", upload.single("labMemberImage"), controller.create.bind(controller));
-router.patch("/:id", upload.single("labMemberImage"), controller.update.bind(controller));
-router.delete("/:id", controller.delete.bind(controller));
+router.patch("/:_id", upload.single("labMemberImage"), controller.update.bind(controller));
+router.delete("/:_id", controller.delete.bind(controller));
 
 
 export default router;
