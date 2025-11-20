@@ -11,7 +11,7 @@ export default class labMemberController extends baseController {
 
 	//expects a list of object with _id attributes
 	//appends a key named "imagePath" with a value of the path of an image relating to the _id in each object
-	//If path of image can't be found a default will be assigned instead
+	//If the path of image can't be found a default will be assigned instead
 	async appendImagePath(memberList) {
 		await Promise.allSettled(memberList.map(async (member) => {
 			try {
@@ -42,7 +42,7 @@ export default class labMemberController extends baseController {
 	    }
 	}
 
-	//not atomic
+
 	async delete(req, res) {
 		super.delete(req, res);
 		try {
@@ -55,13 +55,7 @@ export default class labMemberController extends baseController {
 	async update(req, res) {
 		super.update(req, res);
 		try {
-			await fs.rm(`./public/img/${req.params.id}`);
-		} catch(ex) {
-			console.log(ex);
-		}
-
-		try {
-			//Replace for the old picture
+			//Replace the old picture with the new picture if it exists
 			const oldPath = `${req.file.destination}/${req.file.filename}`;
 		    const newPath = `${req.file.destination}/${req.params.id}`;
 		    await fs.rename(oldPath, newPath);
