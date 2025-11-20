@@ -46,7 +46,7 @@ export default class labMemberController extends baseController {
 	async delete(req, res) {
 		super.delete(req, res);
 		try {
-			fs.rm(`./public/img/${req.params.id}`);
+			fs.rm(`./public/img/${req.params._id}`);
 		} catch(ex) {
 			console.log(ex);
 		}
@@ -57,7 +57,7 @@ export default class labMemberController extends baseController {
 		try {
 			//Replace the old picture with the new picture if it exists
 			const oldPath = `${req.file.destination}/${req.file.filename}`;
-		    const newPath = `${req.file.destination}/${req.params.id}`;
+		    const newPath = `${req.file.destination}/${req.params._id}`;
 		    await fs.rename(oldPath, newPath);
 		} catch(ex) {
 			console.log(ex);
