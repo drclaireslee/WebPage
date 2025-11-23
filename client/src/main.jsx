@@ -10,6 +10,7 @@ import Grants from './Grants.jsx';
 import Research from './Research.jsx';
 import Team from './Team.jsx';
 import Contact from './Contact.jsx';
+import Teaching from './Teaching.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<App/>}/>
         <Route path='/research' element={<Research/>}/>
+        <Route path='/teaching' element={<Teaching/>}/>
         <Route path='/grants' element={<Grants/>}/>
         <Route path='/team' element={<Team/>}/>
         <Route path='/contact' element={<Contact/>}/>
