@@ -21,18 +21,18 @@ export default class editorController extends baseController {
 		try {
 			const doc = this.validateDocument(req.body);
 			if (await this.verifyLogin(doc)) {
-				const tk = jwt.sign({username: doc.username}, this.secret);
+				const tk = jwt.sign({username: doc.username}, this.secret, {expiresIn: '1d'});
 				return res.json({token: tk});
 			} else {
-				//Unauthorized access
-				return res.status(401).json({error: "Bad username/password"});
+				return res.status(403).json({error: "Bad username/password"});
 			}
 		} catch(ex) {
 			this.errorHandler(res, ex);
 		}
 	}
 
-	isAdmin(token) {
+	isAdmin(req) {
+		const token = req.headers["x-auth"];
 		const payload = this.verifyToken(token);
 		const editorInfo = this.model.findOne({username: payload.username}).exec();
 		return editorInfo.role == "admin";
@@ -40,7 +40,7 @@ export default class editorController extends baseController {
 
 	async read(req, res) {
 		try {
-			if (!this.isAdmin(req.headers["x-auth"])) {
+			if (!this.isAdmin(req)) {
 				return res.status(403).json({error: "Forbidden: Admin only operation"});
 			}
 			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
@@ -52,7 +52,7 @@ export default class editorController extends baseController {
 
 	async readFiltered(req, res) {
 		try {
-			if (!this.isAdmin(req.headers["x-auth"])) {
+			if (!this.isAdmin(req)) {
 				return res.status(403).json({error: "Forbidden: Admin only operation"});
 			}
 			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
@@ -66,7 +66,7 @@ export default class editorController extends baseController {
 	//Assume req.body.passhash contains the plain text password
 	async create(req, res) {
 		try {
-			if (!this.isAdmin(req.headers["x-auth"])) {
+			if (!this.isAdmin(req)) {
 				return res.status(403).json({error: "Forbidden: Admin only operation"});
 			}
 			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
@@ -78,7 +78,7 @@ export default class editorController extends baseController {
 
 	async delete(req, res) {
 		try {
-			if (!this.isAdmin(req.headers["x-auth"])) {
+			if (!this.isAdmin(req)) {
 				return res.status(403).json({error: "Forbidden: Admin only operation"});
 			}
 			super.delete(req, res);
@@ -90,9 +90,9 @@ export default class editorController extends baseController {
 	//Assume req.body.passhash contains the plain text password
 	async update(req, res) {
 		try {
-			const token = this.verifyToken(req.headers["x-auth"]);
+			const token = this.verifyToken(req);
 			const userInfo = await this.model.findOne({username: token.username}).exec();
-			if (!this.isAdmin(token) &&  req.params._id != userInfo._id) {
+			if (!this.isAdmin(req) &&  req.params._id != userInfo._id) {
 				return res.status(403).json({error: "Forbidden: Not the same creator or admin"});
 			} 
 			if (req.params._id != userInfo._id) {

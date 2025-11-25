@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import zod from "zod";
 import mongoose from "mongoose";
+import {editorModel, editorZod} from "../model/editorModel.js"
 
 //class
 export default class baseController {
@@ -24,9 +25,20 @@ export default class baseController {
 		return this.zodSchema.partial().parse(doc);
 	}
 
+	//returns true if the editor associated with the token exists and false otherwise
+	async hasAccess(req) {
+		try {
+			const payload = this.verifyToken(req.headers["x-auth"]);
+			const editor = await editorModel.findOne({username: payload.username}).exec();
+			return (editor != null)
+		} catch (ex) {
+			return false;
+		}
+	}
+
 	errorHandler(res, ex) {
-		if (ex.message == "Not an object id") {
-			return res.status(400).json({error: `Bad request: ${ex.message}`});
+		if (ex instanceof zod.ZodError) {
+			return res.status(400).json({error: "Bad Request: Invalid document"});
 		}
 		return res.status(500).json({error: `Internal Server Error: ${ex.message}`});
 	}
@@ -50,7 +62,9 @@ export default class baseController {
 
 	async create(req, res) {
 		try {
-	    	this.verifyToken(req.headers["x-auth"]);
+	    	if (!(await this.hasAccess(req))) {
+				return res.status(403).json({error: "Forbidden: Access denied"})
+			}
 	    	const doc = this.validateDocument(req.body);
 	    	const createdDoc = await this.model.create(doc);
 	    	return res.status(201).json(createdDoc);
@@ -61,13 +75,14 @@ export default class baseController {
 
 	async delete(req, res) {
 		try {
-	    	this.verifyToken(req.headers["x-auth"]);
+			if (!(await this.hasAccess(req))) {
+				return res.status(403).json({error: "Forbidden: Access denied"})
+			}
 	    	if (!mongoose.isValidObjectId(req.params._id)) {
-	    		throw new Error("Not an object id");
-	    	}
+	    		return res.status(400).json({error: "Not an object id"});
+	    	} 
 
 	    	const result = await this.model.findById(req.params._id).deleteOne().exec();
-	    	
 	    	if (result.deletedCount == 0) {
 	    		return res.status(404).json();
 	    	} else {
@@ -80,10 +95,13 @@ export default class baseController {
 
 	async update(req, res) {
 		try {
-	    	this.verifyToken(req.headers["x-auth"]);
+	    	if (!(await this.hasAccess(req))) {
+				return res.status(403).json({error: "Forbidden: Access denied"})
+			}
 	    	if (!mongoose.isValidObjectId(req.params._id)) {
-	    		throw new Error("Not an object id");
+	    		return res.status(400).json({error: "Not an object id"});
 	    	}
+
 	    	const doc = this.validateDocument(req.body);
 	    	const result = await this.model.findById(req.params._id).updateOne({$set: doc}).exec();
 	    	if (result.matchedCount == 0) {
@@ -92,7 +110,6 @@ export default class baseController {
 	    		return res.status(200).send("OK");
 	    	}
 	    } catch(ex) {
-	    	console.log(ex.message);
 	    	this.errorHandler(res, ex);
 	    } 
 	}

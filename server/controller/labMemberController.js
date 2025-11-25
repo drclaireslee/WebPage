@@ -25,10 +25,11 @@ export default class labMemberController extends baseController {
 
 	async create(req, res) {
 		try {
-	    	this.verifyToken(req.headers["x-auth"]);
+	    	if (!(await this.hasAccess(req))) {
+				return res.status(403).json({error: "Forbidden: Access denied"})
+			}
 	    	const doc = this.validateDocument(req.body);
 	    	const createdDoc = await this.model.create(doc);
-
 	    	//rename the uploaded image file if it exists
 	    	if (req.file) {
 	    		const oldPath = `${req.file.destination}/${req.file.filename}`;
@@ -46,7 +47,7 @@ export default class labMemberController extends baseController {
 	async delete(req, res) {
 		super.delete(req, res);
 		try {
-			fs.rm(`./public/img/${req.params._id}`);
+			fs.rm(`./public/img/${req.params._id}`, {force: true});
 		} catch(ex) {
 			console.log(ex);
 		}
@@ -56,9 +57,11 @@ export default class labMemberController extends baseController {
 		super.update(req, res);
 		try {
 			//Replace the old picture with the new picture if it exists
-			const oldPath = `${req.file.destination}/${req.file.filename}`;
-		    const newPath = `${req.file.destination}/${req.params._id}`;
-		    await fs.rename(oldPath, newPath);
+			if (req.file) {
+				const oldPath = `${req.file.destination}/${req.file.filename}`;
+				const newPath = `${req.file.destination}/${req.params._id}`;
+				await fs.rename(oldPath, newPath);
+			}
 		} catch(ex) {
 			console.log(ex);
 		}
