@@ -11,7 +11,7 @@ async function auth(e) {
 		passhash: document.getElementById("password").value
 	};
 
-	const response = await fetch("http://localhost:3000/api/editor/auth", {
+	const response = await fetch("/api/editor/auth", {
 		method: "POST",
 		headers: {"content-type": "application/json"},
 		body: JSON.stringify(logInfo)

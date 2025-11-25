@@ -29,7 +29,7 @@ async function createLabMember(e) {
 	const labMemberImage = document.getElementById("fileInput");
 	formData.append("labMemberImage", labMemberImage.files[0]);
 
-	const response = await fetch("http://localhost:3000/api/labMember/", {
+	const response = await fetch("/api/labMember/", {
 		method: "POST",
 		headers: {"x-auth": localStorage.getItem("token")},
 		body: formData
@@ -43,7 +43,7 @@ async function createLabMember(e) {
 }
 
 async function deleteLabMember() {
-	const response = await fetch("http://localhost:3000/api/labMember/" + document.getElementById("deleteIdInput").value, {
+	const response = await fetch("/api/labMember/" + document.getElementById("deleteIdInput").value, {
 		method: "DELETE",
 		headers: {"x-auth": localStorage.getItem("token")}
 	});
@@ -64,7 +64,7 @@ async function updateLabMember(e) {
 	const labMemberImage = document.getElementById("updateFileInput");
 	formData.append("labMemberImage", labMemberImage.files[0]);
 
-	const response = await fetch("http://localhost:3000/api/labMember/" + document.getElementById("updateIdInput").value, {
+	const response = await fetch("/api/labMember/" + document.getElementById("updateIdInput").value, {
 		method: "PATCH",
 		headers: {"x-auth": localStorage.getItem("token")},
 		body: formData
