@@ -15,10 +15,7 @@ import publicationRoute from "./route/publicationRoute.js";
 import researchRoute from "./route/researchRoute.js";
 
 
-
-const port = process.env.PORT || 3000;
 const app = express();
-
 
 //Activate general security policies
 app.use(helmet());
@@ -45,17 +42,13 @@ app.use("/api/research", researchRoute);
 
 
 
-async function startServer() {
-	try {
-		await mongoose.connect(process.env.DB);
-		app.listen(port, () => {
-			console.log(`Listen on port: ${port}`);
-		});
-	} catch(ex) {
-		console.log(ex.message);
-		process.exit(1);
-	}
+//Connect to the database
+try {
+	mongoose.connect(process.env.DB);
+} catch(ex) {
+	console.log(ex.message);
+	process.exit(1);
 }
-startServer();
+
 
 export default app;
