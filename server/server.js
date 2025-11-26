@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
+import corsOptions from "./middleware/corsOptions.js";
 import mongoose from "mongoose";
 import helmet from "helmet";
 
@@ -20,8 +21,8 @@ const app = express();
 //Activate general security policies
 app.use(helmet());
 
-//Enable all CORS requests
-app.use(cors());
+//Enable CORS requests with specific options
+app.use(cors(corsOptions));
 
 //Disable finger printing
 app.disable('x-powered-by');
