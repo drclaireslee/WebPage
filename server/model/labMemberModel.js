@@ -1,4 +1,4 @@
-import connectionHelper from "../helper/connectionHelper";
+import connectionHelper from "../helper/connectionHelper.js";
 import zod from "zod";
 
 
