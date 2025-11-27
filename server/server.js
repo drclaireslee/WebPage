@@ -33,7 +33,8 @@ app.use(express.json());
 //Parses URL-encoded data in a request body and adds the parsed values to the req.body
 app.use(express.urlencoded({extended: false}));
 
-app.use(express.static("public"));
+
+// app.use(express.static("public"));
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
