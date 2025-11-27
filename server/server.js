@@ -44,11 +44,13 @@ app.use("/api/research", researchRoute);
 app.use(errorHandler);
 
 //Connect to the database
+/*
 try {
 	mongoose.connect(process.env.DB);
 } catch(ex) {
 	console.log(ex.message);
 	process.exit(1);
 }
+*/
 
 export default app;
