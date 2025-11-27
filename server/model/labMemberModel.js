@@ -1,5 +1,8 @@
-import mongoose from "mongoose";
+import connectionHelper from "../helper/connectionHelper";
 import zod from "zod";
+
+
+const mongoose = await connectionHelper();
 
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
