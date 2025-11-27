@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import zod from "zod";
+import connectionHelper from "../helper/connectionHelper.js";
 
 const publicationSchema = mongoose.Schema({
     title: {type: String, unique: true, required: true},
@@ -15,8 +16,9 @@ const publicationZod = zod.object({
     abstract: zod.string()
 });
 
+const conn = await connectionHelper();
 
-const publicationModel = mongoose.model("Publication", publicationSchema);
+conn.model("Publication", publicationSchema);
 
 
-export {publicationModel, publicationZod};
+export {publicationZod};

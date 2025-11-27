@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import zod from "zod";
-
+import connectionHelper from "../helper/connectionHelper.js";
 
 const researchSchema = mongoose.Schema({
 	title: {type: String, required: true, unique: true},
@@ -29,7 +29,7 @@ const researchZod = zod.object({
     fundAmountUsd: zod.number()
 });
 
+const conn = await connectionHelper();
+conn.model("Research", researchSchema);
 
-const researchModel = mongoose.model("Research", researchSchema);
-
-export {researchModel, researchZod};
+export {researchZod};
