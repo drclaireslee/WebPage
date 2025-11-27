@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import zod from "zod";
 import baseController from "./baseController.js";
 import {editorModel, editorZod} from "../model/editorModel.js"
+import customError from "../middleware/customError.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,21 +14,21 @@ export default class editorController extends baseController {
 	}
 
 	async verifyLogin(editorInput) {
-		const doc = await this.model.findOne({username: editorInput.username}).exec();
-	    return (doc.passhash != undefined && bcrypt.compareSync(editorInput.passhash, doc.passhash));
+		try {
+			const doc = await this.model.findOne({username: editorInput.username}).exec();
+	    	return (doc.passhash != undefined && bcrypt.compareSync(editorInput.passhash, doc.passhash));
+		} catch {
+			throw new customError(400, "Bad Request: Bad username/password");
+		}
 	}
 
 	async auth(req, res) {
-		try {
-			const doc = this.validateDocument(req.body);
-			if (await this.verifyLogin(doc)) {
-				const tk = jwt.sign({username: doc.username}, this.secret, {expiresIn: '1d'});
-				return res.json({token: tk});
-			} else {
-				return res.status(403).json({error: "Bad username/password"});
-			}
-		} catch(ex) {
-			this.errorHandler(res, ex);
+		const doc = this.validateDocument(req.body);
+		if (await this.verifyLogin(doc)) {
+			const tk = jwt.sign({username: doc.username}, this.secret, {expiresIn: '1d'});
+			return res.status(200).json({token: tk});
+		} else {
+			throw new customError(403, "Forbidden: Bad username/password");
 		}
 	}
 
@@ -39,70 +40,50 @@ export default class editorController extends baseController {
 	}
 
 	async read(req, res) {
-		try {
-			if (!this.isAdmin(req)) {
-				return res.status(403).json({error: "Forbidden: Admin only operation"});
-			}
-			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
-			super.read(req, res);
-		} catch(ex) {
-			this.errorHandler(res, ex);	
+		if (!this.isAdmin(req)) {
+			throw new customError(403, "Forbidden: Admin only operation");
 		}
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		super.read(req, res);
 	}
 
 	async readFiltered(req, res) {
-		try {
-			if (!this.isAdmin(req)) {
-				return res.status(403).json({error: "Forbidden: Admin only operation"});
-			}
-			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
-			super.readFiltered(req, res);
-		} catch(ex) {
-			this.errorHandler(res, ex);	
+		if (!this.isAdmin(req)) {
+			throw new customError(403, "Forbidden: Admin only operation");
 		}
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		super.readFiltered(req, res);
 	}
 
 
 	//Assume req.body.passhash contains the plain text password
 	async create(req, res) {
-		try {
-			if (!this.isAdmin(req)) {
-				return res.status(403).json({error: "Forbidden: Admin only operation"});
-			}
-			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
-			super.create(req, res);
-		} catch(ex) {
-			this.errorHandler(res, ex);	
+		if (!this.isAdmin(req)) {
+			throw new customError(403, "Forbidden: Admin only operation");
 		}
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		super.create(req, res);
 	}
 
 	async delete(req, res) {
-		try {
-			if (!this.isAdmin(req)) {
-				return res.status(403).json({error: "Forbidden: Admin only operation"});
-			}
-			super.delete(req, res);
-		} catch(ex) {
-			this.errorHandler(res, ex);
+		if (!this.isAdmin(req)) {
+			throw new customError(403, "Forbidden: Admin only operation");
 		}
+		super.delete(req, res);
 	}
 
 	//Assume req.body.passhash contains the plain text password
 	async update(req, res) {
-		try {
-			const token = this.verifyToken(req);
-			const userInfo = await this.model.findOne({username: token.username}).exec();
-			if (!this.isAdmin(req) &&  req.params._id != userInfo._id) {
-				return res.status(403).json({error: "Forbidden: Not the same creator or admin"});
-			} 
-			if (req.params._id != userInfo._id) {
-				this.updateZodCreator.parse(req.body);
-			}
-			req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
-			super.update(req, res);
-		} catch(ex) {	
-			this.errorHandler(res, ex);
-		}	
+		const token = this.verifyToken(req);
+		const userInfo = await this.model.findOne({username: token.username}).exec();
+		if (!this.isAdmin(req) &&  req.params._id != userInfo._id) {
+			throw new customError(403, "Forbidden: Not the same creator or admin");
+		} 
+		if (req.params._id != userInfo._id) {
+			this.updateZodCreator.parse(req.body);
+		}
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		super.update(req, res);
 	}
 }
 

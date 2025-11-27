@@ -2,6 +2,7 @@ import baseController from "./baseController.js";
 import {labMemberModel, labMemberZod} from "../model/labMemberModel.js"
 import fs from "node:fs/promises";
 import dotenv from "dotenv";
+import customError from "../middleware/customError.js";
 dotenv.config();
 
 export default class labMemberController extends baseController {
@@ -24,67 +25,46 @@ export default class labMemberController extends baseController {
 	}
 
 	async create(req, res) {
-		try {
-	    	if (!(await this.hasAccess(req))) {
-				return res.status(403).json({error: "Forbidden: Access denied"})
-			}
-	    	const doc = this.validateDocument(req.body);
-	    	const createdDoc = await this.model.create(doc);
-	    	//rename the uploaded image file if it exists
-	    	if (req.file) {
-	    		const oldPath = `${req.file.destination}/${req.file.filename}`;
-	    		const newPath = `${req.file.destination}/${createdDoc._id}`;
-	    		fs.rename(oldPath, newPath);
-	    	}
-
-	    	res.status(201).json(createdDoc);
-	    } catch(ex) {
-	    	this.errorHandler(res, ex);
+	    if (!(await this.hasAccess(req))) {
+			throw new customError(403, "Forbidden: Access denied");
+		}
+	    const doc = this.validateDocument(req.body);
+	    const createdDoc = await this.model.create(doc);
+	    //rename the uploaded image file if it exists
+	    if (req.file) {
+	    	const oldPath = `${req.file.destination}/${req.file.filename}`;
+	    	const newPath = `${req.file.destination}/${createdDoc._id}`;
+	    	fs.rename(oldPath, newPath);
 	    }
+	    res.status(201).json(createdDoc);
 	}
 
 
 	async delete(req, res) {
 		super.delete(req, res);
-		try {
-			fs.rm(`./public/img/${req.params._id}`, {force: true});
-		} catch(ex) {
-			console.log(ex);
-		}
+		fs.rm(`./public/img/${req.params._id}`, {force: true});
 	}
 
 	async update(req, res) {
 		super.update(req, res);
-		try {
-			//Replace the old picture with the new picture if it exists
-			if (req.file) {
-				const oldPath = `${req.file.destination}/${req.file.filename}`;
-				const newPath = `${req.file.destination}/${req.params._id}`;
-				await fs.rename(oldPath, newPath);
-			}
-		} catch(ex) {
-			console.log(ex);
+		//Replace the old picture with the new picture if it exists
+		if (req.file) {
+			const oldPath = `${req.file.destination}/${req.file.filename}`;
+			const newPath = `${req.file.destination}/${req.params._id}`;
+			await fs.rename(oldPath, newPath);
 		}
 	}
 
 	async readFiltered(req, res) {
-	    try {
-	    	const doc = this.validateDocument(req.query);
-	    	const memberList = await this.model.find(doc).lean().exec();
-	    	await this.appendImagePath(memberList);
-	    	return res.status(200).json(memberList);
-	    } catch(ex) {
-	    	this.errorHandler(res, ex);
-	    }
+		const doc = this.validateDocument(req.query);
+		const memberList = await this.model.find(doc).lean().exec();
+		await this.appendImagePath(memberList);
+		return res.status(200).json(memberList);
 	}
 
 	async readAll(req, res) {
-		try {
-	    	const memberList = await this.model.find({}).lean().exec(); 
-	    	await this.appendImagePath(memberList);
-	    	res.status(200).json(memberList);
-	    } catch(ex) {
-	    	this.errorHandler(res, ex);
-	    }
+		const memberList = await this.model.find({}).lean().exec(); 
+		await this.appendImagePath(memberList);
+		res.status(200).json(memberList);
 	}
 }

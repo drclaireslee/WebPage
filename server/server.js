@@ -4,9 +4,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import corsOptions from "./middleware/corsOptions.js";
+import errorHandler from "./middleware/errorHandler.js";
 import mongoose from "mongoose";
 import helmet from "helmet";
-
 
 
 //Routes
@@ -33,7 +33,6 @@ app.use(express.json());
 //Parses URL-encoded data in a request body and adds the parsed values to the req.body
 app.use(express.urlencoded({extended: false}));
 
-
 app.use(express.static("public"));
 
 app.use("/api/labMember", labMemberRoute);
@@ -41,7 +40,7 @@ app.use("/api/editor", editorRoute);
 app.use("/api/publication", publicationRoute);
 app.use("/api/research", researchRoute);
 
-
+app.use(errorHandler);
 
 //Connect to the database
 try {
@@ -50,6 +49,5 @@ try {
 	console.log(ex.message);
 	process.exit(1);
 }
-
 
 export default app;
