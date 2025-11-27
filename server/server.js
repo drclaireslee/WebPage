@@ -4,9 +4,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import corsOptions from "./middleware/corsOptions.js";
+import errorHandler from "./middleware/errorHandler.js";
 import mongoose from "mongoose";
 import helmet from "helmet";
-
 
 
 //Routes
@@ -41,7 +41,7 @@ app.use("/api/editor", editorRoute);
 app.use("/api/publication", publicationRoute);
 app.use("/api/research", researchRoute);
 
-
+app.use(errorHandler);
 
 //Connect to the database
 try {
@@ -50,6 +50,5 @@ try {
 	console.log(ex.message);
 	process.exit(1);
 }
-
 
 export default app;
