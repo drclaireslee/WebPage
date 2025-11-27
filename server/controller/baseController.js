@@ -1,15 +1,15 @@
 import jwt from "jsonwebtoken";
 import zod from "zod";
 import mongoose from "mongoose";
-import {editorModel} from "../model/editorModel.js"
 import customError from "../middleware/customError.js";
+import connectionHelper from "../helper/connectionHelper.js";
 
 //class
 export default class baseController {
 
-	constructor(secret, model, zodSchema) {
+	constructor(secret, modelName, zodSchema) {
 		this.secret = secret;
-		this.model = model;
+		this.modelName = modelName;
 		this.zodSchema = zodSchema;
 	}
 
@@ -28,26 +28,36 @@ export default class baseController {
 
 	//returns true if the editor associated with the token exists and false otherwise
 	async hasAccess(req) {
+		const conn = await connectionHelper();
+		const model = await conn.model("Editor");
 		const payload = this.verifyToken(req.headers["x-auth"]);
-		const editor = await editorModel.findOne({username: payload.username}).exec();
+		const editor = await model.findOne({username: payload.username}).exec();
 		return (editor != null)
+	}
+
+	async getModel() {
+		const conn = await connectionHelper();
+		return await conn.model(this.modelName);
 	}
 	
 	async readAll(req, res) {
-	    return res.status(200).json(await this.model.find({}).exec());
+		const model = await this.getModel();
+	    return res.status(200).json(await model.find({}).exec());
 	}
 
 	async readFiltered(req, res) {
+		const model = await this.getModel();
 	    const doc = this.validateDocument(req.query);
-	    return res.status(200).json(await this.model.find(doc).exec());
+	    return res.status(200).json(await model.find(doc).exec());
 	}
 
 	async create(req, res) {
 	    if (!(await this.hasAccess(req))) {
 			throw new customError(403, "Forbidden: Access denied");
 		}
+		const model = await this.getModel();
 	    const doc = this.validateDocument(req.body);
-	    const createdDoc = await this.model.create(doc);
+	    const createdDoc = await model.create(doc);
 	    return res.status(201).json(createdDoc);
 	}
 
@@ -58,7 +68,8 @@ export default class baseController {
 	    if (!mongoose.isValidObjectId(req.params._id)) {
 			throw new customError(400, "Bad Request: Not a valid object id");
 	    } 
-	    const result = await this.model.findById(req.params._id).deleteOne().exec();
+		const model = await this.getModel();
+	    const result = await model.findById(req.params._id).deleteOne().exec();
 	    if (result.deletedCount == 0) {
 			throw new customError(404, "Not Found: Document does not exist");
 	    } else {
@@ -73,8 +84,9 @@ export default class baseController {
 	    if (!mongoose.isValidObjectId(req.params._id)) {
 	    	throw new customError(400, "Bad Request: Not a valid object id");
 	    }
+		const model = await this.getModel();
 	    const doc = this.validateDocument(req.body);
-	    const result = await this.model.findById(req.params._id).updateOne({$set: doc}).exec();
+	    const result = await model.findById(req.params._id).updateOne({$set: doc}).exec();
 	    if (result.matchedCount == 0) {
 	    	throw new customError(404, "Not Found: Document does not exist");
 	    } else {

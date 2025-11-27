@@ -1,8 +1,6 @@
-import connectionHelper from "../helper/connectionHelper.js";
+import mongoose from "mongoose";
 import zod from "zod";
-
-
-const mongoose = await connectionHelper();
+import connectionHelper from "../helper/connectionHelper.js";
 
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
@@ -17,8 +15,8 @@ const labMemberZod = zod.object({
     email: zod.email(),
     background: zod.array(zod.string())
 });
+const conn = await connectionHelper();
 
-const labMemberModel = mongoose.model("LabMember", labMemberSchema);
+conn.model("LabMember", labMemberSchema);
 
-
-export {labMemberModel, labMemberZod};
+export {labMemberZod};

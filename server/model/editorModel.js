@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import zod from "zod";
+import connectionHelper from "../helper/connectionHelper.js";
 
 const editorSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
@@ -13,9 +14,11 @@ const editorZod = zod.object({
     role: zod.string()
 });
 
-const editorModel = mongoose.model("Editor", editorSchema);
+const conn = await connectionHelper();
+
+conn.model("Editor", editorSchema);
 
 
-export {editorModel, editorZod};
+export {editorZod};
 
 

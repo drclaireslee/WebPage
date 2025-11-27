@@ -5,7 +5,6 @@ import express from "express";
 import cors from "cors";
 import corsOptions from "./middleware/corsOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
-import mongoose from "mongoose";
 import helmet from "helmet";
 
 
@@ -34,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);

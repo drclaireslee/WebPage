@@ -1,5 +1,5 @@
 import baseController from "./baseController.js";
-import {labMemberModel, labMemberZod} from "../model/labMemberModel.js"
+import {labMemberZod} from "../model/labMemberModel.js"
 import fs from "node:fs/promises";
 import dotenv from "dotenv";
 import customError from "../middleware/customError.js";
@@ -7,7 +7,7 @@ dotenv.config();
 
 export default class labMemberController extends baseController {
 	constructor() {
-		super(process.env.SECRET, labMemberModel, labMemberZod);
+		super(process.env.SECRET, "LabMember", labMemberZod);
 	}
 
 	//expects a list of object with _id attributes
@@ -29,7 +29,8 @@ export default class labMemberController extends baseController {
 			throw new customError(403, "Forbidden: Access denied");
 		}
 	    const doc = this.validateDocument(req.body);
-	    const createdDoc = await this.model.create(doc);
+		const model = await this.getModel();
+	    const createdDoc = await model.create(doc);
 	    //rename the uploaded image file if it exists
 	    if (req.file) {
 	    	const oldPath = `${req.file.destination}/${req.file.filename}`;
@@ -57,13 +58,15 @@ export default class labMemberController extends baseController {
 
 	async readFiltered(req, res) {
 		const doc = this.validateDocument(req.query);
-		const memberList = await this.model.find(doc).lean().exec();
+		const model = await this.getModel();
+		const memberList = await model.find(doc).lean().exec();
 		await this.appendImagePath(memberList);
 		return res.status(200).json(memberList);
 	}
 
 	async readAll(req, res) {
-		const memberList = await this.model.find({}).lean().exec(); 
+		const model = await this.getModel();
+		const memberList = await model.find({}).lean().exec(); 
 		await this.appendImagePath(memberList);
 		res.status(200).json(memberList);
 	}
