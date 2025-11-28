@@ -16,7 +16,7 @@ export default class labMemberController extends baseController {
 	//appends a key named "imageURL" with a value of the path of an image relating to the _id in each object
 	//If the path of image can't be found a default will be assigned instead
 	async appendImageURL(memberList) {
-		const defaultURL = await this.getImageURL("default.png");
+		const defaultURL = await this.getImageURL("default.jpg");
 		const blobList = await list({prefix: `img/labMembers/`});
 		const map = new Map();
 		blobList.blobs.forEach(({pathname, url}) => {
