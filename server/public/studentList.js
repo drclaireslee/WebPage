@@ -10,7 +10,7 @@ async function getListItems() {
 	const resJSON = await res.json();
 	let html = "";
 	for (let entry of resJSON) {
-		html = html + `<li>${entry.fullName} <img src="${entry.imagePath}"></li>`;
+		html = html + `<li>${entry.fullName} <img src="${entry.imageURL}"></li>`;
 	}
 	return html;
 }
@@ -22,7 +22,7 @@ async function getBobItems() {
 	const resJSON = await res.json();
 	let html = "";
 	for (let entry of resJSON) {
-		html = html + `<li>${entry.fullName} <img src="${entry.imagePath}"></li>`;
+		html = html + `<li>${entry.fullName} <img src="${entry.imageURL}"></li>`;
 	}
 	return html;
 }
