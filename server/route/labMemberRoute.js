@@ -2,12 +2,7 @@ import express from "express"
 import labMemberController from "../controller/labMemberController.js"
 import multer from "multer"
 
-const store = multer.diskStorage({
-	destination: "./public/img",
-	filename: function(req, file, cb) {
-		cb(null, "temp");
-	}
-});
+const store = multer.memoryStorage();
 
 const imageFilter = function(req, file, cb) {
 	switch (file.mimetype) {
@@ -23,7 +18,7 @@ const imageFilter = function(req, file, cb) {
 
 const limiters = {
 	files: 1,
-	fileSize: 1e7
+	fileSize: 4e6
 };
 
 const upload = multer({

@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 
-app.use(express.static("public"));
+//app.use(express.static("public"));
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);

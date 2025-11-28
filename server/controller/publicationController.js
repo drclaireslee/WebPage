@@ -1,6 +1,6 @@
-import baseController from "./baseController.js";
+import baseController from "./baseController.js"
 import {publicationZod} from "../model/publicationModel.js"
-import dotenv from "dotenv";
+import dotenv from "dotenv"
 dotenv.config();
 
 export default class publicationController extends baseController {
