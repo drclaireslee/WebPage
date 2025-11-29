@@ -34,6 +34,13 @@ export default class editorController extends baseController {
 		}
 	}
 
+	async authAdmin(req, res) {
+		if (!this.isAdmin(req)) {
+			throw new customError(403, "Forbidden: Bad username/password");
+		}
+		return this.auth(req, res);
+	}
+
 
 	async isAdmin(req) {
 		const token = req.headers["x-auth"];
@@ -74,19 +81,41 @@ export default class editorController extends baseController {
 		super.delete(req, res);
 	}
 
-	//Assume req.body.passhash contains a plain text password
-	async update(req, res) {
-		const token = this.verifyToken(req);
-		const model = await this.getModel();
-		const userInfo = await model.findOne({username: token.username}).exec();
-		if (!userInfo) {
-			throw new customError(403, "Forbidden: Access denied");
+	async deleteByUsername(req, res) {
+		if (!(await this.isAdmin(req))) {
+			throw new customError(403, "Forbidden: Admin only operation");
 		}
+		const model = this.getModel();
+		const doc = await model.findOne({username: req.params.username});
+		req.body._id = doc._id;
+		super.delete(req, res);
+	}
+
+
+	async update(req, res) {
+		const editor = this.getAccess(req);
+		if (!editor) {
+			throw new customError(403, "Forbidden: Access denied");
+		} 
 		if (!((await this.isAdmin(req)) ||  req.params._id == userInfo._id)) {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
 		} 
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
+		super.update(req, res);
+	}
+
+	async updateByUsername(req, res) {
+		const editor = this.getAccess(req);
+		if (!editor) {
+			throw new customError(403, "Forbidden: Access denied");
+		} 
+		if (!((await this.isAdmin(req)) ||  req.params.username == userInfo.username)) {
+			throw new customError(403, "Forbidden: Not the same creator or admin");
+		} 
+		this.updateZodCreator.parse(req.body);
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
+		req.body._id = editor._id;
 		super.update(req, res);
 	}
 }
