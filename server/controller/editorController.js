@@ -115,7 +115,9 @@ export default class editorController extends baseController {
 		} 
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		req.body._id = editor._id;
+		const model = this.getModel();
+		const doc = await model.findOne({username: req.params.username});
+		req.body._id = doc._id;
 		super.update(req, res);
 	}
 }
