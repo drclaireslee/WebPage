@@ -66,8 +66,8 @@ export default class labMemberController extends baseController {
 	    const doc = this.validateDocument(req.body);
 		const model = await this.getModel();
 	    const createdDoc = await model.create(doc);
-		const fileExtension = await this.getFileExtension(req.file.mimetype);
 		if (req.file) {
+			const fileExtension = await this.getFileExtension(req.file.mimetype);
 			put(`img/labMembers/${createdDoc._id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
