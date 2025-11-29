@@ -1,6 +1,5 @@
 import baseController from "./baseController.js";
 import {labMemberZod} from "../model/labMemberModel.js"
-import fs from "node:fs/promises";
 import dotenv from "dotenv";
 import customError from "../middleware/customError.js";
 import { put, list, del } from '@vercel/blob';
