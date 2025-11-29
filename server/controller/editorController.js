@@ -85,8 +85,8 @@ export default class editorController extends baseController {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
-		const model = this.getModel();
-		const doc = await model.findOne({username: req.params.username});
+		const model = await this.getModel();
+		const doc = await model.findOne({username: req.params.username}).exec();
 		req.body._id = doc._id;
 		super.delete(req, res);
 	}
@@ -115,8 +115,8 @@ export default class editorController extends baseController {
 		} 
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		const model = this.getModel();
-		const doc = await model.findOne({username: req.params.username});
+		const model = await this.getModel();
+		const doc = await model.findOne({username: req.params.username}).exec();
 		req.body._id = doc._id;
 		super.update(req, res);
 	}
