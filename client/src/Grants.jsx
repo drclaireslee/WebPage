@@ -9,21 +9,15 @@ function ResearchGrants() {
         <div>
             {/** Navigation Bar */}
             <AILabHeader/>
-            <Container className='my-1 p-5 bg-white' role="page" aria-label='grant page'>
+            <Container fluid className='my-1 p-5 bg-white' role="page" aria-label='grant page'>
             
                
 
                 
                 {/** Main section for research projects */}
-                <Container fluid   role="section" aria-label="research grants">
+                <Container role="section" aria-label="research grants">
                     
                     <h1>Research Grants</h1>
-                    <h1>Research Grants</h1>
-                    
-
-            
-                    
-
             
                     
                     {research_data.map((card, idx) => {
