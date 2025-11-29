@@ -117,8 +117,12 @@ export default class editorController extends baseController {
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
 		const model = await this.getModel();
 		const doc = await model.findOne({username: req.params.username}).exec();
-		req.body._id = doc._id;
-		super.update(req, res);
+		const result = await doc.updateOne({$set: doc}).exec();
+		if (result.matchedCount == 0) {
+			throw new customError(404, "Not Found: Document does not exist");
+		} else {
+			return res.status(200).json({message: "Document updated successfully"});
+		}
 	}
 }
 
