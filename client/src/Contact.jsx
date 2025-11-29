@@ -9,7 +9,7 @@ function Contact() {
            
             <Container fluid className="my-1 p-5 bg-white">
                  <h1>Want to work with us?</h1>
-                 <br/>
+             
                  <p className="fs-5">We are always looking for passionate, self-motivated students to join our research projects. </p>
                 
                 <p className="fs-5 text-start">
@@ -25,13 +25,17 @@ function Contact() {
 					Lowell, MA 01859
 				</p>
         	    </address>  
-            </Container>
-            <Container fluid className="my-4 bg-white">
-             
+
+                <hr/>
+               <Container className="d-flex justify-content-center align items-center">
+                <MapEmbed/>
+               </Container>
+               
+                
             </Container>
             
             {/**Commented out due to formatting issues */}
-            <MapEmbed/>
+            
         </div>
 
     );
