@@ -99,7 +99,9 @@ async function updateLabMember(e) {
 }
 
 
-async function changePassword() {
+async function changePassword(e) {
+	e.preventDefault();
+
 	const logInfo = {
 		passhash: document.getElementsById("newPasswordInput").value
 	};
