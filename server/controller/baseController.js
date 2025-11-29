@@ -32,7 +32,7 @@ export default class baseController {
 		const model = await conn.model("Editor");
 		const payload = this.verifyToken(req.headers["x-auth"]);
 		const editor = await model.findOne({username: payload.username}).exec();
-		return (editor != null)
+		return (editor != null);
 	}
 
 	async getModel() {

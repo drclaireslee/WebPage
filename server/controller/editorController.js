@@ -13,11 +13,12 @@ export default class editorController extends baseController {
 		this.updateZodCreator = zod.object({passhash: zod.string()});
 	}
 
+	//Assume editorInput.passhash contains a plain text password
 	async verifyLogin(editorInput) {
 		try {
 			const model = await this.getModel();
 			const doc = await model.findOne({username: editorInput.username}).exec();
-	    	return (doc.passhash != undefined && bcrypt.compareSync(editorInput.passhash, doc.passhash));
+	    	return (doc != null && bcrypt.compareSync(editorInput.passhash, doc.passhash));
 		} catch {
 			throw new customError(400, "Bad Request: Bad username/password");
 		}
@@ -33,6 +34,7 @@ export default class editorController extends baseController {
 		}
 	}
 
+
 	async isAdmin(req) {
 		const token = req.headers["x-auth"];
 		const payload = this.verifyToken(token);
@@ -41,29 +43,27 @@ export default class editorController extends baseController {
 		return editorInfo.role == "admin";
 	}
 
-	async read(req, res) {
+	async readAll(req, res) {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
-		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
-		super.read(req, res);
+		super.readAll(req, res);
 	}
 
 	async readFiltered(req, res) {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
-		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
 		super.readFiltered(req, res);
 	}
 
 
-	//Assume req.body.passhash contains the plain text password
+	//Assume req.body.passhash contains a plain text password
 	async create(req, res) {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
-		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
 		super.create(req, res);
 	}
 
@@ -74,18 +74,19 @@ export default class editorController extends baseController {
 		super.delete(req, res);
 	}
 
-	//Assume req.body.passhash contains the plain text password
+	//Assume req.body.passhash contains a plain text password
 	async update(req, res) {
 		const token = this.verifyToken(req);
 		const model = await this.getModel();
 		const userInfo = await model.findOne({username: token.username}).exec();
-		if (!(await this.isAdmin(req)) &&  req.params._id != userInfo._id) {
+		if (!userInfo) {
+			throw new customError(403, "Forbidden: Access denied");
+		}
+		if (!((await this.isAdmin(req)) ||  req.params._id == userInfo._id)) {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
 		} 
-		if (req.params._id != userInfo._id) {
-			this.updateZodCreator.parse(req.body);
-		}
-		req.body.passhash = bcrypt.hashSync(req.body.passhash, this.secret);
+		this.updateZodCreator.parse(req.body);
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
 		super.update(req, res);
 	}
 }
