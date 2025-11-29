@@ -59,6 +59,9 @@ export default class labMemberController extends baseController {
 	}
 
 	async createAction(req, res) {
+		const model = await this.getModel();
+	    const doc = this.validateDocument(req.body);
+	    const createdDoc = await model.create(doc);
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
 			put(`img/labMembers/${createdDoc._id}.${fileExtension}`, req.file.buffer, {
@@ -67,7 +70,7 @@ export default class labMemberController extends baseController {
 				addRandomSuffix: false
 			});
 		}
-		super.createAction(req, res);
+		return res.status(201).json(createdDoc);
 	}
 
 	async deleteAction(req, res) {
