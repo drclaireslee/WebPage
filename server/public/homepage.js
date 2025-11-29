@@ -101,7 +101,7 @@ async function updateLabMember(e) {
 
 async function changePassword() {
 	const logInfo = {
-		passhash: document.getElementsById("newPasswordInput")
+		passhash: document.getElementsById("newPasswordInput").value
 	};
 
 	const response = await fetch(`api/editor/user/${localStorage.getItem(username)}`, {
