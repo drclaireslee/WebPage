@@ -58,14 +58,7 @@ export default class labMemberController extends baseController {
 		}
 	}
 
-
-	async create(req, res) {
-	    if (!(await this.hasAccess(req))) {
-			throw new customError(403, "Forbidden: Access denied");
-		}
-	    const doc = this.validateDocument(req.body);
-		const model = await this.getModel();
-	    const createdDoc = await model.create(doc);
+	async createAction(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
 			put(`img/labMembers/${createdDoc._id}.${fileExtension}`, req.file.buffer, {
@@ -74,11 +67,10 @@ export default class labMemberController extends baseController {
 				addRandomSuffix: false
 			});
 		}
-	    res.status(201).json(createdDoc);
+		super.createAction(req, res);
 	}
 
-
-	async delete(req, res) {
+	async deleteAction(req, res) {
 		const blobList = await list({
 			prefix: `img/labMembers/${req.params._id}.`,
 			limit: 1,
@@ -86,10 +78,10 @@ export default class labMemberController extends baseController {
 		if (blobList.blobs.length > 0) {
 			del(blobList.blobs[0].url);	
 		}
-		super.delete(req, res);
+		super.deleteAction(req, res);
 	}
 
-	async update(req, res) {
+	async updateAction(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
 			put(`img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
@@ -98,7 +90,7 @@ export default class labMemberController extends baseController {
 				addRandomSuffix: false
 			});
 		}
-		super.update(req, res);
+		super.updateAction(req, res);
 	}
 
 	async readFiltered(req, res) {
