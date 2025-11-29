@@ -23,12 +23,23 @@ async function createLabMember(e) {
 	e.preventDefault();
 
 	const formData = new FormData();
-	formData.append("fullName", document.getElementById("nameInput").value);
-	formData.append("type", document.getElementById("typeInput").value);
 	
-	const labMemberImage = document.getElementById("fileInput");
-	formData.append("labMemberImage", labMemberImage.files[0]);
+	const nameInput = document.getElementById("nameInput");
+	const typeInput = document.getElementById("typeInput");
+	const fileInput = document.getElementById("fileInput");
 
+	if (nameInput.value && nameInput.value.trim() !== "") {
+		formData.append("fullName", nameInput.value);
+	}
+
+	if (typeInput.value && typeInput.value.trim() !== "") {
+		formData.append("type", typeInput.value);
+	}
+
+	if (fileInput.files.length > 0) {
+		formData.append("labMemberImage", fileInput.files[0]);
+	}
+	
 	const response = await fetch("/api/labMember/", {
 		method: "POST",
 		headers: {"x-auth": localStorage.getItem("token")},
@@ -59,10 +70,17 @@ async function updateLabMember(e) {
 	e.preventDefault();
 
 	const formData = new FormData();
-	formData.append("fullName", document.getElementById("updateNameInput").value);
 
-	const labMemberImage = document.getElementById("updateFileInput");
-	formData.append("labMemberImage", labMemberImage.files[0]);
+	const nameInput = document.getElementById("updateNameInput");
+    const fileInput = document.getElementById("updateFileInput");
+
+	if (nameInput.value && nameInput.value.trim() !== "") {
+		formData.append("fullName", nameInput.value);
+	}
+
+	if (fileInput.files.length > 0) {
+        formData.append("labMemberImage", fileInput.files[0]);
+    }
 
 	const response = await fetch("/api/labMember/" + document.getElementById("updateIdInput").value, {
 		method: "PATCH",
