@@ -93,7 +93,7 @@ export default class editorController extends baseController {
 
 
 	async update(req, res) {
-		const editor = this.getAccess(req);
+		const editor = await this.getAccess(req);
 		if (!editor) {
 			throw new customError(403, "Forbidden: Access denied");
 		} 
@@ -106,7 +106,7 @@ export default class editorController extends baseController {
 	}
 
 	async updateByUsername(req, res) {
-		const editor = this.getAccess(req);
+		const editor = await this.getAccess(req);
 		if (!editor) {
 			throw new customError(403, "Forbidden: Access denied");
 		} 

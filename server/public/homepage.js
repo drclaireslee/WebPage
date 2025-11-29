@@ -106,7 +106,7 @@ async function changePassword(e) {
 		passhash: document.getElementById("newPasswordInput").value
 	};
 
-	const response = await fetch(`api/editor/user/${localStorage.getItem("username")}`, {
+	const response = await fetch(`/api/editor/user/${localStorage.getItem("username")}`, {
 		method: "PATCH",
 		headers: {
 			"x-auth": localStorage.getItem("token"),
