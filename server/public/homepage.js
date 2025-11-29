@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	document.getElementById("updateForm").addEventListener(
     	"submit", updateLabMember);
+
+	document.getElementById("updatePassword").addEventListener(
+    	"submit", changePassword);
 });
 
 function logOut() {
@@ -92,6 +95,28 @@ async function updateLabMember(e) {
 		window.alert("Update lab member");
 	} else {
 		window.alert("Did not update lab member");
+	}
+}
+
+
+async function changePassword() {
+	const logInfo = {
+		passhash: document.getElementsById("newPasswordInput")
+	};
+
+	const response = await fetch(`api/editor/user/${localStorage.getItem(username)}`, {
+		method: "PATCH",
+		headers: {
+			"x-auth": localStorage.getItem("token"),
+			"content-type": "application/json"
+		},
+		body: JSON.stringify(logInfo)
+	});
+
+	if (response.ok)  {
+		window.alert("Update Password");
+	} else {
+		window.alert("Did not update password");
 	}
 }
 

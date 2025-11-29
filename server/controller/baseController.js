@@ -28,11 +28,16 @@ export default class baseController {
 
 	//returns true if the editor associated with the token exists and false otherwise
 	async hasAccess(req) {
+		return (this.getAccess(req) != null);
+	}
+
+	//Null if it can't find the editor.
+	async getAccess(req) {
 		const conn = await connectionHelper();
 		const model = await conn.model("Editor");
 		const payload = this.verifyToken(req.headers["x-auth"]);
 		const editor = await model.findOne({username: payload.username}).exec();
-		return (editor != null);
+		return editor;
 	}
 
 	async getModel() {
