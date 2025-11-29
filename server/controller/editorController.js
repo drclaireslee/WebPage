@@ -97,7 +97,7 @@ export default class editorController extends baseController {
 		if (!editor) {
 			throw new customError(403, "Forbidden: Access denied");
 		} 
-		if (!((await this.isAdmin(req)) ||  req.params._id == userInfo._id)) {
+		if (!((await this.isAdmin(req)) ||  req.params._id == editor._id)) {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
 		} 
 		this.updateZodCreator.parse(req.body);
@@ -110,7 +110,7 @@ export default class editorController extends baseController {
 		if (!editor) {
 			throw new customError(403, "Forbidden: Access denied");
 		} 
-		if (!((await this.isAdmin(req)) ||  req.params.username == userInfo.username)) {
+		if (!((await this.isAdmin(req)) ||  req.params.username == editor.username)) {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
 		} 
 		this.updateZodCreator.parse(req.body);
