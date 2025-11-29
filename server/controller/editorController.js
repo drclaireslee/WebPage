@@ -64,46 +64,51 @@ export default class editorController extends baseController {
 		super.readFiltered(req, res);
 	}
 
-
-	//Assume req.body.passhash contains a plain text password
-	async create(req, res) {
+	async createVerification(req, res) {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
+	}
+	
+	//Assume req.body.passhash contains a plain text password
+	async createAction(req, res) {
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		super.create(req, res);
+		super.createAction(req, res);
 	}
 
-	async delete(req, res) {
+	async deleteVerification(req, res) {
 		if (!(await this.isAdmin(req))) {
 			throw new customError(403, "Forbidden: Admin only operation");
 		}
-		super.delete(req, res);
 	}
 
 	async deleteByUsername(req, res) {
-		if (!(await this.isAdmin(req))) {
-			throw new customError(403, "Forbidden: Admin only operation");
-		}
+		this.deleteVerification();
 		const model = await this.getModel();
-		const doc = await model.findOne({username: req.params.username}).exec();
-		req.body._id = doc._id;
-		super.delete(req, res);
+		const result = await model.findOne({username: req.params.username}).deleteOne().exec();
+		if (result.deletedCount == 0) {
+			throw new customError(404, "Not Found: Document does not exist");
+		} else {
+			return res.status(200).json({message: "Document deleted successfully"});
+		}
 	}
 
-
-	async update(req, res) {
+	async updateVerification(req, res) {
 		const editor = await this.getAccess(req);
 		if (!editor) {
 			throw new customError(403, "Forbidden: Access denied");
 		} 
 		if (!((await this.isAdmin(req)) ||  req.params._id == editor._id)) {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
-		} 
+		}
+	}
+
+	async updateAction() {
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		super.update(req, res);
+		super.updateAction(req, res);
 	}
+
 
 	async updateByUsername(req, res) {
 		const editor = await this.getAccess(req);
@@ -114,10 +119,8 @@ export default class editorController extends baseController {
 			throw new customError(403, "Forbidden: Not the same creator or admin");
 		} 
 		this.updateZodCreator.parse(req.body);
-		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
 		const model = await this.getModel();
-		const doc = await model.findOne({username: req.params.username}).exec();
-		const result = await doc.updateOne({$set: doc}).exec();
+		const result = await model.findOne({username: req.params.username}).updateOne({$set: {passhash: bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10))}}).exec();
 		if (result.matchedCount == 0) {
 			throw new customError(404, "Not Found: Document does not exist");
 		} else {

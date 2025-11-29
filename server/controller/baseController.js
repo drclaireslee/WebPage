@@ -57,9 +57,17 @@ export default class baseController {
 	}
 
 	async create(req, res) {
-	    if (!(await this.hasAccess(req))) {
+		this.createVerification(req, res);
+		this.createAction(req, res);
+	}
+
+	async createVerification(req, res) {
+		if (!(await this.hasAccess(req))) {
 			throw new customError(403, "Forbidden: Access denied");
 		}
+	}
+
+	async createAction(req, res) {
 		const model = await this.getModel();
 	    const doc = this.validateDocument(req.body);
 	    const createdDoc = await model.create(doc);
@@ -67,12 +75,20 @@ export default class baseController {
 	}
 
 	async delete(req, res) {
+		this.deleteVerification(req, res);
+		this.deleteAction(req, res);
+	}
+
+	async deleteVerification(req, res) {
 		if (!(await this.hasAccess(req))) {
 			throw new customError(403, "Forbidden: Access denied");
 		}
 	    if (!mongoose.isValidObjectId(req.params._id)) {
 			throw new customError(400, "Bad Request: Not a valid object id");
-	    } 
+	    }
+	}
+
+	async deleteAction(req, res) {
 		const model = await this.getModel();
 	    const result = await model.findById(req.params._id).deleteOne().exec();
 	    if (result.deletedCount == 0) {
@@ -83,12 +99,20 @@ export default class baseController {
 	}
 
 	async update(req, res) {
-	    if (!(await this.hasAccess(req))) {
+		this.updateVerification(req, res);
+		this.updateAction(req, res);
+	}
+
+	async updateVerification(req, res) {
+		if (!(await this.hasAccess(req))) {
 			throw new customError(403, "Forbidden: Access denied");
 		}
 	    if (!mongoose.isValidObjectId(req.params._id)) {
 	    	throw new customError(400, "Bad Request: Not a valid object id");
 	    }
+	}
+
+	async updateAction(req, res) {
 		const model = await this.getModel();
 	    const doc = this.validateDocument(req.body);
 	    const result = await model.findById(req.params._id).updateOne({$set: doc}).exec();
