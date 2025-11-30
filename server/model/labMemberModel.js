@@ -5,7 +5,7 @@ import connectionHelper from "../helper/connectionHelper.js";
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
         type: {type: String, required: true},
-        picture: {type: String},
+        email: {type: String},
         background: {type: [String]}
 });
 
