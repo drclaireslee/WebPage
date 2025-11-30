@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+	document.getElementById("greeting").innerHTML = `<p>Hello admin, ${localStorage.getItem("username")}</p>`;
+
     document.getElementById("logoutBtn").addEventListener(
     	"click", logOut);
 	
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function logOut() {
 	localStorage.clear();
-	window.location.replace("./login.html");
+	window.location.replace("./loginAdmin.html");
 }
 
 async function createEditor(e) {
@@ -38,7 +40,6 @@ async function createEditor(e) {
 		window.alert("Fail to create editor");
 	}
 }
-headers: {"x-auth": localStorage.getItem("token")}
 
 async function deleteEditor(e) {
 	e.preventDefault();
@@ -53,5 +54,29 @@ async function deleteEditor(e) {
 		window.alert("Succeeded to delete editor");
 	} else {
 		window.alert("Fail to delete editor");
+	}
+}
+
+
+async function changePassword(e) {
+	e.preventDefault();
+
+	const logInfo = {
+		passhash: document.getElementById("newPasswordInput").value
+	};
+
+	const response = await fetch(`/api/editor/user/${localStorage.getItem("username")}`, {
+		method: "PATCH",
+		headers: {
+			"x-auth": localStorage.getItem("token"),
+			"content-type": "application/json"
+		},
+		body: JSON.stringify(logInfo)
+	});
+
+	if (response.ok)  {
+		window.alert("Update Password");
+	} else {
+		window.alert("Did not update password");
 	}
 }
