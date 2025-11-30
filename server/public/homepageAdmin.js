@@ -45,7 +45,7 @@ async function createEditor(e) {
 async function deleteEditor(e) {
 	e.preventDefault();
 	
-	const response = await fetch(`api/editor/user/${document.getElementById("deleteUsernameInput")}`, {
+	const response = await fetch(`api/editor/user/${document.getElementById("deleteUsernameInput").value}`, {
 		method: "DELETE",
 		headers: {"x-auth": localStorage.getItem("token")},
 	});
