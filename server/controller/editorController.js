@@ -35,7 +35,9 @@ export default class editorController extends baseController {
 	}
 
 	async authAdmin(req, res) {
-		if (!(await this.isAdmin(req))) {
+		const model = await this.getModel();
+		const editorInfo = await model.findOne({username: payload.username}).exec();
+		if (editorInfo.role != "admin") {
 			throw new customError(403, "Forbidden: Bad username/password");
 		}
 		return this.auth(req, res);
