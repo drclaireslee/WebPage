@@ -22,7 +22,8 @@ async function createEditor(e) {
 
 	const logInfo = {
 		username: document.getElementById("createUsernameInput").value,
-		passhash: document.getElementById("createPasswordInput").value
+		passhash: document.getElementById("createPasswordInput").value,
+		role: "editor"
 	};
 
 	const response = await fetch("/api/editor/", {
