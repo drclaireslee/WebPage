@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import corsOptions from "./config/corsOptions.js";
+import helmetOptions from "./config/helmetOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
 import helmet from "helmet";
 
@@ -15,10 +16,10 @@ import researchRoute from "./route/researchRoute.js";
 const app = express();
 
 //Activate general security policies
-app.use(helmet());
+app.use(helmet(helmetOptions));
 
 //Enable CORS requests with specific options
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 //Disable finger printing
 app.disable('x-powered-by');

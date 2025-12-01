@@ -3,6 +3,7 @@ import editorController from "../controller/editorController.js"
 import accessUpdateUser from "../middleware/accessUpdateUser.js"
 import accessAdmin from "../middleware/accessAdmin.js";
 import auth from "../middleware/auth.js";
+import authAdmin from "../middleware/authAdmin.js";
 
 const router = express.Router();
 const controller = new editorController();
@@ -11,7 +12,7 @@ router.get("/all", accessAdmin, controller.readAll.bind(controller));
 router.get("/", accessAdmin, controller.readFiltered.bind(controller));
 
 router.post("/auth", auth);
-router.post("/auth/admin", auth);
+router.post("/auth/admin", authAdmin);
 
 router.post("/", accessAdmin, controller.create.bind(controller));
 
