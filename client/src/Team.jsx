@@ -50,14 +50,14 @@ const Team = () => {
         <Container fluid className='p-2 bg-white' role="section" aria-label='team members'>
             <div className="d-flex justify-content-center my-4">
                 <hr style={{
-                    width: '80%',       // only half the container width
-                    borderTop: '2px solid #676767ff', // thickness and color
-                    borderRadius: '2px' // optional: rounded edges
+                    width: '80%',     
+                    borderTop: '2px solid #676767ff', 
+                    borderRadius: '2px'
                 }} />
             </div>
             
             <Container fluid className="py-2 bg-white" role="section" aria-label="team members">
-                <h2 className="mb-4 text-center">Meet the Members</h2>
+                <h3 className="mb-4 text-center">Meet the Members</h3>
                  <br/>
                 {students.length === 0 ? (
                     <p className="text-center">Loading...</p>
@@ -65,7 +65,7 @@ const Team = () => {
                     <Row className="g-4 justify-content-center">
                         {students.map((student) => (
                         <Col key={student._id} xs={12} sm={6} md={4} lg={3}>
-                            <div className="team-card text-center p-3 bg-light rounded shadow-sm h-100 border border-secondary">
+                            <div className="team-card text-center p-3 bg-light rounded shadow-md h-100 border border-secondary">
                                 <img
                                     src={student.imageURL || '/assets/default-profile.jpg'}
                                     alt={student.fullName}
@@ -74,6 +74,9 @@ const Team = () => {
                                 />
                                 <h5 className="mb-1">{student.fullName}</h5>
                                 <p className="text-muted">{student.type}</p>
+                                <p className="text-truncate" style={{ fontSize: '0.9rem' }}>
+                                    <b>Email:</b> {student.email ? student.email : 'N/A'}
+                                </p>
                             </div>
                         </Col>
                         ))}
