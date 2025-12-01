@@ -7,11 +7,12 @@ function Research() {
     <div>
             <AILabHeader/>
            
-            <Container fluid className="my-1 p-5 bg-white">
+            <Container fluid className="p-5 bg-white">
                  <h1>Research</h1>
                  <br/>
                  <Row>
                   <Col md={6}>
+                    <p className="fs-4 text-start text-danger">MY EXPERIENCE</p>
                     <p className="fs-5 text-start">I am a sociologist by training, but I have been and am collaborating with scholars from different disciplines including criminology, anthropology, media and communication studies, economics, political science, and computer science. </p>
                     <p className="fs-4 text-start text-danger">CURRENT RESEARCH INTERESTS</p>
                     <p className="fs-5 text-start">Deviance and crime in cyberspace, Consequences and complications of digital space/media and (big) data, Digital sociology, Big data, ICT, Global media, International migration, Global sociology</p>
@@ -24,11 +25,40 @@ function Research() {
                   </Col>
 
                  </Row>
+                
                  
                 
 
                 
             </Container>
+
+             <Container fluid className="p-1 maroon">
+                  <h1 className="text-white">Key Research Expertise</h1>
+                  <p className="fs-4 text-white">My research expertise revolves around two overlapping areas.</p>
+                  <Row> 
+                    <Col md={6}>
+                      <p className="large-emoji">💻</p>
+                      <p className="fs-3 fw-bold text-white">Cybercrime and Digital Sociology</p>
+                      <p className="fs-5 text-white">Cyberterrorism, Cyberpolicing, Transnational Cybercrime, Datafication, Big Data, Digital Ethics, IT Policy</p>
+
+                    </Col>
+ 
+
+                    <Col md={6}>
+                      
+                      <p className="large-emoji">🌏</p>
+                      <p className="fs-3 fw-bold text-white">Global Media and Immigration</p>
+                      <p className="fs-5 text-white">Cross-border mobilities of People, Knowledge, Culture</p>
+                    </Col>
+
+
+
+                  </Row>
+              </Container>
+              <Container fluid className="p-5 bg-white">
+                <h1>Selected Publications</h1>
+
+              </Container>
 
     
       
