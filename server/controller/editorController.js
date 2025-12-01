@@ -35,8 +35,10 @@ export default class editorController extends baseController {
 	}
 
 	async authAdmin(req, res) {
-		if (!this.isAdmin(req)) {
-			throw new customError(403, "Forbidden: Bad username/password");
+		const model = await this.getModel();
+		const editorInfo = await model.findOne({username: req.body.username}).exec();
+		if (editorInfo.role != "admin") {
+			throw new customError(403, "Forbidden: Not an admin");
 		}
 		return this.auth(req, res);
 	}
@@ -83,7 +85,7 @@ export default class editorController extends baseController {
 	}
 
 	async deleteByUsername(req, res) {
-		this.deleteVerification();
+		this.deleteVerification(req, res);
 		const model = await this.getModel();
 		const result = await model.findOne({username: req.params.username}).deleteOne().exec();
 		if (result.deletedCount == 0) {
@@ -103,7 +105,7 @@ export default class editorController extends baseController {
 		}
 	}
 
-	async updateAction() {
+	async updateAction(req, res) {
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
 		super.updateAction(req, res);
