@@ -1,10 +1,6 @@
 import customError from "../middleware/customError.js";
 import connectionHelper from "../helper/connectionHelper.js";
 
-/** 
- * @class baseController
- * 
-*/
 export default class baseController {
 
 	constructor(modelName, zodSchema) {
@@ -16,8 +12,6 @@ export default class baseController {
      * Sanitizes a document object against the defined schema.
      * This method treats all schema fields as optional (partial) and strips
      * any properties in the `doc` that are not defined in the schema.
-	 * @method
-	 * @memberof validateDocument#
      * @param {Object} doc - The input object to validate and sanitize.
      * @returns {Object} A new object containing only the valid, known fields.
      * @throws {ZodError} If validation fails on existing fields.
@@ -49,24 +43,24 @@ export default class baseController {
 	    return res.status(201).json(createdDoc);
 	}
 
-	async delete(req, res) {
+	async delete(req, res, next) {
 		const model = await this.getModel();
 	    const result = await model.findById(req.params._id).deleteOne().exec();
 	    if (result.deletedCount == 0) {
-			throw new customError(404, "Not Found: Document does not exist");
+			next(new customError(404, "Not Found: Document does not exist"));
 	    } else {
 	    	return res.status(200).json({message: "Document deleted successfully"});
 	    }
 	}
 
-	async update(req, res) {
+	async update(req, res, next) {
 		const model = await this.getModel();
-	    const doc = this.validateDocument(req.body);
-	    const result = await model.findById(req.params._id).updateOne({$set: doc}).exec();
-	    if (result.matchedCount == 0) {
-	    	throw new customError(404, "Not Found: Document does not exist");
-	    } else {
-	    	return res.status(200).json({message: "Document updated successfully"});
-	    }
+		const doc = this.validateDocument(req.body);
+		const result = await model.findById(req.params._id).updateOne({$set: doc}).exec();
+		if (result.matchedCount == 0) {
+			next(new customError(404, "Not Found: Document does not exist"));
+		} else {
+			return res.status(200).json({message: "Document updated successfully"});
+		}
 	}
 }
