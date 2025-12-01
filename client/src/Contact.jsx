@@ -7,7 +7,7 @@ function Contact() {
         <div>
             <AILabHeader/>
            
-            <Container fluid className="my-1 p-5 bg-white">
+            <Container fluid className="p-5 bg-white">
                  <h1>Want to work with us?</h1>
              
                  <p className="fs-5">We are always looking for passionate, self-motivated students to join our research projects. </p>
@@ -26,12 +26,13 @@ function Contact() {
 				</p>
         	    </address>  
 
-                <hr/>
-               <Container className="d-flex justify-content-center align items-center">
-                <MapEmbed/>
-               </Container>
+         
                
                 
+            </Container>
+
+            <Container fluid className="bg-white">
+                <MapEmbed/>
             </Container>
             
             {/**Commented out due to formatting issues */}
