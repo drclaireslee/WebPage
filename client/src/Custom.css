@@ -4,3 +4,10 @@ body {
 
 }
 
+.maroon {
+  background-color: #6f1010
+}
+
+.large-emoji {
+  font-size: 7em;
+}
