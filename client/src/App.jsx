@@ -43,7 +43,7 @@ function App() {
             <Col>
                 <h1 className='align-center text-light' role="title" aria-label='ai-cyren lab full title'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
                 <br/>
-                <Image src={homeImage} width={800} height={800} alt='cybercrime image' thumbnail/>
+                <Image src={homeImage} alt='cybercrime image' thumbnail/>
             </Col>
 
            </Row>

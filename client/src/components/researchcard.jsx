@@ -2,7 +2,7 @@ import { Container, Col, Row, Card, Button } from "react-bootstrap"
 
 function ResearchCard({research_image, research_name, research_country, research_year, research_desc}) {
     return(
-        <Container className="d-flex justify-content-center my-5">
+        <Container className="p-5">
             <Card border="dark">
                 <Row>
                     <Col md={4}>
