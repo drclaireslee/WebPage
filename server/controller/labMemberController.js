@@ -1,45 +1,14 @@
 import baseController from "./baseController.js";
 import {labMemberZod} from "../model/labMemberModel.js"
-import dotenv from "dotenv";
 import customError from "../middleware/customError.js";
-import { put, list, del } from '@vercel/blob';
-import path from "path";
-dotenv.config();
+import { put, del } from '@vercel/blob';
+import mongoose from "mongoose";
+import {origin} from "../helper/config.js";
 
 export default class labMemberController extends baseController {
 	constructor() {
-		super(process.env.SECRET, "LabMember", labMemberZod);
-	}
-
-	//expects a list of object with _id attributes
-	//appends a key named "imageURL" with a value of the path of an image relating to the _id in each object
-	//If the path of image can't be found a default will be assigned instead
-	async appendImageURL(memberList) {
-		const defaultURL = await this.getImageURL("default.jpg");
-		const blobList = await list({prefix: `img/labMembers/`});
-		const map = new Map();
-		blobList.blobs.forEach(({pathname, url}) => {
-			map.set(path.basename(pathname, path.extname(pathname)), url);
-		});
-
-		memberList.forEach((member) => {
-			const imageBlobURL = map.get(member["_id"].toString());
-			if (imageBlobURL) {
-				member["imageURL"] = imageBlobURL;
-			} else {
-				member["imageURL"] = defaultURL;
-			}
-		});
-	}
-
-	async getImageURL(FileNameWithExtension) {
-		const blobList = await list({
-			prefix: `img/labMembers/${FileNameWithExtension}`,
-			limit: 1,
-		});
-		if (blobList.blobs.length > 0) {
-			return blobList.blobs[0].url;	
-		}	
+		super("LabMember", labMemberZod);
+		this.defaultURL = "https://drclaireslee-backend.vercel.app/img/labMembers/default.jpg";
 	}
 
 	//Expects a mimetype string
@@ -58,56 +27,45 @@ export default class labMemberController extends baseController {
 		}
 	}
 
-	async createAction(req, res) {
-		const model = await this.getModel();
-	    const doc = this.validateDocument(req.body);
-	    const createdDoc = await model.create(doc);
+	async create(req, res) {
+		const _id = new mongoose.Types.ObjectId();
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			put(`img/labMembers/${createdDoc._id}.${fileExtension}`, req.file.buffer, {
+			const url = `${origin}/img/labMembers/${_id}.${fileExtension}`;
+			put(url, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
 			});
+			req.body.imageURL = url;
+		} else {
+			req.body.imageURL = this.defaultURL;
 		}
+		const model = await this.getModel();
+	    const doc = this.validateDocument(req.body);
+		doc["_id"] = _id;
+	    const createdDoc = await model.create(doc);
 		return res.status(201).json(createdDoc);
 	}
 
-	async deleteAction(req, res) {
-		const blobList = await list({
-			prefix: `img/labMembers/${req.params._id}.`,
-			limit: 1,
-		});
-		if (blobList.blobs.length > 0) {
-			del(blobList.blobs[0].url);	
+	async delete(req, res) {
+		const model = await this.getModel();
+	    const result = await model.findById(req.params._id).exec();
+		if (result.imageURL != this.defaultURL) {
+			del(result.imageURL);
 		}
-		super.deleteAction(req, res);
+		super.delete(req, res);
 	}
 
-	async updateAction(req, res) {
+	async update(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			put(`img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
+			put(`${origin}/img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
-			});
+			})
 		}
-		super.updateAction(req, res);
-	}
-
-	async readFiltered(req, res) {
-		const doc = this.validateDocument(req.query);
-		const model = await this.getModel();
-		const memberList = await model.find(doc).lean().exec();
-		await this.appendImageURL(memberList);
-		return res.status(200).json(memberList);
-	}
-
-	async readAll(req, res) {
-		const model = await this.getModel();
-		const memberList = await model.find({}).lean().exec(); 
-		await this.appendImageURL(memberList);
-		res.status(200).json(memberList);
+		super.update(req, res);
 	}
 }

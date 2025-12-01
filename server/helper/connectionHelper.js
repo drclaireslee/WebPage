@@ -1,10 +1,9 @@
 //Abridged from https://mongoosejs.com/docs/8.x/docs/lambda.html
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+import {db} from "./config.js"
 
 let conn = null;
-const uri = process.env.DB;
+const uri = db
 
 async function connectionHelper() {
   if (conn == null) {
