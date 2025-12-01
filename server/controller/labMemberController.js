@@ -3,7 +3,7 @@ import {labMemberZod} from "../model/labMemberModel.js"
 import customError from "../middleware/customError.js";
 import { put, del } from '@vercel/blob';
 import mongoose from "mongoose";
-import {origin} from "../helper/config.js";
+import {origin} from "../config/config.js";
 
 export default class labMemberController extends baseController {
 	constructor() {

@@ -2,7 +2,7 @@
 import customError from "../middleware/customError.js";
 import connectionHelper from "../helper/connectionHelper.js";
 import jwt from "jsonwebtoken";
-import {secret} from "../helper/config.js"
+import {secret} from "../config/config.js"
 
 async function access(req, res, next) {
     try {

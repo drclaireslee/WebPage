@@ -26,5 +26,6 @@ dist-ssr
 
 #Testing
 coverage/*
+runlocal.js
 
 .env

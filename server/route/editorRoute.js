@@ -1,6 +1,6 @@
 import express from "express"
 import editorController from "../controller/editorController.js"
-import accessUpdateUser from "../middleware/accessUpdateUser"
+import accessUpdateUser from "../middleware/accessUpdateUser.js"
 import accessAdmin from "../middleware/accessAdmin.js";
 import auth from "../middleware/auth.js";
 

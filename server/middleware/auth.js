@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import {secret} from "../helper/config.js"
+import {secret} from "../config/config.js"
 import customError from "../middleware/customError.js";
 import connectionHelper from "../helper/connectionHelper.js";
 

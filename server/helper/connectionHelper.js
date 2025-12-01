@@ -1,6 +1,6 @@
 //Abridged from https://mongoosejs.com/docs/8.x/docs/lambda.html
 import mongoose from "mongoose";
-import {db} from "./config.js"
+import {db} from "../config/config.js"
 
 let conn = null;
 const uri = db
