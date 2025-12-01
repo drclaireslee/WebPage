@@ -58,7 +58,7 @@ export default class labMemberController extends baseController {
 	async update(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			const blob = await put(`/img/labMembers/${_id}.${fileExtension}`, req.file.buffer, {
+			const blob = await put(`/img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
