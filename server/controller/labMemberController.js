@@ -3,7 +3,6 @@ import {labMemberZod} from "../model/labMemberModel.js"
 import customError from "../middleware/customError.js";
 import { put, del } from '@vercel/blob';
 import mongoose from "mongoose";
-import {origin} from "../config/config.js";
 
 export default class labMemberController extends baseController {
 	constructor() {
@@ -31,13 +30,12 @@ export default class labMemberController extends baseController {
 		const _id = new mongoose.Types.ObjectId();
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			const url = `${origin}/img/labMembers/${_id}.${fileExtension}`;
-			put(url, req.file.buffer, {
+			const blob = await put(`/img/labMembers/${_id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
 			});
-			req.body.imageURL = url;
+			req.body.imageURL = blob.url;
 		} else {
 			req.body.imageURL = this.defaultURL;
 		}
@@ -60,13 +58,12 @@ export default class labMemberController extends baseController {
 	async update(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			const url = `${origin}/img/labMembers/${_id}.${fileExtension}`;
-			put(url, req.file.buffer, {
+			const blob = await put(`/img/labMembers/${_id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
-			})
-			req.body.imageURL = url;
+			});
+			req.body.imageURL = blob.url;
 		}
 		super.update(req, res);
 	}
