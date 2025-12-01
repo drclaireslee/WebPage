@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	document.getElementById("logoutBtn").addEventListener(
     	"click", logOut);
+		
 	document.querySelector("form").addEventListener(
     	"submit", createLabMember);
 
