@@ -45,7 +45,7 @@ function App() {
       </Container>
 
       {/*** Information about the AI-CYREN Lab */}
-        <Container className='bg-white' role='section' aria-label='ai-cyren lab information'>
+        <Container fluid className='bg-white' role='section' aria-label='ai-cyren lab information'>
           <Row>
             <Col className='col-md-8 p-4'>
               <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society.</p>
