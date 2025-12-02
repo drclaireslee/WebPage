@@ -12,7 +12,7 @@ const Team = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await fetch("/api/labMember/all");
+        const res = await fetch("https://drclaireslee-backend.vercel.app/api/labMember/all");
         if (!res.ok) throw new Error("Failed to fetch students");
         const data = await res.json();
         setStudents(data);
