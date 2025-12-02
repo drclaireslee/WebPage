@@ -10,10 +10,7 @@ This project serves as the backend infrastructure for [drclairlee-web/WebPage]. 
 * **Deployment:** Vercel (Hobby Tier)
 
 ## Limitations & Hobby Tier Info
-Please note that this project is deployed on the **Vercel Hobby Tier**. As a result, you may experience the following:
-
-* **Cold Starts:** If the API hasn't been used in a while, the first request might take a few seconds to load as the serverless function "wakes up."
-* **Maintenance:** This is a hobby project. Immediate support or active maintenance might be limited.
+Please note that this project is deployed on the **Vercel Hobby Tier**. 
 
 ## Installation
 
@@ -29,6 +26,10 @@ To run this project locally, follow these steps:
     ```bash
     npm install
     ```
+
+## JSdocs
+
+[Link to project's JSdocs](https://drclairlee-web.github.io/WebPage/)
 
 ## API Endpoints
 

@@ -12,8 +12,8 @@ const uri = db
  */
 
 /**
- * @function connectionHelper
  * Returns a connection to the database
+ * @function connectionHelper
  * @return {external:mongoose.Connection}
  */
 async function connectionHelper() {
