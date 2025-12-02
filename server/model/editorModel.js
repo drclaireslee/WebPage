@@ -9,6 +9,7 @@ const editorSchema = mongoose.Schema({
 });
 
 const editorZod = zod.object({
+    _id: zod.string(),
     username: zod.string(),
     passhash: zod.string(),
     role: zod.string()

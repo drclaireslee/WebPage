@@ -23,11 +23,6 @@ function Research() {
                   </Col>
 
                  </Row>
-                
-                 
-                
-
-                
             </Container>
 
              <Container fluid className="p-5 maroon">
@@ -52,9 +47,6 @@ function Research() {
                       <p className="fs-3 fw-bold text-white">Global Media and Im/migration</p>
                       <p className="fs-5 text-white">Cross-border mobilities of People, Knowledge, Culture</p>
                     </Col>
-
-
-
                   </Row>
               </Container>
               <Container fluid className="p-5 bg-white">

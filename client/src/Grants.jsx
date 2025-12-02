@@ -32,12 +32,14 @@ function ResearchGrants() {
     
                 
                 
+
+            </Container>
+
                 <footer role="section" aria-label="footer">
                     <Container fluid>
                         <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
                     </Container>
                 </footer>
-            </Container>
      </div>
 
 

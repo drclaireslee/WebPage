@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: researchController</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: researchController</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>researchController<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="researchController"><span class="type-signature"></span>new researchController<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    create a publicationController
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_researchController.js.html">controller/researchController.js</a>, <a href="controller_researchController.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="baseController.html">baseController</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="create"><span class="type-signature">(async) </span>create<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Inserts one new document/object into the class's associated model/table 
+based on the properties and values of req.body or the request body.
+The properties of the req.body that don't match the properties of the 
+document/object are stripped. Sends A JSON response object of
+the document/object that was created.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.res</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express response object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#create">baseController#create</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A JSON response object containing the object inserted into the database.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+app.post("/", controller.create.bind(controller))
+
+//Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+//Assume req.body has {username: Jerry, passhash: somepassword, role: editor, food: "Pizza"}
+//The JSON response will be {{username: Jerry, passhash:LKASJLKASDJLSAJ, role: editor}}
+//The editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}, {username: Jerry, passhash:LKASJLKASDJLSAJ, role: editor}}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="delete"><span class="type-signature">(async) </span>delete<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Delete one document/object specified by req.params._id.
+Sends a JSON response object containing a message that the 
+document/object is deleted.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.res</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express response object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.next</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express next object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#delete">baseController#delete</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A JSON response object containing a message.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+app.post("/", controller.delete.bind(controller))
+
+//Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}}
+//Assume req.params_id has value 1
+//The JSON response will be {message: "Document deleted successfully"}
+//The editor table has {}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getModel"><span class="type-signature">(async) </span>getModel<span class="signature">()</span><span class="type-signature"> &rarr; {external:mongoose.Model}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns a mongoose model specified by the modelName
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#getModel">baseController#getModel</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">external:mongoose.Model</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readAll"><span class="type-signature">(async) </span>readAll<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends a JSON response object containing an array of all documents/objects
+from the class's associated model/table to the client
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.res</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express response object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#readAll">baseController#readAll</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A JSON response object containing the array of documents.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+app.get("/", controller.readAll.bind(controller))
+
+//Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+//The JSON response will be {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readFiltered"><span class="type-signature">(async) </span>readFiltered<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends a JSON response object containing an array of selected documents/objects
+from the class's associated model/table to the client.
+The documents/objects that are selected occurs when all properties from req.query that
+also exist within the selected document/object properties match.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.res</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express response object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#readFiltered">baseController#readFiltered</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line127">line 127</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A JSON response object containing the array of documents.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+app.get("/", controller.readFiltered.bind(controller))
+
+//Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+//Assume req.query has {username: Bob, food: "Pizza"}
+//The JSON response will be {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="update"><span class="type-signature">(async) </span>update<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Update one document/object by setting the properties and values of the req.body or request body
+to the document/object specified by req.params._id. 
+The properties of the req.body that don't match the properties of the 
+document/object are stripped. Sends a JSON response object containing a
+message that the document/object is updated.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.req</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.res</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express response object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">external:express.next</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an express next object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#update">baseController#update</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line240">line 240</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A JSON response object containing a message.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+app.post("/", controller.update.bind(controller))
+
+//Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {_id:2, username: Sal, passhash:asdfJLKASDJLSAJ, role: editor}}
+//Assume req.params_id has value 1
+//Aassume req.body has {username: Orlando, food: "Pizza"}
+//The JSON respond will be {message: "Document updated successfully"}
+//The editor table has {{_id:1, username: Orlando, passhash:LKASJLKASDJLSAJ, role: admin}, {_id:2, username: Sal, passhash:asdfJLKASDJLSAJ, role: editor}}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="validateDocument"><span class="type-signature"></span>validateDocument<span class="signature">(doc)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method treats all schema fields as optional (partial) and strips
+any properties in the `doc` that are not defined in the schema.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>doc</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The input object to validate and sanitize.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="baseController.html#validateDocument">baseController#validateDocument</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controller_baseController.js.html">controller/baseController.js</a>, <a href="controller_baseController.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        If validation fails on existing fields.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">external:zod.ZodError</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new object containing only the valid, known fields.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//Assume we have created a mongoose model named "Editor"
+
+const editorZod = zod.object({
+  _id: zod.string(),
+	 username: zod.string(),
+	 passhash: zod.string(),
+	 role: zod.string()
+});
+
+const controller = new baseController("Editor", editorZod);
+
+const obj = {username: "Bob", passhash: "password", food: "Pizza"}
+
+console.log(controller.validateDocument(obj));
+//logs {username: "Bob", passhash: "password"}</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Externals</h3><ul><li><a href="external-express.html">express</a></li><li><a href="external-jsonwebtoken.html">jsonwebtoken</a></li><li><a href="external-mongoose.html">mongoose</a></li><li><a href="external-zod.html">zod</a></li></ul><h3>Classes</h3><ul><li><a href="baseController.html">baseController</a></li><li><a href="customError.html">customError</a></li><li><a href="editorController.html">editorController</a></li><li><a href="labMemberController.html">labMemberController</a></li><li><a href="publicationController.html">publicationController</a></li><li><a href="researchController.html">researchController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#access">access</a></li><li><a href="global.html#accessAdmin">accessAdmin</a></li><li><a href="global.html#accessUpdateUser">accessUpdateUser</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#authAdmin">authAdmin</a></li><li><a href="global.html#connectionHelper">connectionHelper</a></li><li><a href="global.html#errorHandler">errorHandler</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Dec 02 2025 10:10:16 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

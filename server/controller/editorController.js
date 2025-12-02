@@ -1,133 +1,102 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import zod from "zod";
 import baseController from "./baseController.js";
 import {editorZod} from "../model/editorModel.js"
 import customError from "../middleware/customError.js";
-import dotenv from "dotenv";
-dotenv.config();
 
-export default class editorController extends baseController {
+
+
+/** 
+ * @external express 
+ * @see {@link https://expressjs.com/}
+ * 
+ */
+
+/**
+ * 
+ * @extends baseController
+ * 
+ */
+class editorController extends baseController {
+	/**
+	 * create an editorController
+     */
 	constructor() {
-		super(process.env.SECRET, "Editor", editorZod);
+		super("Editor", editorZod);
 		this.updateZodCreator = zod.object({passhash: zod.string()});
 	}
 
-	//Assume editorInput.passhash contains a plain text password
-	async verifyLogin(editorInput) {
-		try {
-			const model = await this.getModel();
-			const doc = await model.findOne({username: editorInput.username}).exec();
-	    	return (doc != null && bcrypt.compareSync(editorInput.passhash, doc.passhash));
-		} catch {
-			throw new customError(400, "Bad Request: Bad username/password");
-		}
-	}
-
-	async auth(req, res) {
-		const doc = this.validateDocument(req.body);
-		if (await this.verifyLogin(doc)) {
-			const tk = jwt.sign({username: doc.username}, this.secret, {expiresIn: '1d'});
-			return res.status(200).json({token: tk});
-		} else {
-			throw new customError(403, "Forbidden: Bad username/password");
-		}
-	}
-
-	async authAdmin(req, res) {
-		const model = await this.getModel();
-		const editorInfo = await model.findOne({username: req.body.username}).exec();
-		if (editorInfo.role != "admin") {
-			throw new customError(403, "Forbidden: Not an admin");
-		}
-		return this.auth(req, res);
-	}
-
-
-	async isAdmin(req) {
-		const token = req.headers["x-auth"];
-		const payload = this.verifyToken(token);
-		const model = await this.getModel();
-		const editorInfo = await model.findOne({username: payload.username}).exec();
-		return editorInfo.role == "admin";
-	}
-
-	async readAll(req, res) {
-		if (!(await this.isAdmin(req))) {
-			throw new customError(403, "Forbidden: Admin only operation");
-		}
-		super.readAll(req, res);
-	}
-
-	async readFiltered(req, res) {
-		if (!(await this.isAdmin(req))) {
-			throw new customError(403, "Forbidden: Admin only operation");
-		}
-		super.readFiltered(req, res);
-	}
-
-	async createVerification(req, res) {
-		if (!(await this.isAdmin(req))) {
-			throw new customError(403, "Forbidden: Admin only operation");
-		}
-	}
-	
 	//Assume req.body.passhash contains a plain text password
-	async createAction(req, res) {
+	async create(req, res) {
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		super.createAction(req, res);
+		return super.create(req, res);
 	}
 
-	async deleteVerification(req, res) {
-		if (!(await this.isAdmin(req))) {
-			throw new customError(403, "Forbidden: Admin only operation");
-		}
-	}
-
-	async deleteByUsername(req, res) {
-		this.deleteVerification(req, res);
+	/**
+	 * Delete a document/object specified by req.params.username.
+	 * Sends a JSON response object containing a message that the 
+	 * document/object is deleted.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @return {Promise<Object>} A JSON response object containing a message.
+	 * @example
+	 * 
+	 * const controller = new editorController();
+	 * app.post("/", controller.deleteByUsername.bind(controller));
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash: oldhash}}
+	 * //Assume req.params.username = "Bob"
+	 * //The JSON response will be {message: "Document deleted successfully"}
+	 * //The editor table will have {}
+	 */
+	async deleteByUsername(req, res, next) {
 		const model = await this.getModel();
 		const result = await model.findOne({username: req.params.username}).deleteOne().exec();
 		if (result.deletedCount == 0) {
-			throw new customError(404, "Not Found: Document does not exist");
+			next(new customError(404, "Not Found: Document does not exist"));
 		} else {
 			return res.status(200).json({message: "Document deleted successfully"});
 		}
-	}
+	} 
 
-	async updateVerification(req, res) {
-		const editor = await this.getAccess(req);
-		if (!editor) {
-			throw new customError(403, "Forbidden: Access denied");
-		} 
-		if (!((await this.isAdmin(req)) ||  req.params._id == editor._id)) {
-			throw new customError(403, "Forbidden: Not the same creator or admin");
-		}
-	}
-
-	async updateAction(req, res) {
+	async update(req, res) {
 		this.updateZodCreator.parse(req.body);
 		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
-		super.updateAction(req, res);
+		return super.update(req, res);
 	}
 
 
-	async updateByUsername(req, res) {
-		const editor = await this.getAccess(req);
-		if (!editor) {
-			throw new customError(403, "Forbidden: Access denied");
-		} 
-		if (!((await this.isAdmin(req)) ||  req.params.username == editor.username)) {
-			throw new customError(403, "Forbidden: Not the same creator or admin");
-		} 
+	/**
+	 * Update a document/object by setting the properties and values of the req.body or request body
+	 * to the document/object specified by req.params.username. 
+	 * The properties of the req.body that don't match the properties of the 
+	 * document/object are stripped. Sends a JSON response object containing a
+	 * message that the document/object is updated.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @returns {Promise<Object>} A JSON response object containing a message.
+	 * @example
+	 * const controller = new editorController();
+	 * app.post("/", controller.updateByUsername.bind(controller));
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash: oldhash}}
+	 * //Assume req.body = {passhash: newpassword}
+	 * //Assume req.params.username = "Bob"
+	 * //The JSON response will be {message: "Document updated successfully"}
+	 * //The editor table has {{username: Bob, passhash: newhash}}
+	 */
+	async updateByUsername(req, res, next) {
 		this.updateZodCreator.parse(req.body);
 		const model = await this.getModel();
 		const result = await model.findOne({username: req.params.username}).updateOne({$set: {passhash: bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10))}}).exec();
 		if (result.matchedCount == 0) {
-			throw new customError(404, "Not Found: Document does not exist");
+			next(new customError(404, "Not Found: Document does not exist"));
 		} else {
 			return res.status(200).json({message: "Document updated successfully"});
 		}
 	}
 }
 
+export default editorController;
