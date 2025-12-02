@@ -20,6 +20,7 @@ app.use(helmet(helmetOptions));
 
 //Enable CORS requests with specific options
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 //Disable finger printing
 app.disable('x-powered-by');
