@@ -20,6 +20,7 @@ const researchSchema = mongoose.Schema({
 });
 
 const researchZod = zod.object({
+    _id: zod.string(),
     title: zod.string(),
     startDate: zod.iso.date(),
     endDate: zod.iso.date(),

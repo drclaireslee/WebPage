@@ -3,17 +3,31 @@ import {labMemberZod} from "../model/labMemberModel.js"
 import customError from "../middleware/customError.js";
 import { put, del } from '@vercel/blob';
 import mongoose from "mongoose";
-import {origin} from "../config/config.js";
 
-export default class labMemberController extends baseController {
+
+/**
+ * @extends baseController
+ */
+class labMemberController extends baseController {
+	/**
+	 * create a labMemberController
+     */
 	constructor() {
 		super("LabMember", labMemberZod);
 		this.defaultURL = "https://drclaireslee-backend.vercel.app/img/labMembers/default.jpg";
 	}
 
-	//Expects a mimetype string
-	//Returns the appropriate file extension for that mimetype
-	//Throws an error if the mimetype is unsupported
+	/**
+	 * Returns the a file extension for a given string representation of a mimetype
+	 * @param {string} mimetype - String representation of a mimetype
+	 * @return {Promise<Object>} A JSON response object containing a message.
+	 * @throws {customError} If mime type is not a valid type for labMemberController
+	 * @example
+	 * 
+	 *  const controller = new labMemberController();
+	 *  console.log(controller.getFileExtension("image/jpeg"));
+	 *  //logs "jpg"
+	 */
 	async getFileExtension(mimetype) {
 		switch (mimetype) {
 		case "image/jpeg":
@@ -31,13 +45,12 @@ export default class labMemberController extends baseController {
 		const _id = new mongoose.Types.ObjectId();
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			const url = `${origin}/img/labMembers/${_id}.${fileExtension}`;
-			put(url, req.file.buffer, {
+			const blob = await put(`/img/labMembers/${_id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
 			});
-			req.body.imageURL = url;
+			req.body.imageURL = blob.url;
 		} else {
 			req.body.imageURL = this.defaultURL;
 		}
@@ -54,18 +67,22 @@ export default class labMemberController extends baseController {
 		if (result.imageURL != this.defaultURL) {
 			del(result.imageURL);
 		}
-		super.delete(req, res);
+		return super.delete(req, res);
 	}
 
 	async update(req, res) {
 		if (req.file) {
 			const fileExtension = await this.getFileExtension(req.file.mimetype);
-			put(`${origin}/img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
+			const blob = await put(`/img/labMembers/${req.params._id}.${fileExtension}`, req.file.buffer, {
 				access: "public",
 				allowOverwrite: true,
 				addRandomSuffix: false
-			})
+			});
+			req.body.imageURL = blob.url;
 		}
-		super.update(req, res);
+		return super.update(req, res);
 	}
 }
+
+
+export default labMemberController;

@@ -18,6 +18,7 @@ const labMemberSchema = mongoose.Schema({
 });
 
 const labMemberZod = zod.object({
+    _id: zod.string(),
     fullName: zod.string(),
     type: zod.string(),
     email: zod.email(),
