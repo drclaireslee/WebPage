@@ -5,6 +5,17 @@ import {db} from "../config/config.js"
 let conn = null;
 const uri = db
 
+
+/** 
+ * @external mongoose
+ * @see {@link https://mongoosejs.com/}
+ */
+
+/**
+ * Returns a connection to the database
+ * @function connectionHelper
+ * @return {external:mongoose.Connection}
+ */
 async function connectionHelper() {
   if (conn == null) {
     conn = mongoose.createConnection(uri, {
