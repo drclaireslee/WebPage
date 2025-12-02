@@ -25,11 +25,6 @@ function Research() {
                   </Col>
 
                  </Row>
-                
-                 
-                
-
-                
             </Container>
 
              <Container fluid className="p-1 maroon">
@@ -40,28 +35,18 @@ function Research() {
                       <p className="large-emoji">💻</p>
                       <p className="fs-3 fw-bold text-white">Cybercrime and Digital Sociology</p>
                       <p className="fs-5 text-white">Cyberterrorism, Cyberpolicing, Transnational Cybercrime, Datafication, Big Data, Digital Ethics, IT Policy</p>
-
                     </Col>
  
-
                     <Col md={6}>
-                      
                       <p className="large-emoji">🌏</p>
                       <p className="fs-3 fw-bold text-white">Global Media and Immigration</p>
                       <p className="fs-5 text-white">Cross-border mobilities of People, Knowledge, Culture</p>
                     </Col>
-
-
-
                   </Row>
               </Container>
               <Container fluid className="p-5 bg-white">
                 <h1>Selected Publications</h1>
-
               </Container>
-
-    
-      
     </div>
     );
 }
