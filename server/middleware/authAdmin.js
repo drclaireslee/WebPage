@@ -22,7 +22,7 @@ import connectionHelper from "../helper/connectionHelper.js";
  * If it a valid password to the username that exists within editor and is an admin then it 
  * sends an JSON response with a token property that contains the value 
  * of a signed jsonwebtoken for that username. Else it goes the express error handler.
- * @function
+ * @function authAdmin
  * @param {external:express.req} req - an express request object
  * @param {external:express.res} res - an express response object
  * @param {external:express.next} next - an express next object

@@ -47,14 +47,13 @@ Contains the following fields:
   imageURL: {type: String},
   background: {type: [String]}
 
-| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/labMember/all` | Get all lab members | N/A | N/A |
-| `GET` | `/api/labMember` | Get specific lab members |`{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor |
-| `DELETE` | `/api/labMember/:id` | Delete a lab member | N/A | editor |
-| `POST` | `/api/labMember` | Create a lab member | `{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor |
-| `PATCH` | `/api/labMember/:id` | Update a lab member | `{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor |
-
+| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement | <br />
+| :--- | :--- | :--- | :--- | :--- | <br />
+| `GET` | `/api/labMember/all` | Get all lab members | N/A | N/A | <br /> 
+| `GET` | `/api/labMember` | Get specific lab members |`{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor |  <br />
+| `DELETE` | `/api/labMember/:id` | Delete a lab member | N/A | editor | <br />
+| `POST` | `/api/labMember` | Create a lab member | `{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor | <br />
+| `PATCH` | `/api/labMember/:id` | Update a lab member | `{ "fullName": "John Smith", type: "undergraduate", "email": "john@test.com", "background:["Example"]}` | editor | 
 ###  editor
 
 Note passhash for the request body should be a password in plaintext
@@ -69,15 +68,15 @@ Contains the following fields:
 response object {token: jwt token} to put into header["x-auth"]
 to satisfy auth role requirments
 
-| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/editor/all` | Get all editors | N/A | admin |
-| `GET` | `/api/editor` | Get specific editors |`{"username": "Bob"}` | admin |
-| `DELETE` | `/api/editor/:id` | Delete an editor | N/A | admin |
-| `DELETE` | `/api/editor/user/:username` | Delete a editor | N/A | admin |
-| `POST` | `/api/editor` | Create an editor | `{"username": "Bob", "passhash": "passwordexample", role: "editor"}` | admin |
-| `POST` | `/api/editor/auth` | Authorize an editor with a role of atleast editor | `{"username": "Bob", "passhash": "passwordexample"}` | N/A |
-| `POST` | `/api/editor/auth/admin` | Authorize an editor with a role of admin | `{"username": "Bob", "passhash": "passwordexample"}` | N/A |
+| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement |<br /> 
+| :--- | :--- | :--- | :--- | :--- | <br />
+| `GET` | `/api/editor/all` | Get all editors | N/A | admin | <br />
+| `GET` | `/api/editor` | Get specific editors |`{"username": "Bob"}` | admin | <br />
+| `DELETE` | `/api/editor/:id` | Delete an editor | N/A | admin | <br />
+| `DELETE` | `/api/editor/user/:username` | Delete a editor | N/A | admin | <br />
+| `POST` | `/api/editor` | Create an editor | `{"username": "Bob", "passhash": "passwordexample", role: "editor"}` | admin | <br />
+| `POST` | `/api/editor/auth` | Authorize an editor with a role of atleast editor | `{"username": "Bob", "passhash": "passwordexample"}` | N/A | <br />
+| `POST` | `/api/editor/auth/admin` | Authorize an editor with a role of admin | `{"username": "Bob", "passhash": "passwordexample"}` | N/A | <br />
 | `PATCH` | `/api/editor/user/:username` | Update a editor | `{"passhash": "passwordexample"}` | admin and editor* |
 
 
@@ -90,12 +89,12 @@ Contains the following fields
     url:  {type: String},
     abstract: {type: String}
 
-| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/publication/all` | Get all publications | N/A | N/A |
-| `GET` | `/api/publication` | Get specific publications |`{ "title": "example-title"}` | editor |
-| `DELETE` | `/api/publication/:id` | Delete a publication | N/A | editor |
-| `POST` | `/api/publication` | Create a publication | `{ "title": "example-title"}` | editor |
+| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement | <br />
+| :--- | :--- | :--- | :--- | :--- | <br />
+| `GET` | `/api/publication/all` | Get all publications | N/A | N/A | <br />
+| `GET` | `/api/publication` | Get specific publications |`{ "title": "example-title"}` | editor | <br />
+| `DELETE` | `/api/publication/:id` | Delete a publication | N/A | editor | <br />
+| `POST` | `/api/publication` | Create a publication | `{ "title": "example-title"}` | editor | <br />
 | `PATCH` | `/api/publication/:id` | Update a publication | `{ "title": "example-title"}`| editor |
 
 
@@ -114,12 +113,12 @@ Contains the following fields
 
 
 
-| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/research/all` | Get all researches | N/A | N/A |
-| `GET` | `/api/research` | Get specific researches |`{ "title": "example-title"}` | editor |
-| `DELETE` | `/api/research/:id` | Delete a research | N/A | editor |
-| `POST` | `/api/research` | Create a research | `{ "title": "example-title"}` | editor |
+| Method | Endpoint | Description | Request Body (JSON) | Auth role requirement | <br />
+| :--- | :--- | :--- | :--- | :--- |<br />
+| `GET` | `/api/research/all` | Get all researches | N/A | N/A | <br />
+| `GET` | `/api/research` | Get specific researches |`{ "title": "example-title"}` | editor | <br />
+| `DELETE` | `/api/research/:id` | Delete a research | N/A | editor | <br />
+| `POST` | `/api/research` | Create a research | `{ "title": "example-title"}` | editor | <br />
 | `PATCH` | `/api/research/:id` | Update a research | `{ "title": "example-title"}`| editor |
 
 
