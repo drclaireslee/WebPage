@@ -4,6 +4,7 @@ import './App.css';
 import axios from "axios";
 import AILabHeader from './components/pagenavbar';
 import {Container, Row, Col, Image} from 'react-bootstrap';
+import Footer from './components/footer';
 
 import homeImage from '/assets/ai-cyren-home-image.jpg';
 import umlLogo from '/assets/umllogo.svg';
@@ -92,12 +93,7 @@ function App() {
         
         {/**Dr. Claire S. Lee is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell. She is also a founding member and a researcher of Cybercrime Investigation & Cybersecurity Lab (CIC) at Boston University and an editor of the International Journal of Cybersecurity Intelligence and Cybercrime (IJCIC). She was an Assistant Professor (of Sociology) and was affiliated with the Immigration & Multiculturalism Program (Graduate Studies) at Inha University and was a research affiliate with the University of Massachusetts Boston. She has worked in the educational, media and legal sectors in Hong Kong, Shanghai, Taipei and Seoul, and for the Korea Institute for International Economic Policy (KIEP), one of the leading think tanks in South Korea. She worked for the Division of International Cooperation at the Korean Institute for Curriculum and Evaluation and Tembusu College and Asia Research Institute at the National University of Singapore. She has taught undergraduate and professional courses at Tembusu College, National University of Singapore, Hankuk University of Foreign Studies, and Cyber Hankuk University of Foreign Studies where she taught online courses. She was a volunteer instructor for the Prison Teaching Initiative in Incheon, South Korea. She serves as a Treasurer/Secretary for the Division of Cybercrime at American Society of Criminology. */}
       
-            <footer role='section' aria-label='footer'>
-                <Container>
-                     <br/>
-                    <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
-                </Container>
-            </footer>
+          <Footer/>
         
         
         {
