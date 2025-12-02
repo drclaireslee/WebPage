@@ -1,9 +1,18 @@
 import baseController from "./baseController.js"
 import {publicationZod} from "../model/publicationModel.js"
 
-
-export default class publicationController extends baseController {
+/**
+ * 
+ * @extends baseController
+ */
+class publicationController extends baseController {
+	/**
+	 * create a publicationController
+     */
 	constructor() {
 		super("Publication", publicationZod);
 	}
 }
+
+
+export default publicationController;

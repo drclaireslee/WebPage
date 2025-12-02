@@ -1,41 +1,165 @@
 import customError from "../middleware/customError.js";
 import connectionHelper from "../helper/connectionHelper.js";
 
-export default class baseController {
 
+/** 
+ * @external zod
+ * @see {@link https://zod.dev/}
+ */
+
+/** 
+ * @external mongoose
+ * @see {@link https://mongoosejs.com/}
+ */
+ 
+/** 
+ * @external express 
+ * @see {@link https://expressjs.com/}
+ * 
+ */
+
+/** */
+class baseController {
+
+	/**
+	 * Create a baseController
+	 * @param {string} modelName - The name of the model/table
+	 * @param {external:zod.Object}  - The set of properties to check based on the model/table in modelName
+     */
 	constructor(modelName, zodSchema) {
 		this.modelName = modelName;
 		this.zodSchema = zodSchema;
+		this.model = null;
 	}
 
 	/**
-     * Sanitizes a document object against the defined schema.
      * This method treats all schema fields as optional (partial) and strips
      * any properties in the `doc` that are not defined in the schema.
      * @param {Object} doc - The input object to validate and sanitize.
      * @returns {Object} A new object containing only the valid, known fields.
-     * @throws {ZodError} If validation fails on existing fields.
+     * @throws {external:zod.ZodError} If validation fails on existing fields.
+	 * @example
+	 * 
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+	 * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * 
+	 * const obj = {username: "Bob", passhash: "password", food: "Pizza"}
+	 * 
+	 * console.log(controller.validateDocument(obj));
+	 * //logs {username: "Bob", passhash: "password"}
      */
 	validateDocument(doc) {
 		return this.zodSchema.partial().parse(doc);
 	}
 
+	/**
+	 * Returns a mongoose model specified by the modelName
+	 * @return {external:mongoose.Model}
+	 */
 	async getModel() {
 		const conn = await connectionHelper();
-		return await conn.model(this.modelName);
+		this.model = await conn.model(this.modelName);
+		return this.model;
 	}
-	
+
+	/**
+	 * Sends a JSON response object containing an array of all documents/objects
+	 * from the class's associated model/table to the client
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @return {Promise<Object>} A JSON response object containing the array of documents.
+	 * @example
+	 * 
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+     * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * app.get("/", controller.readAll.bind(controller))
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+	 * //The JSON response will be {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+	 */
 	async readAll(req, res) {
 		const model = await this.getModel();
 	    return res.status(200).json(await model.find({}).exec());
 	}
 
+	/**
+	 * Sends a JSON response object containing an array of selected documents/objects
+	 * from the class's associated model/table to the client.
+	 * The documents/objects that are selected occurs when all properties from req.query that
+	 * also exist within the selected document/object properties match.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @return {Promise<Object>} A JSON response object containing the array of documents.
+	 * @example
+	 * 
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+     * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * app.get("/", controller.readFiltered.bind(controller))
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+	 * //Assume req.query has {username: Bob, food: "Pizza"}
+	 * //The JSON response will be {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}}
+	 */
 	async readFiltered(req, res) {
 		const model = await this.getModel();
 	    const doc = this.validateDocument(req.query);
 	    return res.status(200).json(await model.find(doc).exec());
 	}
 
+
+	/**
+	 * Inserts one new document/object into the class's associated model/table 
+	 * based on the properties and values of req.body or the request body.
+	 * The properties of the req.body that don't match the properties of the 
+	 * document/object are stripped. Sends A JSON response object of
+	 * the document/object that was created.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @return {Promise<Object>} A JSON response object containing the object inserted into the database.
+	 * 
+	 * @example
+	 * 
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+     * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * app.post("/", controller.create.bind(controller))
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}}
+	 * //Assume req.body has {username: Jerry, passhash: somepassword, role: editor, food: "Pizza"}
+	 * //The JSON response will be {{username: Jerry, passhash:LKASJLKASDJLSAJ, role: editor}}
+	 * //The editor table has {{username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {username: Sal, passhash:asdlkknfasdknf, role: editor}, {username: Jerry, passhash:LKASJLKASDJLSAJ, role: editor}}
+	 */
 	async create(req, res) {
 		const model = await this.getModel();
 	    const doc = this.validateDocument(req.body);
@@ -43,6 +167,34 @@ export default class baseController {
 	    return res.status(201).json(createdDoc);
 	}
 
+	/**
+	 * Delete one document/object specified by req.params._id.
+	 * Sends a JSON response object containing a message that the 
+	 * document/object is deleted.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @return {Promise<Object>} A JSON response object containing a message.
+	 * @example
+	 * 
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+     * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * app.post("/", controller.delete.bind(controller))
+	 * 
+	 * //Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}}
+	 * //Assume req.params_id has value 1
+	 * //The JSON response will be {message: "Document deleted successfully"}
+	 * //The editor table has {}
+	 * 
+	 */
 	async delete(req, res, next) {
 		const model = await this.getModel();
 	    const result = await model.findById(req.params._id).deleteOne().exec();
@@ -53,6 +205,38 @@ export default class baseController {
 	    }
 	}
 
+
+
+	/**
+	 * Update one document/object by setting the properties and values of the req.body or request body
+	 * to the document/object specified by req.params._id. 
+	 * The properties of the req.body that don't match the properties of the 
+	 * document/object are stripped. Sends a JSON response object containing a
+	 * message that the document/object is updated.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @returns {Promise<Object>} A JSON response object containing a message.
+	 * @example
+	 * //Assume we have created a mongoose model named "Editor"
+	 * 
+     * const editorZod = zod.object({
+	 *   _id: zod.string(),
+	 *	 username: zod.string(),
+	 *	 passhash: zod.string(),
+	 *	 role: zod.string()
+	 * });
+	 * 
+	 * const controller = new baseController("Editor", editorZod);
+	 * app.post("/", controller.update.bind(controller))
+	 * 
+	 * //Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {_id:2, username: Sal, passhash:asdfJLKASDJLSAJ, role: editor}}
+	 * //Assume req.params_id has value 1
+	 * //Aassume req.body has {username: Orlando, food: "Pizza"}
+	 * //The JSON respond will be {message: "Document updated successfully"}
+	 * //The editor table has {{_id:1, username: Orlando, passhash:LKASJLKASDJLSAJ, role: admin}, {_id:2, username: Sal, passhash:asdfJLKASDJLSAJ, role: editor}}
+	 * 
+	 */
 	async update(req, res, next) {
 		const model = await this.getModel();
 		const doc = this.validateDocument(req.body);
@@ -64,3 +248,6 @@ export default class baseController {
 		}
 	}
 }
+
+
+export default baseController;

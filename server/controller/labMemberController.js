@@ -4,15 +4,30 @@ import customError from "../middleware/customError.js";
 import { put, del } from '@vercel/blob';
 import mongoose from "mongoose";
 
-export default class labMemberController extends baseController {
+
+/**
+ * @extends baseController
+ */
+class labMemberController extends baseController {
+	/**
+	 * create a labMemberController
+     */
 	constructor() {
 		super("LabMember", labMemberZod);
 		this.defaultURL = "https://drclaireslee-backend.vercel.app/img/labMembers/default.jpg";
 	}
 
-	//Expects a mimetype string
-	//Returns the appropriate file extension for that mimetype
-	//Throws an error if the mimetype is unsupported
+	/**
+	 * Returns the a file extension for a given string representation of a mimetype
+	 * @param {string} mimetype - String representation of a mimetype
+	 * @return {Promise<Object>} A JSON response object containing a message.
+	 * @throws {customError} If mime type is not a valid type for labMemberController
+	 * @example
+	 * 
+	 *  const controller = new labMemberController();
+	 *  console.log(controller.getFileExtension("image/jpeg"));
+	 *  //logs "jpg"
+	 */
 	async getFileExtension(mimetype) {
 		switch (mimetype) {
 		case "image/jpeg":
@@ -52,7 +67,7 @@ export default class labMemberController extends baseController {
 		if (result.imageURL != this.defaultURL) {
 			del(result.imageURL);
 		}
-		super.delete(req, res);
+		return super.delete(req, res);
 	}
 
 	async update(req, res) {
@@ -65,6 +80,9 @@ export default class labMemberController extends baseController {
 			});
 			req.body.imageURL = blob.url;
 		}
-		super.update(req, res);
+		return super.update(req, res);
 	}
 }
+
+
+export default labMemberController;
