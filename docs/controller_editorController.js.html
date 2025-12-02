@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controller/editorController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controller/editorController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import bcrypt from "bcryptjs";
+import zod from "zod";
+import baseController from "./baseController.js";
+import {editorZod} from "../model/editorModel.js"
+import customError from "../middleware/customError.js";
+
+
+
+/** 
+ * @external express 
+ * @see {@link https://expressjs.com/}
+ * 
+ */
+
+/**
+ * 
+ * @extends baseController
+ * 
+ */
+class editorController extends baseController {
+	/**
+	 * create an editorController
+     */
+	constructor() {
+		super("Editor", editorZod);
+		this.updateZodCreator = zod.object({passhash: zod.string()});
+	}
+
+	//Assume req.body.passhash contains a plain text password
+	async create(req, res) {
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
+		return super.create(req, res);
+	}
+
+	/**
+	 * Delete a document/object specified by req.params.username.
+	 * Sends a JSON response object containing a message that the 
+	 * document/object is deleted.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @return {Promise&lt;Object>} A JSON response object containing a message.
+	 * @example
+	 * 
+	 * const controller = new editorController();
+	 * app.post("/", controller.deleteByUsername.bind(controller));
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash: oldhash}}
+	 * //Assume req.params.username = "Bob"
+	 * //The JSON response will be {message: "Document deleted successfully"}
+	 * //The editor table will have {}
+	 */
+	async deleteByUsername(req, res, next) {
+		const model = await this.getModel();
+		const result = await model.findOne({username: req.params.username}).deleteOne().exec();
+		if (result.deletedCount == 0) {
+			next(new customError(404, "Not Found: Document does not exist"));
+		} else {
+			return res.status(200).json({message: "Document deleted successfully"});
+		}
+	} 
+
+	async update(req, res) {
+		this.updateZodCreator.parse(req.body);
+		req.body.passhash = bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10));
+		return super.update(req, res);
+	}
+
+
+	/**
+	 * Update a document/object by setting the properties and values of the req.body or request body
+	 * to the document/object specified by req.params.username. 
+	 * The properties of the req.body that don't match the properties of the 
+	 * document/object are stripped. Sends a JSON response object containing a
+	 * message that the document/object is updated.
+	 * @param {external:express.req} req - an express request object
+	 * @param {external:express.res} res - an express response object
+	 * @param {external:express.next} next - an express next object
+	 * @returns {Promise&lt;Object>} A JSON response object containing a message.
+	 * @example
+	 * const controller = new editorController();
+	 * app.post("/", controller.updateByUsername.bind(controller));
+	 * 
+	 * //Assume editor table has {{username: Bob, passhash: oldhash}}
+	 * //Assume req.body = {passhash: newpassword}
+	 * //Assume req.params.username = "Bob"
+	 * //The JSON response will be {message: "Document updated successfully"}
+	 * //The editor table has {{username: Bob, passhash: newhash}}
+	 */
+	async updateByUsername(req, res, next) {
+		this.updateZodCreator.parse(req.body);
+		const model = await this.getModel();
+		const result = await model.findOne({username: req.params.username}).updateOne({$set: {passhash: bcrypt.hashSync(req.body.passhash, bcrypt.genSaltSync(10))}}).exec();
+		if (result.matchedCount == 0) {
+			next(new customError(404, "Not Found: Document does not exist"));
+		} else {
+			return res.status(200).json({message: "Document updated successfully"});
+		}
+	}
+}
+
+export default editorController;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Externals</h3><ul><li><a href="external-express.html">express</a></li><li><a href="external-jsonwebtoken.html">jsonwebtoken</a></li><li><a href="external-mongoose.html">mongoose</a></li><li><a href="external-zod.html">zod</a></li></ul><h3>Classes</h3><ul><li><a href="baseController.html">baseController</a></li><li><a href="customError.html">customError</a></li><li><a href="editorController.html">editorController</a></li><li><a href="labMemberController.html">labMemberController</a></li><li><a href="publicationController.html">publicationController</a></li><li><a href="researchController.html">researchController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#access">access</a></li><li><a href="global.html#accessAdmin">accessAdmin</a></li><li><a href="global.html#accessUpdateUser">accessUpdateUser</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#authAdmin">authAdmin</a></li><li><a href="global.html#connectionHelperReturnsaconnectiontothedatabase">connectionHelperReturns a connection to the database</a></li><li><a href="global.html#errorHandler">errorHandler</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Mon Dec 01 2025 21:53:47 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

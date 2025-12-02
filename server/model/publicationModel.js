@@ -10,6 +10,7 @@ const publicationSchema = mongoose.Schema({
 });
 
 const publicationZod = zod.object({
+    _id: zod.string(),
     title: zod.string(),
     author: zod.string(),
     url: zod.url(),
