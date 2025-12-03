@@ -2,15 +2,19 @@ import { Container, Col, Row, Card, Button } from "react-bootstrap"
 
 function ResearchCard({research_image, research_name, research_country, research_year, research_desc}) {
     return(
-        <Container className="p-5 my-5 bg-primary border border-danger">
+        <Container className="p-5  border border-dark">
+
+            <h3><strong>{research_name}</strong>, {research_country}<br/>({research_year})</h3>
+                            
+            <p className="fs-4">{research_desc}</p>
             
-                <Row>
+                {/*<Row>
                     {/*
                     <Col>
                         <Card.Img variant="top" src={research_image}/>
                     </Col>
                     */}
-                    <Col>
+                    {/*<Col>
                 
                             <h3><strong>{research_name}</strong>, {research_country}<br/>({research_year})</h3>
                             
@@ -18,8 +22,8 @@ function ResearchCard({research_image, research_name, research_country, research
 
                     
                     
-                    </Col>
-                </Row>
+                    </Col>*/}
+                {/*</Row>*/}
         </Container>
 
     )

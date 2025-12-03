@@ -16,7 +16,7 @@ function ResearchGrants() {
 
                 
                 {/** Main section for research projects */}
-                <Container  role="section" aria-label="research grants">
+                <Container fluid role="section" aria-label="research grants">
                     
                     <h1>Research Grants</h1>
             
