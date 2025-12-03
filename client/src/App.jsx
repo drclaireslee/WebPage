@@ -36,7 +36,7 @@ function App() {
       
       {/** Name of the Lab*/}
       <Container fluid className='p-5 bg-dark' role='section' aria-label='ai-cyren lab landing section'>
-           <Row className='m-5'>
+           <Row>
             <Col>
                 <h1 className='align-center text-light' role="title" aria-label='ai-cyren lab full title'>Artificial Intelligence, Cybercrime, and Cybersecurity Research and Education Nexus (AI-CYREN) Lab</h1>
                 <br/>
@@ -48,11 +48,11 @@ function App() {
       {/*** Information about the AI-CYREN Lab */}
         <Container fluid className='bg-white' role='section' aria-label='ai-cyren lab information'>
           <Row>
-            <Col className='col-md-8 p-4'>
+            <Col className='col-md-9 p-4'>
               <p className='text-start fs-5'>The <b>AI-CYREN Lab</b> (Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus) adopts a social science–driven approach to the study of cybersecurity and cybercrime. It seeks to advance interdisciplinary research and education at the intersection of technology and society.</p>
               <p className='text-start fs-5'>Through this integrative framework, the lab fosters a creative, holistic, and nuanced understanding of cyberattacks, cybercrime, cybersecurity, and AI phenomena.</p>
             </Col>
-            <Col className='col-md-4 align-items-start'>
+            <Col className='col-md-3 align-items-start'>
               <Image src={umlLogo} width={"250"} height={"250"} rounded alt='umass lowell logo'/>
             </Col>
           </Row>
