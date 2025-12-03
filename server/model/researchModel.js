@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import zod from "zod";
 import connectionHelper from "../helper/connectionHelper.js";
+import DOMPurify from "isomorphic-dompurify";
 
 const researchSchema = mongoose.Schema({
 	title: {type: String, required: true, unique: true},
@@ -20,14 +21,14 @@ const researchSchema = mongoose.Schema({
 });
 
 const researchZod = zod.object({
-    _id: zod.string(),
-    title: zod.string(),
-    startDate: zod.iso.date(),
-    endDate: zod.iso.date(),
-    role: zod.string(),
-    description: zod.string(),
-    sponsor: zod.array(zod.string()),
-    fundAmountUsd: zod.number()
+    _id: zod.string().transform(val => DOMPurify.sanitize(val)),
+    title: zod.string().transform(val => DOMPurify.sanitize(val)),
+    startDate: zod.iso.date().transform(val => DOMPurify.sanitize(val)),
+    endDate: zod.iso.date().transform(val => DOMPurify.sanitize(val)),
+    role: zod.string().transform(val => DOMPurify.sanitize(val)),
+    description: zod.string().transform(val => DOMPurify.sanitize(val)),
+    sponsor: zod.array(zod.string()).transform(val => DOMPurify.sanitize(val)),
+    fundAmountUsd: zod.number().transform(val => DOMPurify.sanitize(val))
 });
 
 const conn = await connectionHelper();
