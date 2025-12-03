@@ -4,7 +4,7 @@ import corsOptions from "./config/corsOptions.js";
 import helmetOptions from "./config/helmetOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
 import helmet from "helmet";
-import mongoSanitize from "express-mongo-sanitize";
+
 
 
 //Routes
@@ -34,8 +34,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-//any keys in objects that begin with a $ sign or contain a ., from req.body, req.query or req.params is removed or replaced
-app.use(mongoSanitize());
 
 
 app.use("/api/labMember", labMemberRoute);
@@ -46,3 +44,4 @@ app.use("/api/research", researchRoute);
 app.use(errorHandler);
 
 export default app;
+
