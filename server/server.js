@@ -4,10 +4,6 @@ import corsOptions from "./config/corsOptions.js";
 import helmetOptions from "./config/helmetOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
 import helmet from "helmet";
-<<<<<<< HEAD
-=======
-
->>>>>>> 537ce0e1661112ad597e02fd420f51aa860aad6b
 
 
 //Routes
@@ -37,11 +33,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(express.static("public"));
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 537ce0e1661112ad597e02fd420f51aa860aad6b
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
 app.use("/api/publication", publicationRoute);
