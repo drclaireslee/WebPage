@@ -5,10 +5,12 @@ function ResearchCard({research_image, research_name, research_country, research
         <Container className="p-5">
             <Card border="dark">
                 <Row>
-                    <Col md={4}>
+                    {/*
+                    <Col>
                         <Card.Img variant="top" src={research_image}/>
                     </Col>
-                    <Col md={8}>
+                    */}
+                    <Col>
                         <Card.Body>
                             <Card.Title><h3><strong>{research_name}</strong>, {research_country}<br/>({research_year})</h3></Card.Title>
                             

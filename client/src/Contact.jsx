@@ -32,12 +32,12 @@ function Contact() {
                 
             </Container>
 
-            <Container fluid className="bg-white">
+           {/* <Container fluid className="bg-white">
                 <MapEmbed/>
-            </Container>
+            </Container>*/}
             
             {/**Commented out due to formatting issues */}
-            <Footer/>
+            {<Footer/>}
         </div>
 
     );
