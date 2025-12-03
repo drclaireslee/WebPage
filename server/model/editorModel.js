@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import zod from "zod";
 import connectionHelper from "../helper/connectionHelper.js";
-import DOMPurify from 'isomorphic-dompurify';
-
 
 const editorSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
@@ -11,10 +9,10 @@ const editorSchema = mongoose.Schema({
 });
 
 const editorZod = zod.object({
-    _id: zod.string().transform(val => DOMPurify.sanitize(val)),
-    username: zod.string().transform(val => DOMPurify.sanitize(val)),
-    passhash: zod.string().transform(val => DOMPurify.sanitize(val)),
-    role: zod.string().transform(val => DOMPurify.sanitize(val))
+    _id: zod.string(),
+    username: zod.string(),
+    passhash: zod.string(),
+    role: zod.string()
 });
 
 const conn = await connectionHelper();
