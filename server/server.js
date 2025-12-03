@@ -4,7 +4,7 @@ import corsOptions from "./config/corsOptions.js";
 import helmetOptions from "./config/helmetOptions.js";
 import errorHandler from "./middleware/errorHandler.js";
 import helmet from "helmet";
-
+import {xss} from "express-xss-sanitizer";
 
 //Routes
 import labMemberRoute from "./route/labMemberRoute.js";
@@ -32,6 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.static("public"));
+
+app.use(xss());
 
 app.use("/api/labMember", labMemberRoute);
 app.use("/api/editor", editorRoute);
