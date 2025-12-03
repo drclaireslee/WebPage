@@ -187,7 +187,7 @@ class baseController {
 	 * });
 	 * 
 	 * const controller = new baseController("Editor", editorZod);
-	 * app.post("/", controller.delete.bind(controller))
+	 * app.delete("/", controller.delete.bind(controller))
 	 * 
 	 * //Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}}
 	 * //Assume req.params_id has value 1
@@ -228,7 +228,7 @@ class baseController {
 	 * });
 	 * 
 	 * const controller = new baseController("Editor", editorZod);
-	 * app.post("/", controller.update.bind(controller))
+	 * app.patch("/", controller.update.bind(controller))
 	 * 
 	 * //Assume editor table has {{_id:1, username: Bob, passhash:LKASJLKASDJLSAJ, role: admin}, {_id:2, username: Sal, passhash:asdfJLKASDJLSAJ, role: editor}}
 	 * //Assume req.params_id has value 1

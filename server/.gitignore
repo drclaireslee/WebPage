@@ -28,7 +28,6 @@ dist-ssr
 coverage/*
 runlocal.js
 
-#Doc
-out/*
+
 
 .env
