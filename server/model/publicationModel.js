@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import zod from "zod";
 import connectionHelper from "../helper/connectionHelper.js";
+import DOMPurify from 'isomorphic-dompurify';
+
 
 const publicationSchema = mongoose.Schema({
     title: {type: String, unique: true, required: true},
@@ -10,11 +12,11 @@ const publicationSchema = mongoose.Schema({
 });
 
 const publicationZod = zod.object({
-    _id: zod.string(),
-    title: zod.string(),
-    author: zod.string(),
-    url: zod.url(),
-    abstract: zod.string()
+    _id: zod.string().transform(val => DOMPurify.sanitize(val)),
+    title: zod.string().transform(val => DOMPurify.sanitize(val)),
+    author: zod.string().transform(val => DOMPurify.sanitize(val)),
+    url: zod.httpUrl().transform(val => DOMPurify.sanitize(val)),
+    abstract: zod.string().transform(val => DOMPurify.sanitize(val))
 });
 
 const conn = await connectionHelper();

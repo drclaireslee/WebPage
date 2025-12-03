@@ -1,13 +1,7 @@
 import mongoose from "mongoose";
 import zod from "zod";
 import connectionHelper from "../helper/connectionHelper.js";
-
-//From: https://zod.dev/api#urls
-const httpUrl = zod.url({
-  protocol: /^https?$/,
-  hostname: zod.regexes.domain
-});
-
+import DOMPurify from 'isomorphic-dompurify';
 
 const labMemberSchema = mongoose.Schema({
         fullName: {type: String, required: true},
@@ -18,12 +12,12 @@ const labMemberSchema = mongoose.Schema({
 });
 
 const labMemberZod = zod.object({
-    _id: zod.string(),
-    fullName: zod.string(),
-    type: zod.string(),
-    email: zod.email(),
-    imageURL: httpUrl,
-    background: zod.array(zod.string())
+    _id: zod.string().transform(val => DOMPurify.sanitize(val)),
+    fullName: zod.string().transform(val => DOMPurify.sanitize(val)),
+    type: zod.string().transform(val => DOMPurify.sanitize(val)),
+    email: zod.email().transform(val => DOMPurify.sanitize(val)),
+    imageURL: zod.httpUrl().transform(val => DOMPurify.sanitize(val)),
+    background: zod.array(zod.string().transform(val => DOMPurify.sanitize(val)))
 });
 const conn = await connectionHelper();
 
