@@ -2,7 +2,7 @@ import { Container, Col, Row, Card, Button } from "react-bootstrap"
 
 function ResearchCard({research_image, research_name, research_country, research_year, research_desc}) {
     return(
-        <Container className="p-5 border border-dark">
+        <>
 
             <h3><strong>{research_name}</strong>, {research_country}<br/>({research_year})</h3>
                             
@@ -24,7 +24,7 @@ function ResearchCard({research_image, research_name, research_country, research
                     
                     </Col>*/}
                 {/*</Row>*/}
-        </Container>
+        </>
 
     )
 }
