@@ -14,7 +14,7 @@ class labMemberController extends baseController {
      */
 	constructor() {
 		super("LabMember", labMemberZod);
-		this.defaultURL = "https://drclaireslee-backend.vercel.app/img/labMembers/default.jpg";
+		this.defaultURL = "https://iprahoo86xomtazb.public.blob.vercel-storage.com/img/labMembers/default.jpg";
 	}
 
 	/**
