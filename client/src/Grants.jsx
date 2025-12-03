@@ -2,6 +2,7 @@ import AILabHeader from "./components/pagenavbar";
 import { Container } from "react-bootstrap";
 import ResearchCard from "./components/researchcard";
 import research_data from './research_grants.json';
+import Footer from "./components/footer";
 
 function ResearchGrants() {
     return (
@@ -9,7 +10,7 @@ function ResearchGrants() {
         <div>
             {/** Navigation Bar */}
             <AILabHeader/>
-            <Container fluid className='my-1 p-5 bg-white' role="page" aria-label='grant page'>
+            <Container fluid className=' p-5 bg-white' role="page" aria-label='grant page'>
             
                
 
@@ -35,11 +36,7 @@ function ResearchGrants() {
 
             </Container>
 
-                <footer role="section" aria-label="footer">
-                    <Container fluid>
-                        <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
-                    </Container>
-                </footer>
+                <Footer/>
      </div>
 
 

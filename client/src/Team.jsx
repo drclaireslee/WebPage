@@ -3,6 +3,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 
 import './Team.css';
 import AILabHeader from "./components/pagenavbar";
+import Footer from "./components/footer";
 import claireLeePhoto from '/assets/claire_lee_photo.jpg';
 
 
@@ -30,7 +31,7 @@ const Team = () => {
 
         {/*** Information about Dr. Claire Lee ***/}      
 
-        <Container  className='bg-white' role='section' aria-label='dr claire lee about section' >
+        <Container fluid className='bg-white' role='section' aria-label='dr claire lee about section' >
             <br/>
             <br/>
             <br/>
@@ -88,13 +89,7 @@ const Team = () => {
         </Container>
 
 
-
-        <footer role='section' aria-label='footer'>
-            <Container>
-                 <br/>
-                <p>&copy; 2025 Dr. Claire S. Lee. All rights reserved.</p>
-            </Container>
-        </footer>
+        <Footer/>
     </div>
   );
 };

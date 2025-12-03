@@ -1,6 +1,7 @@
 
 import AILabHeader from "./components/pagenavbar";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import Footer from "./components/footer";
 
 function Research() {
     return (
@@ -71,6 +72,8 @@ function Research() {
                 <h1>Selected Publications</h1>
                 <p className="fs-4"><a href="https://scholar.google.com/citations?hl=en&user=PABcsxAAAAAJ&view_op=list_works&sortby=pubdate&inst=8587491165479738887">Google Scholar</a></p>
               </Container>
+
+              <Footer/>
               
 
     
