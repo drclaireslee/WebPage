@@ -123,6 +123,17 @@ Contains the following fields
 | `PATCH` | `/api/research/:id` | Update a research | `{ "title": "example-title"}`| editor |
 
 
+## security
+The use of the create, read, and update operations on the REST API are limited to users who are editors or admins. The process of authorizing users is done through token-based authentication. First, the user sends a POST request to either /api/editor/auth to authorize themselves as editors or /api/editor/auth/admin to authorize themselves as admins. The request also contains the username and password pair the user is trying to authorize themselves with. The server gets the request and finds the document matching the request’s username. The document then compares its password hash with the password in the request through bcryptjs. If bcrypt.hashSync returns true, then the server will sign a JWT token  containing the user's username using the jsonwebtoken library and send it back to the user. When the user wants to interact with the REST API editor only operations it first puts the JWT token it had received into the x-auth header. The server that receives the token uses jsonwetoken library to get the payload and check if the username in the payload still exists in the database. If it does, then the server will proceed with the request. If not, then the server will go to its error handler to return an error message back to the user. The server processes user input by first passing it through the express-xss-sanitizer middleware to get rid of dangerous text, from the request body.  The server validates user input by stripping off any unwanted properties and values based on one of the schemas from the models using the zod library. Then it further validates the input using schema-based validation with the mongoose library. The server also uses the helmet middleware library to secure the HTTP response through configuring its headers, such as the Content Security Policy (CSP), to heavily restrict what is loaded in the browser. The server disables finger printing to make it harder to identify what software the server is using. Below is a list of known security flaws
+
+<ul>
+<li>Social engineering attacks such as phishing</li>
+<li>Brute force attacks on authentication </li>
+<li>DDOS/DOS </li>
+<li>Message replay attacks on the application level</li>
+</ul>
+
+
 This project is configured for Vercel.
 
 1.  Install Vercel CLI: `npm i -g vercel`
