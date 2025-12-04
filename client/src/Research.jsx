@@ -55,12 +55,12 @@ function Research() {
                 
                 <Row className="p-4">
                   <Col>
-                    <img src="/assets/soft_power.jpg" alt="soft power book" width={250} height={350} fluid/>
+                    <Image src="/assets/soft_power.jpg" alt="soft power book" width={250} height={350} thumbnail fluid/>
                     <p className="fs-4">Soft Power: Made in China</p>
                     <a href="https://www.amazon.com/Soft-Power-Made-China-Transnational/dp/3030065936" className="fs-5">Available on Amazon</a>
                   </Col>
                    <Col>
-                    <img src="/assets/ai_and_cybersec.jpg" alt="soft power book" width={250} height={350} fluid/>
+                    <Image src="/assets/ai_and_cybersec.jpg" alt="soft power book" width={250} height={350} thumbnail fluid/>
                     <p className="fs-4">AI And Cybersecurity (Korean)</p>
                     <a href="https://product.kyobobook.co.kr/detail/S000216868690" className="fs-5">Available on Kyobo</a>
                   </Col>
