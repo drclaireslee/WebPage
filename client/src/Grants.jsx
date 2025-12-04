@@ -10,14 +10,13 @@ function ResearchGrants() {
         <div>
             {/** Navigation Bar */}
             <AILabHeader/>
-            <Container fluid className=' p-5 bg-white' role="page" aria-label='grant page'>
+            <Container fluid className='p-5 bg-white' role="page" aria-label='grant page'>
             
                
 
                 
                 {/** Main section for research projects */}
-                <Container role="section" aria-label="research grants">
-                    
+                
                     <h1>Research Grants</h1>
             
                     
@@ -28,8 +27,7 @@ function ResearchGrants() {
                     
                     
 
-                </Container>
-
+             
     
                 
                 
