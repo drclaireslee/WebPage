@@ -19,10 +19,11 @@ function ResearchGrants() {
                 
                     <h1>Research Grants</h1>
             
-                    
+                    <br/>
                     {research_data.map((card, idx) => {
                         return(<ResearchCard key={idx} research_image={card.research_image} research_name={card.research_name} research_country={card.research_country} research_year={card.research_years} research_desc={card.research_desc}/>)
                     })}
+                    
                     
                     
                     
