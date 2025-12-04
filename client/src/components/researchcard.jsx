@@ -4,7 +4,7 @@ function ResearchCard({research_image, research_name, research_country, research
     return(
         <>
          
-                <Row className="border border-dark rounded">
+                <Row>
                     <Col md={4}>
                         <Image src={research_image} fluid/>
                     </Col>
