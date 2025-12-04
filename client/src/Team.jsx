@@ -42,12 +42,30 @@ const Team = () => {
                     <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture' className='p-2'/>
                 </Col>
                 <Col className='col-md-9'>
-                    <p className='text-start fs-5'><b>Dr. Claire S. Lee</b> is an Assistant Professor in the School of Criminology and Justice Studies and a member of the Center for Internet Security and Forensics Education and Research (iSAFER) at the University of Massachusetts Lowell.</p>
-                    <p className='text-start fs-5'>As a dedicated teacher-scholar, she is interested in and practices connective learning in her classroom, which is also being translated into her research. In this connection, she received innovative teaching grants (for big data and statistics courses) at her previous institution. She is a recipient of an Outstanding Teaching Award in 2022.</p>
+                    <p className='text-start fs-5'><b>Dr. Claire Seungeun Lee</b> is an Associate Professor in the <a href='https://www.uml.edu/fahss/criminal-justice/'>School of Criminology and Justice Studies</a> and a Co-Director of the <a href='https://www.uml.edu/research/caas/'>Center for Asian American Studies (CASS)</a>.  </p>
+                    <p className='text-start fs-5'>Dr. Lee is also a member of the <a href='https://www.uml.edu/research/isafer/'>Center for Internet Security and Forensics Education and Research (iSAFER)</a>, the <a href='https://www.uml.edu/research/ctss/'>Center for Terrorism and Security Studies (CTSS)</a>, and the <a href='https://www.uml.edu/research/public-opinion/'>Center for Public Opinion (CPO)</a> at the University of Massachusetts Lowell.</p>
+                    
+                    <address className="text-start fs-5">
+                        Associate Professor <br/>
+                        Email: <a href="mailto:claire_lee@uml.edu">claire_lee@uml.edu</a> <br/>
+                        Google Scholar: <a href='https://scholar.google.com/citations?user=PABcsxAAAAAJ&hl=en&inst=8587491165479738887'>Click Here</a> <br/>
+                        School of Criminology and Justice Studies <br/>
+                        Co-Director, Center for Asian American Studies <br/>
+                        University of Massachusetts Lowell <br/>
+
+
+                    </address>
+                    <p > </p>
+                    <p className="text-start fs-5"></p>
+                    <p className="text-start fs-5"> </p>
+                    <p className="text-start fs-5"> </p>
+                    <p className="text-start fs-5"> </p>
+                    <p className="text-start fs-5"> </p>
                 </Col>
             </Row>
         </Container>
 
+        
         <Container fluid className='p-2 bg-white' role="section" aria-label='team members'>
             <div className="d-flex justify-content-center my-4">
                 <hr style={{
