@@ -18,11 +18,11 @@ function Teaching() {
               </Col>
               <Col md={9}>
                   <br/>
-                 <ListGroup as="ul">
-                  <ListGroup.Item as="li" className="fs-4 text-start border border-dark">CRIM.6580: Issues in Computer Crime and Cyber Security (Graduate-level)</ListGroup.Item>
-                  <ListGroup.Item as="li" className="fs-4 text-start border border-dark">CRIM.4930: Issues in Technology and Security (Undergraduate-level)</ListGroup.Item>
-                  <ListGroup.Item as="li" className="fs-4 text-start border border-dark">CRIM.3950: Statistics in Criminal Justice (Undergraduate-level)</ListGroup.Item>
-                 </ListGroup>
+                 <ul>
+                  <li className="fs-4 text-start">CRIM.6580: Issues in Computer Crime and Cyber Security (Graduate-level)</li>
+                  <li className="fs-4 text-start">CRIM.4930: Issues in Technology and Security (Undergraduate-level)</li>
+                  <li className="fs-4 text-start">CRIM.3950: Statistics in Criminal Justice (Undergraduate-level)</li>
+                 </ul>
               </Col>
             </Row>
             <hr/>
@@ -34,14 +34,14 @@ function Teaching() {
               </Col>
               <Col md={9}>
                              
-                 <ListGroup as="ul"  className="">
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Research Methodology [Excel, SPSS] </ListGroup.Item>
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Basic Statistical Analysis [SPSS, R] <em>(Univ.'s Innovative Teaching Fund awarded)</em> </ListGroup.Item>
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Big Data and Industrial Geography in China [R, NodeXL, UCINET] <em>(Univ.'s Innovative Teaching Fund awarded)</em> </ListGroup.Item>
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Regions and Provinces of China</ListGroup.Item>
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Global Migration, Deviance, and Crime in Everyday Life and Cyberspace <em>(Graduate course in English)</em></ListGroup.Item>
-                    <ListGroup.Item as="li" className="fs-4 text-start border border-dark">Im/migration in Asia and Beyond </ListGroup.Item>
-                 </ListGroup>
+                 <ul>
+                    <li className="fs-4 text-start">Research Methodology [Excel, SPSS] </li>
+                    <li className="fs-4 text-start">Basic Statistical Analysis [SPSS, R] <em>(Univ.'s Innovative Teaching Fund awarded)</em> </li>
+                    <li className="fs-4 text-start">Big Data and Industrial Geography in China [R, NodeXL, UCINET] <em>(Univ.'s Innovative Teaching Fund awarded)</em> </li>
+                    <li className="fs-4 text-start">Regions and Provinces of China</li>
+                    <li className="fs-4 text-start">Global Migration, Deviance, and Crime in Everyday Life and Cyberspace <em>(Graduate course in English)</em></li>
+                    <li className="fs-4 text-start">Im/migration in Asia and Beyond </li>
+                 </ul>
               </Col>
               
             </Row>
