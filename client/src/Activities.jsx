@@ -1,3 +1,10 @@
+/**
+ * Name: Activities Page
+ * Filename: Activities.jsx
+ * Description: This page contains a list of Dr. Claire Lee's professional activities
+ * 
+ */
+
 import AILabHeader from "./components/pagenavbar";
 import { Container } from "react-bootstrap";
 import Footer from "./components/footer";
@@ -7,12 +14,16 @@ function Activities() {
         <div>
             <AILabHeader/>
            
-            <Container fluid className="p-5 bg-white">
+           {/**Dr. Lee's Journal and Media Contributions */}
+            <Container fluid className="p-5 bg-white" role="section" aria-label="journal and media contributions">
                  <h1>Professional Activities</h1>
                  <br/>
+
                  <h3 className="text-start">Journal and proposal reviewer (selected)</h3>
+
+                 {/**English journal contributions */}
                  <p className="text-start fs-4">In English:</p>
-                 <ul>
+                 <ul role="list" aria-label="list of journals reviewed in english">
                     <li className="text-start fs-5">Computers in Human Behavior, 2019 - Present (SSCI)</li>
                     <li className="text-start fs-5">Crime, Law and Social Change, 2018 - Present (SSCI)</li>
                     <li className="text-start fs-5">Computers & Security, 2018 - Present (SCI(E) & Scopus)</li>
@@ -27,16 +38,19 @@ function Activities() {
                     <li className="text-start fs-5">International Journal of Communication (IJoC), 2015 - Present (SSCI)</li>
                     <li className="text-start fs-5">New Media and Society, 2012 - Present (SSCI)</li>
                  </ul>
+
+                  {/**Korean and Chinese journal contributions */}
                  <p className="text-start fs-4">In Korean/Chinese:</p>
-                 <ul>
+                 <ul role="list" aria-label="list of journals reviewed in korean and chinese">
                     <li className="text-start fs-5">Journal of International Area Studies, 2015 – Present (KCI)</li>
                     <li className="text-start fs-5">China and Sinology, 2015 – Present (KCI)</li>
                     <li className="text-start fs-5">Korea Trade-Investment Promotion Agency (KOTRA), Proposal reviewer, 2014 – Present</li>
                     
                  </ul>
 
+                {/**Media and blog contributions */}
                 <h3 className="text-start">Contributor to Media and Blogs</h3>
-                <ul>
+                <ul role="list" aria-label="list of media and blog contributions">
                     <li className="text-start fs-5">World Weekly (世界周刊)/World Journal (世界日報) (U.S.-based Chinese newspaper), 2021 – Present</li>
                     <li className="text-start fs-5">Korean Newspaper Pressian, Section on China Insight, Commentator, 2016 – Present</li>
                     <li className="text-start fs-5">Knowledge Group China-Korea, Founding Member, Contributor, 2015 – Present</li>
@@ -45,10 +59,12 @@ function Activities() {
 
                 </ul>
             </Container>
-            <Container fluid className="p-5 maroon">
+
+            {/**Dr. Lee's previous work experiences */}
+            <Container fluid className="p-5 maroon" role="section" aria-label="previous work experience">
 
                 <h3 className="text-white text-start">Previous work experience (non-academic positions only)</h3>
-                <ul>
+                <ul role="list" aria-label="list of previous work experiences">
                     <li className="text-white text-start fs-5">Interpreter, Korean Broadcasting System (KBS), Seoul, South Korea, 201</li>
                     <li className="text-white text-start fs-5">Interpreter, Korean Broadcasting System (KBS), Shanghai, China, 2014</li>
                     <li className="text-white text-start fs-5">Interpreter and production manager, Seediq Bale (Warriors of the Rainbow) (dir. Te-sheng Wei), Taiwan, 2009</li>
@@ -59,9 +75,9 @@ function Activities() {
                 </ul>
                 
             </Container>
-            <Container fluid className="p-5 bg-primary">
+            <Container fluid className="p-5 dark-blue" role="section" aria-label="other services">
                 <h3 className="text-white text-start">Other services</h3>
-                <ul>
+                <ul role="list" aria-label="list of other services">
                     <li className="text-white text-start fs-5">Treasurer/Secretary, Division of Cybercrime, American Society of Criminology, 2021 – 2023</li>
                     <li className="text-white text-start fs-5">Managing Editor, International Journal of Cybersecurity Intelligence and Cybercrime, 2018 – Present</li>
                     <li className="text-white text-start fs-5">FTA expert (2014 – Present), CSF China Specialist, 2017 – Present</li>
@@ -75,7 +91,7 @@ function Activities() {
 
             </Container>
 
-              <Footer/>
+            <Footer/>
         </div>
     )
 }

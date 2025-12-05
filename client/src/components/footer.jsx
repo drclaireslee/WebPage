@@ -1,22 +1,30 @@
-import { Container, Row, Col, Stack, Image, Nav, NavLink } from "react-bootstrap"
-import { Link } from "react-router"
+/**
+ * Name: Footer Component
+ * Filename: researchcard.jsx
+ * Description: This component is a common footer for each page. 
+ * Inspiration: https://medium.com/@racosta323/create-a-simple-footer-using-react-bootstrap-58c4371a4ade
+ */
 
-{/**Footer component: Inspiration: https://medium.com/@racosta323/create-a-simple-footer-using-react-bootstrap-58c4371a4ade*/}
+import { Container, Row, Col, Stack, Image, Nav } from "react-bootstrap"
+
 function Footer() {
     return(
         <footer role="section" aria-label="footer">
             <Container fluid className="bg-dark text-white p-5">
-                <Row>
+                <Row role="row" aria-label="footer information">
 
-                    <Col className="mx-5">
+                    {/*Basic site information */}
+                    <Col className="mx-5" role="column" aria-label="dr. lee name and lab name">
                         <Stack>
                             <h2>Dr. Claire Lee</h2>
                             <p>Artificial Intelligence, Cybercrime, Cybersecurity, and Online Hate Research and Education Nexus (AI-CYREN) Lab</p>
                         </Stack>
                     </Col>
-                    <Col>
+
+                    {/*Links to each page */}
+                    <Col role="column" aria-label="list of pages">
                         <Nav className="flex-column">
-                            Sitemap
+                            Pages
                             <a href={"/"} role='navigation' aria-label='about page'>About</a>
                             <a href={"/research"} role='navigation' aria-label='research page'>Research</a>
                             <a href={"/teaching"} role='navigation' aria-label='teaching page'>Teaching</a>
@@ -25,7 +33,9 @@ function Footer() {
                             <a href={"/contact"} role='navigation' aria-label='contact page'>Contact</a>
                         </Nav>
                     </Col>
-                    <Col>
+
+                    {/*Section for logging in and adding lab members (will be removed for client version) */}
+                    <Col role="column" aria-label="login info">
                         <Nav className="flex-column">
                             Admin Portal
                             <a href={"https://drclaireslee-backend.vercel.app/homepageAdmin.html"} role='navigation' aria-label='admin page'>Admin Page</a>
