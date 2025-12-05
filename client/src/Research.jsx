@@ -73,30 +73,8 @@ function Research() {
               
               {/*Peer-Reviewed Articles */}
               <Container fluid className="p-5 bg-white">
-                <hr/>
                 <h1>Articles</h1>
                 <a href="https://scholar.google.com/citations?hl=en&user=PABcsxAAAAAJ&view_op=list_works&sortby=pubdate&inst=8587491165479738887" className="fs-3">Google Scholar</a>
-               
-                <p className="fw-bold text-start fs-4">Cybercrime/cybersecurity/terrorism and digital sociology </p>
-
-                <ul>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b>, Merizalde, J.*, Colautti, J.*, An, J., & Kwak, H. 2022. Storm the Capitol: Linking offline political speech and online Twitter extra-representational participation on QAnon and the January 6 insurrection. <em>Frontiers in Sociology,</em>DOI: 10.3389/fsoc.2022.876070</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b>, & Colautti, J.* 2022. ISIS's COVID-19 Messaging on Twitter: An Analysis of Tweet Sentiment and Emotions. <em>Crime & Delinquency,</em> 10.1177/00111287221083881</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b>, & Kim, D. 2022. Pathways to cybersecurity awareness and cybersecurity behaviors in South Korea. <em>Journal of Computer Information Systems,</em> 10.1080/08874417.2022.2031347</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b> 2022. Analyzing Zoombombing as a new communication tool of cyberhate in the COVID-19 era.” <em>Online Information Review,</em> 46(1), 147-163.</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b>, & Jang, A. 2021. Questing for justice on Twitter: Topic modeling of #StopAsianHate discourses in the wake of Atlanta shooting.” <em>Crime & Delinquency,</em> https://doi.org/10.1177/00111287211057855</li>
-                </ul>
-
-                
-
-                <p className="fw-bold text-start fs-4">Im/migration </p>
-                <ul>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b> 2021. “Contested everyday cultural citizenship: “Mixed race” children and their ethnicized citizenship in South Korea.” <em>Ethnic and Racial Studies,</em> 44(7), 1231-1249.</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b> 2019. “Global Linguistic Capital and Global Cultural Capital: International Student Migrants in China's Two-Track International Education Market.” <em>International Journal of Educational Development</em> 67: 94-102.</li>
-                  <li className="text-start fs-5"><b>Lee, Claire S.</b> 2018. “Experiencing “Internationalized Precarity” in Inter-Asian Film Production: A Case Study of Seediq Bale.” <em>Poetics</em> 66: 42-53. </li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b> 2017. “Between Institutional Exclusion and Inclusion: Comparing Old and New Chinese Immigrants in South Korea.”  <em>Translocal Chinese: East Asian Perspectives</em> 11(2): 250-277.</li>
-                  <li className="text-start fs-5"><b>Lee, C.S.</b> 2017. “Narratives of 'Mixed Race' Youth in South Korea: Racial Order and Inbetweenness.” <em>Asian Ethnicity</em> 18(4): 522-542. (Scopus)</li>
-                </ul>
                 
                 
               </Container>
