@@ -8,6 +8,10 @@ body {
   background-color: #6f1010
 }
 
+.dark-blue {
+  background-color: #0f64cd;
+}
+
 .large-emoji {
   font-size: 7em;
 }
