@@ -61,7 +61,7 @@ function Research() {
               <Container fluid className="p-5 bg-white">
                 <h1>Books</h1>
                 
-                <Row className="p-4">
+                {/*<Row className="p-4">
                   <Col>
                     <Image src="/assets/soft_power.jpg" alt="soft power book" width={250} height={350} thumbnail fluid/>
                     <p className="fs-4">Soft Power: Made in China</p>
@@ -72,7 +72,7 @@ function Research() {
                     <p className="fs-4">AI And Cybersecurity (Korean)</p>
                     <a href="https://product.kyobobook.co.kr/detail/S000216868690" className="fs-5">Available on Kyobo</a>
                   </Col>
-                </Row>
+                </Row>*/}
        
               </Container>  
 
