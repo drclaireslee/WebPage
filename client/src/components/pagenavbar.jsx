@@ -1,3 +1,11 @@
+
+/**
+ * Name: AILabHeader / Navbar Component
+ * Filename: pagenavbar.jsx
+ * Description: This component is the navigation bar for the site
+ * 
+ */
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';

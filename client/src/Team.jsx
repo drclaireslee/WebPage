@@ -1,4 +1,11 @@
-import React, { useEffect, useState } from "react";
+/**
+ * Name: Team Page
+ * Filename: Teaching.jsx
+ * Description: This page contains a list of Dr. Lee's lab members
+ * 
+ */
+
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 
 import './Team.css';
@@ -7,6 +14,7 @@ import Footer from "./components/footer";
 import claireLeePhoto from '/assets/claire_lee_photo.jpg';
 
 
+/**Pull infor about lab members from database */
 const Team = () => {
   const [students, setStudents] = useState([]);
 
@@ -30,18 +38,17 @@ const Team = () => {
         <AILabHeader/>
 
         {/*** Information about Dr. Claire Lee ***/}      
-
-        <Container fluid className='bg-white' role='section' aria-label='dr claire lee about section' >
+        <Container fluid className='bg-white' role='section' aria-label='dr claire lee about section'>
             <br/>
             <br/>
             <br/>
             <h1>Meet the Professor</h1>
             <br/>
-            <Row>
-                <Col className='col-md-3 align-items-start'>
+            <Row aria-label="dr claire lee info">
+                <Col md={3} className='align-items-start'>
                     <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture' className='p-2'/>
                 </Col>
-                <Col className='col-md-9'>
+                <Col md={9}>
                     <p className='text-start fs-5'><b>Dr. Claire Seungeun Lee</b> is an Associate Professor in the <a href='https://www.uml.edu/fahss/criminal-justice/'>School of Criminology and Justice Studies</a> and a Co-Director of the <a href='https://www.uml.edu/research/caas/'>Center for Asian American Studies (CASS)</a>.  </p>
                     <p className='text-start fs-5'>Dr. Lee is also a member of the <a href='https://www.uml.edu/research/isafer/'>Center for Internet Security and Forensics Education and Research (iSAFER)</a>, the <a href='https://www.uml.edu/research/ctss/'>Center for Terrorism and Security Studies (CTSS)</a>, and the <a href='https://www.uml.edu/research/public-opinion/'>Center for Public Opinion (CPO)</a> at the University of Massachusetts Lowell.</p>
                     
@@ -66,6 +73,7 @@ const Team = () => {
         </Container>
 
         
+        {/**Team members info */}
         <Container fluid className='p-2 bg-white' role="section" aria-label='team members'>
             <div className="d-flex justify-content-center my-4">
                 <hr style={{
