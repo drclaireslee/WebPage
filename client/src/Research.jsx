@@ -32,8 +32,15 @@ function Research() {
                   <Row> 
                     <Col>
                       <p className="large-emoji">💻</p>
-                      <p className="fs-3 fw-bold text-white">Cybercrime and Digital Sociology</p>
-                      <p className="fs-5 text-white">Deviance and crime in cyberspace (cybercrime, cybersecurity, cyberterrorism), Online fraud, Digital sociology</p>
+                      <p className="fs-3 fw-bold text-white">Cybercrime</p>
+                      <p className="fs-5 text-white">Deviance and crime in cyberspace (cybercrime, cybersecurity, cyberterrorism)</p>
+
+                    </Col>
+
+                    <Col>
+                      <p className="large-emoji">🧠</p>
+                      <p className="fs-3 fw-bold text-white">Digital Sociology</p>
+                      <p className="fs-5 text-white">Online fraud, Digital sociology</p>
 
                     </Col>
 
@@ -42,15 +49,14 @@ function Research() {
                       <p className="fs-3 fw-bold text-white">AI/Cybersecurity Education</p>
                       <p className="fs-5 text-white">AI education, Cybersecurity education</p>
                     </Col>
-
+                    <Col>
+                      
+                      <p className="large-emoji">🌏</p>
+                      <p className="fs-3 fw-bold text-white">Global Media and Im/migration</p>
+                      <p className="fs-5 text-white">Cross-border mobilities of People, Knowledge, Culture</p>
+                    </Col>
                   </Row>
-                  <Row>
-                      <Col>
-                        <p className="large-emoji">🌏</p>
-                        <p className="fs-3 fw-bold text-white">Global Media and Im/migration</p>
-                        <p className="fs-5 text-white">Cross-border mobilities of People, Knowledge, Culture</p>
-                      </Col>
-                  </Row>
+                  
               </Container>
               <Container fluid className="p-5 bg-white">
                 <h1>Books</h1>
