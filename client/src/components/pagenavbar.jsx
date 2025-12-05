@@ -22,7 +22,9 @@ function AILabHeader() {
             <Nav.Link as={Link} to={"/teaching"} role='navigation' aria-label='teaching page'>Teaching</Nav.Link>
             <Nav.Link as={Link} to={"/grants"} role='navigation' aria-label='grants page'>Grants</Nav.Link>
             <Nav.Link as={Link} to={"/team"} role='navigation' aria-label='members page'>Members</Nav.Link>
-            <Nav.Link as={Link} to={"/contact"} role='navigation' aria-label='contact page'>Contact</Nav.Link>
+            <Nav.Link as={Link} to={"/activities"} role='navigation' aria-label='activities page'>Activities</Nav.Link>
+            <Nav.Link as={Link} to={"/contact"} role='navigation' aria-label='contact page'>Contact</Nav.Link>  
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
