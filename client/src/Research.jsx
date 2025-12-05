@@ -29,7 +29,7 @@ function Research() {
              <Container fluid className="p-5 maroon">
                   <h1 className="text-white">Key Research Expertise</h1>
                   <p className="fs-4 text-white">My research expertise revolves around the following areas.</p>
-                  <Row className="d-flex justify-content-center"> 
+                  <Row> 
                     <Col>
                       <p className="large-emoji">💻</p>
                       <p className="fs-3 fw-bold text-white">Cybercrime and Digital Sociology</p>
@@ -79,9 +79,10 @@ function Research() {
                 <h3 className="text-start">Selected peer-reviewed articles (in English only)</h3>
                 <br/>
                 <p className="text-decoration-underline fw-bold text-start fs-4">Cybercrime/cybersecurity/terrorism and digital sociology </p>
+                
                  
                 <p className="text-start fs-4"><b>Lee, C.S.</b>, Merizalde, J.*, Colautti, J.*, An, J., & Kwak, H. 2022. Storm the Capitol: Linking offline political speech and online Twitter extra-representational participation on QAnon and the January 6 insurrection. <em>Frontiers in Sociology,</em>DOI: 10.3389/fsoc.2022.876070</p>
-                <p className="text-start fs-4"><b>Lee, C.S.</b>, & Colautti, J.* 2022. ISIS’s COVID-19 Messaging on Twitter: An Analysis of Tweet <br/> Sentiment and Emotions. <em>Crime & Delinquency,</em> 10.1177/00111287221083881</p>
+                <p className="text-start fs-4"><b>Lee, C.S.</b>, & Colautti, J.* 2022. ISIS's COVID-19 Messaging on Twitter: An Analysis of Tweet Sentiment and Emotions. <em>Crime & Delinquency,</em> 10.1177/00111287221083881</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b>, & Kim, D. 2022. Pathways to cybersecurity awareness and cybersecurity behaviors in South Korea. <em>Journal of Computer Information Systems,</em> 10.1080/08874417.2022.2031347</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2022. Analyzing Zoombombing as a new communication tool of cyberhate in the COVID-19 era.” <em>Online Information Review,</em> 46(1), 147-163.</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b>, & Jang, A. 2021. Questing for justice on Twitter: Topic modeling of #StopAsianHate discourses in the wake of Atlanta shooting.” <em>Crime & Delinquency,</em> https://doi.org/10.1177/00111287211057855</p>
@@ -89,16 +90,16 @@ function Research() {
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2021. “Contact tracing apps for self-quarantine in South Korea: Rethinking datafication and dataveillance in the COVID-19 age.” <em>Online Information Review,</em> 45(4), 810-829.</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b>, Choi, K.-S., Shandler, R.*, & Kayser, C. 2021. “Mapping global cyberterror networks: A study of al Qaeda and ISIS cyberterror events, 2011-2016.” <em>Journal of Contemporary Criminal Justice,</em> 37(3), 333-355.</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2021. “Online fraud victimization in China: A case study of Baidu Tieba.” <em>Victims & Offenders,</em> 16(3), 343-362.</p>
-                <p className="text-start fs-4"><b>Lee, C.S.</b> 2020. “A Crime Script Analysis of Transnational Identity Fraud: Migrant Offenders’ Use of Technology in South Korea.” <em>Crime, Law and Social Change,</em> 74(2): 201-218. https://doi.org/10.1007/s10611-020-09885</p>
-                <p className="text-start fs-4"><b>Lee, C.S.</b> 2019. “Datafication, Dataveillance, and the Credit Score System as China’s New Normal.” <em>Online Information Review,</em> 43(6): 952-970.</p>
+                <p className="text-start fs-4"><b>Lee, C.S.</b> 2020. “A Crime Script Analysis of Transnational Identity Fraud: Migrant Offenders' Use of Technology in South Korea.” <em>Crime, Law and Social Change,</em> 74(2): 201-218. https://doi.org/10.1007/s10611-020-09885</p>
+                <p className="text-start fs-4"><b>Lee, C.S.</b> 2019. “Datafication, Dataveillance, and the Credit Score System as China's New Normal.” <em>Online Information Review,</em> 43(6): 952-970.</p>
                 <p className="text-start fs-4">Choi, K.-S., & <b>Lee, C.S.</b>, & Cadigan, R. 2018. Spreading Propaganda in Cyberspace: Comparing Cyber-Resource Usage of Al Qaeda and ISIS. <em>International Journal of Cybersecurity Intelligence and Cybercrime,</em> 1(1): 21-39.</p>
                 <p className="text-start fs-4">Choi, K.-S., & <b>Lee, C.S.</b>. 2018. “The Present and Future of Cybercrime, Cyberterrorism, and Cybersecurity.” <em>International Journal of Cybersecurity Intelligence and Cybercrime,</em> 1(1), 1-4.</p>
                 <br/>
                 <p className="text-decoration-underline fw-bold text-start fs-4">Cybercrime/cybersecurity/terrorism and digital sociology </p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2021. “Contested everyday cultural citizenship: “Mixed race” children and their ethnicized citizenship in South Korea.” <em>Ethnic and Racial Studies,</em> 44(7), 1231-1249.</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2019. “Global Linguistic Capital and Global Cultural Capital: International Student Migrants in China's Two-Track International Education Market.” <em>International Journal of Educational Development</em> 67: 94-102.</p>
-                <p className="text-start fs-4"><b>Lee, Claire S.</b> 2018. “Experiencing “Internationalized Precarity” in Inter-Asian Film Production: A Case Study of Seediq Bale.” <em>Poetics</em> 66: 42–53. </p>
-                <p className="text-start fs-4"><b>Lee, C.S.</b> 2017. “Between Institutional Exclusion and Inclusion: Comparing Old and New Chinese Immigrants in South Korea.”  <em>Translocal Chinese: East Asian Perspectives</em> 11(2): 250–277.</p>
+                <p className="text-start fs-4"><b>Lee, Claire S.</b> 2018. “Experiencing “Internationalized Precarity” in Inter-Asian Film Production: A Case Study of Seediq Bale.” <em>Poetics</em> 66: 42-53. </p>
+                <p className="text-start fs-4"><b>Lee, C.S.</b> 2017. “Between Institutional Exclusion and Inclusion: Comparing Old and New Chinese Immigrants in South Korea.”  <em>Translocal Chinese: East Asian Perspectives</em> 11(2): 250-277.</p>
                 <p className="text-start fs-4"><b>Lee, C.S.</b> 2017. “Narratives of 'Mixed Race' Youth in South Korea: Racial Order and Inbetweenness.” <em>Asian Ethnicity</em> 18(4): 522-542. (Scopus)</p>
                 
               </Container>
