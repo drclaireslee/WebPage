@@ -2,11 +2,21 @@
 /**
  * Name: Research Card Component
  * Filename: researchcard.jsx
- * Description: This component is used to list information about each of Dr. Lee's grants.
+ * Description: This component is used to list information about each of Dr. Lee's grants. 
+ */
+
+/**
  * 
+ * @param {*} research_image - Image of the organization providing the grant
+ * @param {*} research_name - Name of the organization providing the grant
+ * @param {*} research_country - The organization's country of origin
+ * @param {*} research_year - The year(s) the grant was awarded 
+ * @param {*} research_desc - Brief description of the study the grant was awarded for
+ * @returns A component with information about a research grant awarded to Dr. Lee
  */
 
 import { Col, Row, Image } from "react-bootstrap"
+
 
 function ResearchCard({research_image, research_name, research_country, research_year, research_desc}) {
     return(
