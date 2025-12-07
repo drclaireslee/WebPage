@@ -31,6 +31,7 @@ function Footer() {
                             <a href={"/grants"} role='navigation' aria-label='grants page'>Grants</a>
                             <a href={"/team"} role='navigation' aria-label='members page'>Members</a>
                             <a href={"/contact"} role='navigation' aria-label='contact page'>Contact</a>
+                            <a href={"/activities"} role='navigation' aria-label='contact page'>Activities</a>
                         </Nav>
                     </Col>
 

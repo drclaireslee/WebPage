@@ -70,13 +70,13 @@ function Research() {
                   
                   <Col role="column" aria-label="soft power in china book">
                     <Image src="/assets/soft_power.jpg" alt="soft power in china book" width={250} height={350} thumbnail fluid/>
-                    <p className="fs-4">Soft Power: Made in China</p>
+                    <p className="fs-4"><b>Soft Power: Made in China</b></p>
                     <a href="https://www.amazon.com/Soft-Power-Made-China-Transnational/dp/3030065936" className="fs-5">Available on Amazon</a>
                   </Col>
 
                    <Col role="column" aria-label="ai and cybersecurity book">
                     <Image src="/assets/ai_and_cybersec.jpg" alt="ai cybersecurity book" width={250} height={350} thumbnail fluid/>
-                    <p className="fs-4">AI And Cybersecurity (Korean)</p>
+                    <p className="fs-4"><b>AI and Cybersecurity</b> (Korean)</p>
                     <a href="https://product.kyobobook.co.kr/detail/S000216868690" className="fs-5">Available on Kyobo</a>
                   </Col>
                 </Row>

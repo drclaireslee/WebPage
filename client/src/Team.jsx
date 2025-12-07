@@ -44,14 +44,14 @@ const Team = () => {
             <br/>
             <h1>Meet the Professor</h1>
             <br/>
-            <Row aria-label="dr claire lee info">
+            <Row role="row" aria-label="dr claire lee info">
                 <Col md={3} className='align-items-start'>
                     <Image src={claireLeePhoto} width={"250"} height={"250"} rounded alt='dr claire lee profile picture' className='p-2'/>
                 </Col>
                 <Col md={9}>
                     <p className='text-start fs-5'><b>Dr. Claire Seungeun Lee</b> is an Associate Professor in the <a href='https://www.uml.edu/fahss/criminal-justice/'>School of Criminology and Justice Studies</a> and a Co-Director of the <a href='https://www.uml.edu/research/caas/'>Center for Asian American Studies (CASS)</a>.  </p>
                     <p className='text-start fs-5'>Dr. Lee is also a member of the <a href='https://www.uml.edu/research/isafer/'>Center for Internet Security and Forensics Education and Research (iSAFER)</a>, the <a href='https://www.uml.edu/research/ctss/'>Center for Terrorism and Security Studies (CTSS)</a>, and the <a href='https://www.uml.edu/research/public-opinion/'>Center for Public Opinion (CPO)</a> at the University of Massachusetts Lowell.</p>
-                    
+                    <p className='text-start fs-5'>Additionally, Dr. Lee is an Assistant Professor of Cybersecurity & AI at UMass Lowell. Her research interests range from cybercrime and cybersecurity education to global media and im/migration.</p>
                     <address className="text-start fs-5">
                         Associate Professor <br/>
                         Email: <a href="mailto:claire_lee@uml.edu">claire_lee@uml.edu</a> <br/>
@@ -59,15 +59,7 @@ const Team = () => {
                         School of Criminology and Justice Studies <br/>
                         Co-Director, Center for Asian American Studies <br/>
                         University of Massachusetts Lowell <br/>
-
-
                     </address>
-                    <p > </p>
-                    <p className="text-start fs-5"></p>
-                    <p className="text-start fs-5"> </p>
-                    <p className="text-start fs-5"> </p>
-                    <p className="text-start fs-5"> </p>
-                    <p className="text-start fs-5"> </p>
                 </Col>
             </Row>
         </Container>
