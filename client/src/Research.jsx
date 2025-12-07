@@ -63,33 +63,29 @@ function Research() {
               </Container>
 
               {/*Links to author's published books */}
-              <Container fluid className="p-5 bg-white" role="section" aria-label="published books">
+              <Container fluid className="p-5 bg-white" role="section" aria-label="published books and articles">
                 <h1>Books</h1>
                 
                 <Row className="p-4" role="row">
                   
                   <Col role="column" aria-label="soft power in china book">
                     <Image src="/assets/soft_power.jpg" alt="soft power in china book" width={250} height={350} thumbnail fluid/>
-                    <p className="fs-4">Soft Power: Made in China</p>
+                    <p className="fs-4"><b>Soft Power: Made in China</b></p>
                     <a href="https://www.amazon.com/Soft-Power-Made-China-Transnational/dp/3030065936" className="fs-5">Available on Amazon</a>
                   </Col>
 
                    <Col role="column" aria-label="ai and cybersecurity book">
                     <Image src="/assets/ai_and_cybersec.jpg" alt="ai cybersecurity book" width={250} height={350} thumbnail fluid/>
-                    <p className="fs-4">AI And Cybersecurity (Korean)</p>
+                    <p className="fs-4"><b>AI and Cybersecurity</b> (Korean)</p>
                     <a href="https://product.kyobobook.co.kr/detail/S000216868690" className="fs-5">Available on Kyobo</a>
                   </Col>
                 </Row>
-       
-              </Container>  
 
-              
-              {/*Link to Peer-Reviewed Articles */}
-              <Container fluid className="p-5 bg-white" role="section" aria-label="published articles">
+                {/*Link to Peer-Reviewed Articles */}
                 <h1>Articles</h1>
                 <a href="https://scholar.google.com/citations?hl=en&user=PABcsxAAAAAJ&view_op=list_works&sortby=pubdate&inst=8587491165479738887" className="fs-3">Link to Google Scholar</a>
-                
-              </Container>
+       
+              </Container>  
 
               <Footer/>
 
