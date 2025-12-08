@@ -1,7 +1,6 @@
 
 const allowedOrigins = [
   "https://drclaireslee.vercel.app",
-  "http://localhost:5173",
 ];
 
 const corsOptions = {
