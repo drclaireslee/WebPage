@@ -1,3 +1,9 @@
+# Bonus Credit
+1. API Integration: Leaflet API on the contact page
+2. Form Handling: Admin Page that has CRUD functionality (link in the footer)
+3. Password Hashing: Login page that uses password hashing
+
+
 # Client-Webpage
 Repository for the website of the decided Client of project 2 
 

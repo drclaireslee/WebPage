@@ -39,8 +39,8 @@ function Footer() {
                     <Col role="column" aria-label="login info">
                         <Nav className="flex-column">
                             Admin Portal
-                            <a href={"https://drclaireslee-backend.vercel.app/homepageAdmin.html"} role='navigation' aria-label='admin page'>Admin Page</a>
-                            <a href={"https://drclaireslee-backend.vercel.app/loginAdmin.html"} role='navigation' aria-label='admin login'>Login</a>
+                            <a href={"https://drclaireslee-backend.vercel.app/homepage.html"} role='navigation' aria-label='admin page'>Admin Page</a>
+                            <a href={"https://drclaireslee-backend.vercel.app/login.html"} role='navigation' aria-label='admin login'>Login</a>
                         </Nav>
                     </Col>
                 </Row>
