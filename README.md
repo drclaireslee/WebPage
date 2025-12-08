@@ -3,7 +3,6 @@
 2. Form Handling: Admin Page that has CRUD functionality (link in the footer)
 3. Password Hashing: Login page that uses password hashing
 
-
 # Client-Webpage
 Repository for the website of the decided Client of project 2 
 
@@ -26,6 +25,16 @@ Thank you!
 # Client Folder
 This is where all of the front-end work will be stored (i.e. React, CSS, etc.) using Vite.
 
+- 12/08/2025:
+    - Added Dr. Lee bio back to main page
+    - Added footer component that support page naviagtion and login for users
+    - Footer contains link to admin page where information in the backend can be edited
+    - Research page contains a few books by dr lee and a link to their Google Scholar
+    - Teaching now contains course taught by Dr. Lee at UML and INHA
+    - Grants format changed to more neatly display grants awarded to Dr. Lee
+    - Memebers page shows Dr. Lee's bio and fetches data from the back end to display team members
+    - Added activities page displays Dr. Lee's envolvement and services she provides
+    - Contact page now contains fixed embedded map and an embedded contact form 
 - 11/16/2025-11/18/2025: 
     - Added padding at the root to format content better
     - Designed contact page to add basic
@@ -45,5 +54,7 @@ This is where all of the front-end work will be stored (i.e. React, CSS, etc.) u
 # Server Folder
 This is where all of the back-end work will be stored (Express server, Node Server, Database, etc.) using Node.js.
 
+- 12/08/2025:
+    - Use of vercel blob to store images related to team members
 - 11/09/2025 - 11/13/2025: Creation of the authentication server, login page, initial database setup, and status codes for API calls
 - 10/25/2025: Intialization of the Backend Node server.
