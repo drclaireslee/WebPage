@@ -1,7 +1,7 @@
 
 const allowedOrigins = [
   "https://drclaireslee.vercel.app",
-  "https://drclaireslee-backend.vercel.app/"
+  "https://drclaireslee-backend.vercel.app"
 ];
 
 const corsOptions = {
@@ -15,5 +15,6 @@ const corsOptions = {
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS", "HEAD"],
     allowedHeaders: ["Content-Type", "Authorization", "x-auth"],
 };
+
 
 export default corsOptions;
