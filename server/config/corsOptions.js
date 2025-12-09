@@ -1,6 +1,7 @@
 
 const allowedOrigins = [
   "https://drclaireslee.vercel.app",
+  "https://drclaireslee-backend.vercel.app/"
 ];
 
 const corsOptions = {
