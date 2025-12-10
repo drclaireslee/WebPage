@@ -1,6 +1,5 @@
 # Team
-Names: Rohan Mallu, Zuriel Pagan, Kriston Theng, Russell Jones, Anton Kovalev
-Team Name: Motley Crue
+Names: Rohan Mallu, Zuriel Pagan, Kriston Theng, Russell Jones, Anton Kovalev <br/> Team Name: Motley Crue
    
 # Project 2: Website for a Client
 This is the class repository of the website for our Project 2 client
