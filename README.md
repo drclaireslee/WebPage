@@ -1,12 +1,11 @@
-# Bonus Credit
-1. API Integration: Leaflet API on the contact page
-2. Form Handling: Admin Page that has CRUD functionality (link in the footer)
-3. Password Hashing: Login page that uses password hashing
+# Team
+Names: Rohan Mallu, Zuriel Pagan, Kriston Theng, Russell Jones, Anton Kovalev
+Team Name: Motley Crue
+   
+# Project 2: Website for a Client
+This is the class repository of the website for our Project 2 client
 
-# Client-Webpage
-Repository for the website of the decided Client of project 2 
-
-# Website Description Given By Claire: 
+# Website Description Given By Dr. Claire Lee: 
 I am planning to update my professional website to better showcase my recent research activities and teaching experiences. The updated site will serve as a comprehensive platform to highlight my academic and professional contributions, while also providing useful information for different audiences.
 
 The website will feature the following sections (with content and categories to be refined and expanded over time):
@@ -22,8 +21,12 @@ The primary audiences for the website are current and prospective students, as w
 
 Thank you!
 
+# Wiggle Room Requirements
+1. API Integration: Leaflet API on the contact page that pulls data from OpenStreetMaps
+2. Security Best Practices: Login page that uses password hashing and validation for all input.
+
 # Client Folder
-This is where all of the front-end work will be stored (i.e. React, CSS, etc.) using Vite.
+This is where all of the front-end work is stored (i.e. React, CSS, Bootstrap, etc.) using Vite.
 
 - 12/08/2025:
     - Added Dr. Lee bio back to main page
@@ -52,9 +55,9 @@ This is where all of the front-end work will be stored (i.e. React, CSS, etc.) u
 - 10/25/2025: Intialization of the frontend using React and Vite.
 
 # Server Folder
-This is where all of the back-end work will be stored (Express server, Node Server, Database, etc.) using Node.js.
+This is where all of the back-end work is stored (Express server, Node Server, Database, etc.) using Node.js, Express, and MongoDB.
 
 - 12/08/2025:
-    - Use of vercel blob to store images related to team members
+    - Use of vercel blob to store images related to team members 
 - 11/09/2025 - 11/13/2025: Creation of the authentication server, login page, initial database setup, and status codes for API calls
 - 10/25/2025: Intialization of the Backend Node server.
