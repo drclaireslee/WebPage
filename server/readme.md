@@ -137,4 +137,7 @@ The use of the create, read, and update operations on the REST API are limited t
 This project is configured for Vercel.
 
 1.  Install Vercel CLI: `npm i -g vercel`
-2.  Run `vercel` to deploy.
+2.  Configure "SECRET" environmental variable to be any value
+3.  Configure "DB" environmental variable to have a link to a mongodb database in vercel
+4.  Configure the project to point to a blob storage in vercel and modify labMemberController.js default image url.
+5.  Run `vercel` to deploy.
