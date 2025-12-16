@@ -1,3 +1,34 @@
+# [drclairlee-web] Frontend
+
+A React.js and Vite frontend deployed on [Vercel](https://drclaireslee.vercel.app/) and [Github Pages](https://drclaireslee.github.io/).
+
+## About
+This project serves as the frontend infrastructure for [drclairlee-web/WebPage]. It is built using **React + Vite**. It uses Vercel for the class version and Github Pages for the [client version](https://github.com/drclaireslee/drclaireslee.github.io)
+
+* **Tooling:** Vite
+* **Framework:** React
+* **Deployment:** Vercel (Hobby Tier) for class version, Github Pages for the client version
+
+## Limitations & Hobby Tier Info
+Please note that this project is deployed on the **Vercel Hobby Tier**. 
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1.  **Clone the repository**
+    ```bash
+    git clone 
+    cd WebPage/client
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+<hr/>
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
