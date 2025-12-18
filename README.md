@@ -4,6 +4,17 @@ Names: Rohan Mallu, Zuriel Pagan, Kriston Theng, Russell Jones, Anton Kovalev <b
 # Project 2: Website for a Client
 This is the class repository of the website for our Project 2 client
 
+# Wiggle Room Requirements (Fully Met)
+1. Database & Authentication: Supports a validated CRUD system for editor and student information. User authentication is done through token-based authentication using information from the editor table.
+   
+2. Security Best Practices: All sensitive information needed to run the server is stored on the Vercel in an .env file. All inputs into the API are sanitized and validated. Fingerprinting is disabled. Login information is stored in a database with a hashed password using the bcryptjs library. Use of the CORS library to allow only drclaireslee.vercel.app/ and itself to access the API provided by the backend. The use of the helmet library to secure HTTP response headers.
+   * The Backend API has a login feature that allows users to provide a username and password only if the username and password exist in the editor table in the database. Then they will be provided a token in the x-auth header. This token can be placed in the x-auth header for an HTTP request to gain access to a certain endpoint in the api, such as "GET api/editor/"
+   * More details on how wiggle room requirements are achieved can be found in our final report under the <b>Backend Architecture</b> section.
+
+# Wiggle Room Requirements (Partially Met)
+1. API Integration: We used a Leaflet API on the Contact page that displays the location of Dr. Claire Lee's office on South Campus. This map can be found in the My Office section of the website's Contact Page. The Leaflet API pulls data from OpenStreetMap, a map database that stores geographic information. [Leaflet Library Docs](https://leafletjs.com/) 
+2. Contact Form: We implemented a Microsoft Form provided by Dr. Lee on the Contact page. This form allows students and others to ask questions about her work, her career experiences, and whether she has future research opportunities available for students.
+
 # Website Description Given By Dr. Claire Lee: 
 I am planning to update my professional website to better showcase my recent research activities and teaching experiences. The updated site will serve as a comprehensive platform to highlight my academic and professional contributions, while also providing useful information for different audiences.
 
@@ -19,10 +30,6 @@ The website will feature the following sections (with content and categories to 
 The primary audiences for the website are current and prospective students, as well as academic colleagues and collaborators. My goal is to create a stronger professional presence online that not only reflects my work but also promotes the activities of my research lab. In doing so, I hope the site will serve as both a resource for those interested in my work and a platform to encourage new opportunities for collaboration and engagement.
 
 Thank you!
-
-# Wiggle Room Requirements
-1. API Integration: Leaflet API on the contact page that pulls data from OpenStreetMaps
-2. Security Best Practices: Login page that uses password hashing and validation for all input.
 
 # Client Folder
 This is where all of the front-end work is stored (i.e. React, CSS, Bootstrap, etc.) using Vite.
